@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/11/02/services/liunx/liunx/">
+    
+    
+    <title>liunx命令 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="liunx">
+    <meta name="description" content="liunx常用命令                                                                                             目录描述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="liunx命令">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="liunx常用命令                                                                                             目录描述">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://mmc_jj.gitee.io/images/gtaph/liunx/liunx3.jpg">
+<meta property="og:image" content="http://mmc_jj.gitee.io/images/gtaph/liunxliunx2.jpg">
+<meta property="og:image" content="http://mmc_jj.gitee.io/images/gtaph/liunx/liunx1.jpg">
+<meta property="article:published_time" content="2020-11-02T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-29T03:26:36.244Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="liunx">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://mmc_jj.gitee.io/images/gtaph/liunx/liunx3.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">liunx命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">liunx命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-02T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-11-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">服务器常用命令</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#liunx常用命令"><span class="post-toc-number">1.</span> <span class="post-toc-text">liunx常用命令</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-services/liunx/liunx"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">liunx命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-02 08:30:00" datetime="2020-11-02T00:30:00.000Z"  itemprop="datePublished">2020-11-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">服务器常用命令</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="liunx常用命令"><a href="#liunx常用命令" class="headerlink" title="liunx常用命令"></a>liunx常用命令</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://mmc_jj.gitee.io/images/gtaph/liunx/liunx3.jpg" alt="目录描述" title="">
+                </div>
+                <div class="image-caption">目录描述</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://mmc_jj.gitee.io/images/gtaph/liunxliunx2.jpg" alt="liunx中文版本" title="">
+                </div>
+                <div class="image-caption">liunx中文版本</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://mmc_jj.gitee.io/images/gtaph/liunx/liunx1.jpg" alt="liunx英文版本" title="">
+                </div>
+                <div class="image-caption">liunx英文版本</div>
+            </figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br></pre></td><td class="code"><pre><span class="line">linux命令是对Linux系统进行管理的命令。对于Linux系统来说，无论是中央处理器、内存、磁盘驱动器、键盘、鼠标，还是用户等都是文件，Linux系统管理的命令是它正常运行的核心。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">线上查询及帮助命令(2个)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">man：查看命令帮助，命令的词典，更复杂的还有info，但不常用。</span><br><span class="line"></span><br><span class="line">help：查看Linux内置命令的帮助，比如cd命令。</span><br><span class="line"></span><br><span class="line">文件和目录操作命令(18个)</span><br><span class="line"></span><br><span class="line">ls：全拼list，功能是列出目录的内容及其内容属性信息。</span><br><span class="line"></span><br><span class="line">cd：全拼change directory，功能是从当前工作目录切换到指定的工作目录。</span><br><span class="line"></span><br><span class="line">cp：全拼copy，其功能为复制文件或目录。</span><br><span class="line"></span><br><span class="line">find：查找的意思，用于查找目录及目录下的文件。</span><br><span class="line"></span><br><span class="line">mkdir：全拼make directories，其功能是创建目录。</span><br><span class="line"></span><br><span class="line">mv：全拼move，其功能是移动或重命名文件。</span><br><span class="line"></span><br><span class="line">pwd：全拼print working directory，其功能是显示当前工作目录的绝对路径。</span><br><span class="line"></span><br><span class="line">rename：用于重命名文件。</span><br><span class="line"></span><br><span class="line">rm：全拼remove，其功能是删除一个或多个文件或目录。</span><br><span class="line"></span><br><span class="line">rmdir：全拼remove empty directories，功能是删除空目录。</span><br><span class="line"></span><br><span class="line">touch：创建新的空文件，改变已有文件的时间戳属性。</span><br><span class="line"></span><br><span class="line">tree：功能是以树形结构显示目录下的内容。</span><br><span class="line"></span><br><span class="line">basename：显示文件名或目录名。</span><br><span class="line"></span><br><span class="line">dirname：显示文件或目录路径。</span><br><span class="line"></span><br><span class="line">chattr：改变文件的扩展属性。</span><br><span class="line"></span><br><span class="line">lsattr：查看文件扩展属性。</span><br><span class="line"></span><br><span class="line">file：显示文件的类型。</span><br><span class="line"></span><br><span class="line">md5sum：计算和校验文件的MD5值。</span><br><span class="line"></span><br><span class="line">查看文件及内容处理命令(21个)</span><br><span class="line"></span><br><span class="line">cat：全拼concatenate，功能是用于连接多个文件并且打印到屏幕输出或重定向到指定文件中。</span><br><span class="line"></span><br><span class="line">tactac：是cat的反向拼写，因此命令的功能为反向显示文件内容。</span><br><span class="line"></span><br><span class="line">more：分页显示文件内容。</span><br><span class="line"></span><br><span class="line">less：分页显示文件内容，more命令的相反用法。</span><br><span class="line"></span><br><span class="line">head：显示文件内容的头部。</span><br><span class="line"></span><br><span class="line">tail：显示文件内容的尾部。</span><br><span class="line"></span><br><span class="line">cut：将文件的每一行按指定分隔符分割并输出。</span><br><span class="line"></span><br><span class="line">split：分割文件为不同的小片段。</span><br><span class="line"></span><br><span class="line">paste：按行合并文件内容。</span><br><span class="line"></span><br><span class="line">sort：对文件的文本内容排序。</span><br><span class="line"></span><br><span class="line">uniq：去除重复行。</span><br><span class="line"></span><br><span class="line">wc：统计文件的行数、单词数或字节数。</span><br><span class="line"></span><br><span class="line">iconv：转换文件的编码格式。</span><br><span class="line"></span><br><span class="line">dos2unix：将DOS格式文件转换成UNIX格式。</span><br><span class="line"></span><br><span class="line">diff：全拼difference，比较文件的差异，常用于文本文件。</span><br><span class="line"></span><br><span class="line">vimdiff：命令行可视化文件比较工具，常用于文本文件。</span><br><span class="line"></span><br><span class="line">rev：反向输出文件内容。</span><br><span class="line"></span><br><span class="line">grep&#x2F;egrep：过滤字符串，三剑客老三。</span><br><span class="line"></span><br><span class="line">join：按两个文件的相同字段合并。</span><br><span class="line"></span><br><span class="line">tr：替换或删除字符。</span><br><span class="line"></span><br><span class="line">vi&#x2F;vim：命令行文本编辑器。</span><br><span class="line"></span><br><span class="line">文件压缩及解压缩命令(4个)</span><br><span class="line"></span><br><span class="line">tar：打包压缩。oldboy</span><br><span class="line"></span><br><span class="line">unzip：解压文件。</span><br><span class="line"></span><br><span class="line">gzipgzip：压缩工具。</span><br><span class="line"></span><br><span class="line">zip：压缩工具。</span><br><span class="line"></span><br><span class="line">信息显示命令(11个)</span><br><span class="line"></span><br><span class="line">uname：显示操作系统相关信息的命令。</span><br><span class="line"></span><br><span class="line">hostname：显示或者设置当前系统的主机名。</span><br><span class="line"></span><br><span class="line">dmesg：显示开机信息，用于诊断系统故障。</span><br><span class="line"></span><br><span class="line">uptime：显示系统运行时间及负载。</span><br><span class="line"></span><br><span class="line">stat：显示文件或文件系统的状态。</span><br><span class="line"></span><br><span class="line">du：计算磁盘空间使用情况。</span><br><span class="line"></span><br><span class="line">df：报告文件系统磁盘空间的使用情况。</span><br><span class="line"></span><br><span class="line">top：实时显示系统资源使用情况。</span><br><span class="line"></span><br><span class="line">free：查看系统内存。</span><br><span class="line"></span><br><span class="line">date：显示与设置系统时间。</span><br><span class="line"></span><br><span class="line">cal：查看日历等时间信息。</span><br><span class="line"></span><br><span class="line">搜索文件命令(4个)</span><br><span class="line"></span><br><span class="line">which：查找二进制命令，按环境变量PATH路径查找。</span><br><span class="line"></span><br><span class="line">find：从磁盘遍历查找文件或目录。</span><br><span class="line"></span><br><span class="line">whereis：查找二进制命令，按环境变量PATH路径查找。</span><br><span class="line"></span><br><span class="line">locate：从数据库 (&#x2F;var&#x2F;lib&#x2F;mlocate&#x2F;mlocate.db) 查找命令，使用updatedb更新库。</span><br><span class="line"></span><br><span class="line">用户管理命令(10个)</span><br><span class="line"></span><br><span class="line">useradd：添加用户。</span><br><span class="line"></span><br><span class="line">usermod：修改系统已经存在的用户属性。</span><br><span class="line"></span><br><span class="line">userdel：删除用户。</span><br><span class="line"></span><br><span class="line">groupadd：添加用户组。</span><br><span class="line"></span><br><span class="line">passwd：修改用户密码。</span><br><span class="line"></span><br><span class="line">chage：修改用户密码有效期限。</span><br><span class="line"></span><br><span class="line">id：查看用户的uid,gid及归属的用户组。</span><br><span class="line"></span><br><span class="line">su：切换用户身份。</span><br><span class="line"></span><br><span class="line">visudo：编辑&#x2F;etc&#x2F;sudoers文件的专属命令。</span><br><span class="line"></span><br><span class="line">sudo：以另外一个用户身份(默认root用户)执行事先在sudoers文件允许的命令。</span><br><span class="line"></span><br><span class="line">基础网络操作命令(11个)</span><br><span class="line"></span><br><span class="line">telnet：使用TELNET协议远程登录。</span><br><span class="line"></span><br><span class="line">ssh：使用SSH加密协议远程登录。</span><br><span class="line"></span><br><span class="line">scp：全拼secure copy，用于不同主机之间复制文件。</span><br><span class="line"></span><br><span class="line">wget：命令行下载文件。</span><br><span class="line"></span><br><span class="line">ping：测试主机之间网络的连通性。</span><br><span class="line"></span><br><span class="line">route：显示和设置linux系统的路由表。</span><br><span class="line"></span><br><span class="line">ifconfig：查看、配置、启用或禁用网络接口的命令。</span><br><span class="line"></span><br><span class="line">ifup：启动网卡。</span><br><span class="line"></span><br><span class="line">ifdown：关闭网卡。</span><br><span class="line"></span><br><span class="line">netstat：查看网络状态。</span><br><span class="line"></span><br><span class="line">ss：查看网络状态。</span><br><span class="line"></span><br><span class="line">深入网络操作命令(9个)</span><br><span class="line"></span><br><span class="line">nmap：网络扫描命令。</span><br><span class="line"></span><br><span class="line">lsof：全名list open files，也就是列举系统中已经被打开的文件。</span><br><span class="line"></span><br><span class="line">mail：发送和接收邮件。</span><br><span class="line"></span><br><span class="line">mutt：邮件管理命令。</span><br><span class="line"></span><br><span class="line">nslookup：交互式查询互联网DNS服务器的命令。</span><br><span class="line"></span><br><span class="line">dig：查找DNS解析过程。</span><br><span class="line"></span><br><span class="line">host：查询DNS的命令。</span><br><span class="line"></span><br><span class="line">traceroute：追踪数据传输路由状况。</span><br><span class="line"></span><br><span class="line">tcpdump：命令行的抓包工具。</span><br><span class="line"></span><br><span class="line">有关磁盘与文件系统的命令(16个)</span><br><span class="line"></span><br><span class="line">mount：挂载文件系统。</span><br><span class="line"></span><br><span class="line">umount：卸载文件系统。</span><br><span class="line"></span><br><span class="line">fsck：检查并修复Linux文件系统。</span><br><span class="line"></span><br><span class="line">dd：转换或复制文件。</span><br><span class="line"></span><br><span class="line">dumpe2fs：导出ext2&#x2F;ext3&#x2F;ext4文件系统信息。</span><br><span class="line"></span><br><span class="line">dumpe：xt2&#x2F;3&#x2F;4文件系统备份工具。</span><br><span class="line"></span><br><span class="line">fdisk：磁盘分区命令，适用于2TB以下磁盘分区。</span><br><span class="line"></span><br><span class="line">parted：磁盘分区命令，没有磁盘大小限制，常用于2TB以下磁盘分区。</span><br><span class="line"></span><br><span class="line">mkfs：格式化创建Linux文件系统。</span><br><span class="line"></span><br><span class="line">partprobe：更新内核的硬盘分区表信息。</span><br><span class="line"></span><br><span class="line">e2fsck：检查ext2&#x2F;ext3&#x2F;ext4类型文件系统。</span><br><span class="line"></span><br><span class="line">mkswap：创建Linux交换分区。</span><br><span class="line"></span><br><span class="line">swapon：启用交换分区。</span><br><span class="line"></span><br><span class="line">swapoff：关闭交换分区。</span><br><span class="line"></span><br><span class="line">sync：将内存缓冲区内的数据写入磁盘。</span><br><span class="line"></span><br><span class="line">resize2fs：调整ext2&#x2F;ext3&#x2F;ext4文件系统大小。</span><br><span class="line"></span><br><span class="line">系统权限及用户授权相关命令(4个)</span><br><span class="line"></span><br><span class="line">chmod：改变文件或目录权限。</span><br><span class="line"></span><br><span class="line">chown：改变文件或目录的属主和属组。</span><br><span class="line"></span><br><span class="line">chgrp：更改文件用户组。</span><br><span class="line"></span><br><span class="line">umask：显示或设置权限掩码。</span><br><span class="line"></span><br><span class="line">查看系统用户登陆信息的命令(7个)</span><br><span class="line"></span><br><span class="line">whoami：显示当前有效的用户名称，相当于执行id -un命令。</span><br><span class="line"></span><br><span class="line">who：显示目前登录系统的用户信息。</span><br><span class="line"></span><br><span class="line">w：显示已经登陆系统的用户列表，并显示用户正在执行的指令。</span><br><span class="line"></span><br><span class="line">last：显示登入系统的用户。</span><br><span class="line"></span><br><span class="line">lastlog：显示系统中所有用户最近一次登录信息。</span><br><span class="line"></span><br><span class="line">users：显示当前登录系统的所有用户的用户列表。</span><br><span class="line"></span><br><span class="line">finger：查找并显示用户信息。</span><br><span class="line"></span><br><span class="line">内置命令及其它(19个)</span><br><span class="line"></span><br><span class="line">echo：打印变量，或直接输出指定的字符串</span><br><span class="line"></span><br><span class="line">printf：将结果格式化输出到标准输出。</span><br><span class="line"></span><br><span class="line">rpm：管理rpm包的命令。</span><br><span class="line"></span><br><span class="line">yum：自动化简单化地管理rpm包的命令。</span><br><span class="line"></span><br><span class="line">watch：周期性的执行给定的命令，并将命令的输出以全屏方式显示。</span><br><span class="line"></span><br><span class="line">alias：设置系统别名。</span><br><span class="line"></span><br><span class="line">unalias：取消系统别名。</span><br><span class="line"></span><br><span class="line">date：查看或设置系统时间。</span><br><span class="line"></span><br><span class="line">clear：清除屏幕，简称清屏。</span><br><span class="line"></span><br><span class="line">history：查看命令执行的历史纪录。</span><br><span class="line"></span><br><span class="line">eject：弹出光驱。</span><br><span class="line"></span><br><span class="line">time：计算命令执行时间。</span><br><span class="line"></span><br><span class="line">nc：功能强大的网络工具。</span><br><span class="line"></span><br><span class="line">xargs：将标准输入转换成命令行参数。</span><br><span class="line"></span><br><span class="line">exec：调用并执行指令的命令。</span><br><span class="line"></span><br><span class="line">export：设置或者显示环境变量。</span><br><span class="line"></span><br><span class="line">unset：删除变量或函数。</span><br><span class="line"></span><br><span class="line">type：用于判断另外一个命令是否是内置命令。</span><br><span class="line"></span><br><span class="line">bc：命令行科学计算器。</span><br><span class="line"></span><br><span class="line">系统管理与性能监视命令(9个)</span><br><span class="line"></span><br><span class="line">chkconfig：管理Linux系统开机启动项。</span><br><span class="line"></span><br><span class="line">vmstat：虚拟内存统计。</span><br><span class="line"></span><br><span class="line">mpstat：显示各个可用CPU的状态统计。</span><br><span class="line"></span><br><span class="line">iostat：统计系统IO。</span><br><span class="line"></span><br><span class="line">sar：全面地获取系统的CPU、运行队列、磁盘 I&#x2F;O、分页(交换区)、内存、 CPU中断和网络等性能数据。</span><br><span class="line"></span><br><span class="line">ipcs：用于报告Linux中进程间通信设施的状态，显示的信息包括消息列表、共享内存和信号量的信息。</span><br><span class="line"></span><br><span class="line">ipcrm：用来删除一个或更多的消息队列、信号量集或者共享内存标识。</span><br><span class="line"></span><br><span class="line">strace：用于诊断、调试Linux用户空间跟踪器。我们用它来监控用户空间进程和内核的交互，比如系统调用、信号传递、进程状态变更等。</span><br><span class="line"></span><br><span class="line">ltrace：命令会跟踪进程的库函数调用,它会显现出哪个库函数被调用。</span><br><span class="line"></span><br><span class="line">关机&#x2F;重启&#x2F;注销和查看系统信息的命令(6个)</span><br><span class="line"></span><br><span class="line">shutdown：关机。</span><br><span class="line"></span><br><span class="line">halt：关机。</span><br><span class="line"></span><br><span class="line">poweroff：关闭电源。</span><br><span class="line"></span><br><span class="line">logout：退出当前登录的Shell。</span><br><span class="line"></span><br><span class="line">exit：退出当前登录的Shell。</span><br><span class="line"></span><br><span class="line">Ctrl+d：退出当前登录的Shell的快捷键。</span><br><span class="line"></span><br><span class="line">进程管理相关命令(15个)</span><br><span class="line"></span><br><span class="line">bg：将一个在后台暂停的命令，变成继续执行 (在后台执行)。</span><br><span class="line"></span><br><span class="line">fg：将后台中的命令调至前台继续运行。</span><br><span class="line"></span><br><span class="line">jobs：查看当前有多少在后台运行的命令。</span><br><span class="line"></span><br><span class="line">kill：终止进程。</span><br><span class="line"></span><br><span class="line">killall：通过进程名终止进程。</span><br><span class="line"></span><br><span class="line">pkill：通过进程名终止进程。</span><br><span class="line"></span><br><span class="line">crontab：定时任务命令。</span><br><span class="line"></span><br><span class="line">ps：显示进程的快照。</span><br><span class="line"></span><br><span class="line">pstree：树形显示进程。</span><br><span class="line"></span><br><span class="line">nice&#x2F;renice：调整程序运行的优先级。</span><br><span class="line"></span><br><span class="line">nohup：忽略挂起信号运行指定的命令。</span><br><span class="line"></span><br><span class="line">pgrep：查找匹配条件的进程。</span><br><span class="line"></span><br><span class="line">runlevel：查看系统当前运行级别。</span><br><span class="line"></span><br><span class="line">init：切换运行级别。</span><br><span class="line"></span><br><span class="line">service：启动、停止、重新启动和关闭系统服务，还可以显示所有系统服务的当前状态</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-29T03:26:36.244Z" itemprop="dateUpdated">2020-11-29 11:26:36</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/11/02/services/liunx/liunx/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/liunx/" rel="tag">liunx</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/&title=《liunx命令》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/&title=《liunx命令》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《liunx命令》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">网络常见的 9 大命令</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/10/20/services/spring/aopLogger/springBoot%E6%97%A5%E5%BF%97%E9%85%8D%E7%BD%AE/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">springBoot日志配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/&title=《liunx命令》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/&title=《liunx命令》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《liunx命令》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/liunx/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

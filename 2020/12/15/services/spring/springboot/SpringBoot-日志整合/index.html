@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/">
+    
+    
+    <title>统一异常处理 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="spring,Exception">
+    <meta name="description" content="Spring Boot 日志整合1. Java 日志概览说到 Java 日志，很多初学者可能都比较懵，因为这里涉及到太多东西了：Apache Commons Logging、Slf4j、Log4j、Log4j2、Logback、Java Util Logging 等等，这些框架各自有什么作用？他们之间有什么区别？ 1.1 总体概览下面这张图很好的展示了 Java 中的日志体系：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="统一异常处理">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="Spring Boot 日志整合1. Java 日志概览说到 Java 日志，很多初学者可能都比较懵，因为这里涉及到太多东西了：Apache Commons Logging、Slf4j、Log4j、Log4j2、Logback、Java Util Logging 等等，这些框架各自有什么作用？他们之间有什么区别？ 1.1 总体概览下面这张图很好的展示了 Java 中的日志体系：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0002.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0003.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0004.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0005.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0006.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0001.jpg">
+<meta property="article:published_time" content="2020-12-15T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-31T12:49:26.007Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="Exception">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0002.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">统一异常处理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">统一异常处理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-12-15T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-12-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%B0%81%E8%A3%85%E5%A4%84%E7%90%86/">统一异常封装处理</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Spring-Boot-日志整合"><span class="post-toc-number">1.</span> <span class="post-toc-text">Spring Boot 日志整合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Java-日志概览"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. Java 日志概览</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-1-总体概览"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1.1 总体概览</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-2-日志级别"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">1.2 日志级别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-3-综合对比"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">1.3 综合对比</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-4-最佳实践"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">1.4 最佳实践</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Spring-Boot-日志实现"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. Spring Boot 日志实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-Spring-Boot-日志配置"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">2.1 Spring Boot 日志配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-Logback-配置"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">2.2 Logback 配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2-1-基本配置"><span class="post-toc-number">1.2.2.1.</span> <span class="post-toc-text">2.2.1 基本配置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2-2-输出到文件"><span class="post-toc-number">1.2.2.2.</span> <span class="post-toc-text">2.2.2 输出到文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-Log4j-配置"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">2.3 Log4j 配置</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-services/spring/springboot/SpringBoot-日志整合"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">统一异常处理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-12-15 08:30:00" datetime="2020-12-15T00:30:00.000Z"  itemprop="datePublished">2020-12-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%B0%81%E8%A3%85%E5%A4%84%E7%90%86/">统一异常封装处理</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Spring-Boot-日志整合"><a href="#Spring-Boot-日志整合" class="headerlink" title="Spring Boot 日志整合"></a>Spring Boot 日志整合</h1><h2 id="1-Java-日志概览"><a href="#1-Java-日志概览" class="headerlink" title="1. Java 日志概览"></a>1. Java 日志概览</h2><p>说到 Java 日志，很多初学者可能都比较懵，因为这里涉及到太多东西了：<code>Apache Commons Logging</code>、<code>Slf4j</code>、<code>Log4j</code>、<code>Log4j2</code>、<code>Logback</code>、<code>Java Util Logging</code> 等等，这些框架各自有什么作用？他们之间有什么区别？</p>
+<h3 id="1-1-总体概览"><a href="#1-1-总体概览" class="headerlink" title="1.1 总体概览"></a>1.1 总体概览</h3><p>下面这张图很好的展示了 Java 中的日志体系：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0002.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+<p>可以看到，Java 中的日志框架主要分为两大类：<strong>日志门面</strong>和<strong>日志实现</strong>。</p>
+<p><strong>日志门面</strong></p>
+<p>日志门面定义了一组日志的接口规范，它并不提供底层具体的实现逻辑。<code>Apache Commons Logging</code> 和 <code>Slf4j</code> 就属于这一类。</p>
+<p><strong>日志实现</strong></p>
+<p>日志实现则是日志具体的实现，包括日志级别控制、日志打印格式、日志输出形式（输出到数据库、输出到文件、输出到控制台等）。<code>Log4j</code>、<code>Log4j2</code>、<code>Logback</code> 以及 <code>Java Util Logging</code> 则属于这一类。</p>
+<p>将日志门面和日志实现分离其实是一种典型的门面模式，这种方式可以让具体业务在不同的日志实现框架之间自由切换，而不需要改动任何代码，开发者只需要掌握日志门面的 API 即可。</p>
+<p>日志门面是不能单独使用的，它必须和一种具体的日志实现框架相结合使用。</p>
+<p>那么日志框架是否可以单独使用呢？</p>
+<p>技术上来说当然没问题，但是我们一般不会这样做，因为这样做可维护性很差，而且后期扩展不易。例如 A 开发了一个工具包使用 Log4j 打印日志，B 引用了这个工具包，但是 B 喜欢使用 Logback 打印日志，此时就会出现一个业务使用两个甚至多个日志框架，开发者也需要维护多个日志的配置文件。因此我们都是用日志门面打印日志。</p>
+<h3 id="1-2-日志级别"><a href="#1-2-日志级别" class="headerlink" title="1.2 日志级别"></a>1.2 日志级别</h3><p>使用日志级别的好处在于，调整级别，就可以屏蔽掉很多调试相关的日志输出。不同的日志实现定义的日志级别不太一样，不过也都大同小异。</p>
+<p><strong>Java Util Logging</strong></p>
+<p><code>Java Util Logging</code> 定义了 7 个日志级别，从严重到普通依次是：</p>
+<ul>
+<li>SEVERE</li>
+<li>WARNING</li>
+<li>INFO</li>
+<li>CONFIG</li>
+<li>FINE</li>
+<li>FINER</li>
+<li>FINEST</li>
+</ul>
+<p>因为默认级别是 INFO，因此 INFO 级别以下的日志，不会被打印出来。</p>
+<p><strong>Log4j</strong></p>
+<p><code>Log4j</code> 定义了 8 个日志级别（除去 OFF 和 ALL，可以说分为 6 个级别），从严重到普通依次是：</p>
+<ul>
+<li>OFF：最高等级的，用于关闭所有日志记录。</li>
+<li>FATAL：重大错误，这种级别可以直接停止程序了。</li>
+<li>ERROR：打印错误和异常信息，如果不想输出太多的日志，可以使用这个级别。</li>
+<li>WARN：警告提示。</li>
+<li>INFO：用于生产环境中输出程序运行的一些重要信息，不能滥用。</li>
+<li>DEBUG：用于开发过程中打印一些运行信息。</li>
+<li>TRACE</li>
+<li>ALL 最低等级的，用于打开所有日志记录。</li>
+</ul>
+<p><strong>Logback</strong></p>
+<p><code>Logback</code> 日志级别比较简单，从严重到普通依次是：</p>
+<ul>
+<li>ERROR</li>
+<li>WARN</li>
+<li>INFO</li>
+<li>DEBUG</li>
+<li>TRACE</li>
+</ul>
+<h3 id="1-3-综合对比"><a href="#1-3-综合对比" class="headerlink" title="1.3 综合对比"></a>1.3 综合对比</h3><p><code>Java Util Logging</code> 系统在 <code>JVM</code> 启动时读取配置文件并完成初始化，一旦应用程序开始运行，就无法修改配置。另外，这种日志实现配置也不太方便，只能在 <code>JVM</code> 启动时传递参数，像下面这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-Djava.util.logging.config.file=&lt;config-file-name&gt;。</span><br></pre></td></tr></table></figure>
+
+<p>由于这些局限性，导致 <code>Java Util Logging</code> 并未广泛使用。</p>
+<p><code>Log4j</code> 虽然配置繁琐，但是一旦配置完成，使用起来就非常方便，只需要将相关的配置文件放到 <code>classpath</code> 下即可。在很多情况下，<code>Log4j</code> 的配置文件我们可以在不同的项目中反复使用。</p>
+<p><code>Log4j</code> 可以和 <code>Apache Commons Logging</code> 搭配使用，<code>Apache Commons Logging</code> 会自动搜索并使用 <code>Log4j</code>，如果没有找到 <code>Log4j</code>，再使用 <code>Java Util Logging</code>。</p>
+<p>比 <code>Log4j</code> + <code>Apache Commons Logging</code> 组合更得人心的是 <code>Slf4j</code> + <code>Logback</code> 组合。</p>
+<p><code>Logback</code> 是 <code>Slf4j</code> 的原生实现框架，它也出自 <code>Log4j</code> 作者（Ceki Gülcü）之手，但是相比 <code>Log4j</code>，它拥有更多的优点、特性以及更强的性能。</p>
+<h3 id="1-4-最佳实践"><a href="#1-4-最佳实践" class="headerlink" title="1.4 最佳实践"></a>1.4 最佳实践</h3><ul>
+<li>如果不想添加任何依赖，使用 <code>Java Util Logging</code> 或框架容器已经提供的日志接口。</li>
+<li>如果比较在意性能，推荐：<code>Slf4j</code> + <code>Logback</code>。</li>
+<li>如果项目中已经使用了 <code>Log4j</code> 且没有发现性能问题，推荐组合为：<code>Slf4j</code> + <code>Log4j2</code>。</li>
+</ul>
+<h2 id="2-Spring-Boot-日志实现"><a href="#2-Spring-Boot-日志实现" class="headerlink" title="2. Spring Boot 日志实现"></a>2. Spring Boot 日志实现</h2><p>Spring Boot 使用 <code>Apache Commons Logging</code> 作为内部的日志框架门面，它只是一个日志接口，在实际应用中需要为该接口来指定相应的日志实现。</p>
+<p>Spring Boot 默认的日志实现是 <code>Logback</code>。这个很好查看：随便启动一个 Spring Boot 项目，从控制台找一行日志，例如下面这样：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0003.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>考虑到最后的 prod 是一个可以变化的字符，我们在项目中全局搜索：<code>The following profiles are active</code>，结果如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0004.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>在日志输出的那一行 debug。然后再次启动项目，如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0005.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>此时我们就可以看到真正的日志实现是 <code>Logback</code>。</p>
+<p>其他的诸如 <code>Java Util Logging</code>、<code>Log4j</code> 等框架，Spring Boot 也有很好的支持。</p>
+<p>在 Spring Boot 项目中，只要添加了如下 web 依赖，日志依赖就自动添加进来了：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-Spring-Boot-日志配置"><a href="#2-1-Spring-Boot-日志配置" class="headerlink" title="2.1 Spring Boot 日志配置"></a>2.1 Spring Boot 日志配置</h3><p>Spring Boot 的日志系统会自动根据 classpath 下的内容选择合适的日志配置，在这个过程中首选 Logback。</p>
+<p>如果开发者需要修改日志级别，只需要在 application.properties 文件中通过 <code>logging.level 前缀+包名</code> 的形式进行配置即可，例如下面这样：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.level.org.springframework.web</span>=<span class="string">debug</span></span><br><span class="line"><span class="meta">logging.level.org.hibernate</span>=<span class="string">error</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你想将日志输出到文件，可以通过如下配置指定日志文件名：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.file.name</span>=<span class="string">javaboy.log</span></span><br></pre></td></tr></table></figure>
+
+<p>logging.file.name 可以只指定日志文件名，也可以指定日志文件全路径，例如下面这样：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.file.name</span>=<span class="string">/Users/sang/Documents/javaboy/javaboy.log</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你只是想重新定义输出日志文件的路径，也可以使用 <code>logging.file.path</code> 属性，如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.file.path</span>=<span class="string">/Users/sang/Documents/javaboy</span></span><br></pre></td></tr></table></figure>
+
+<p>如果想对输出到文件中的日志进行精细化管理，还有如下一些属性可以配置：</p>
+<ul>
+<li>logging.logback.rollingpolicy.file-name-pattern：日志归档的文件名，日志文件达到一定大小之后，自动进行压缩归档。</li>
+<li>logging.logback.rollingpolicy.clean-history-on-start：是否在应用启动时进行归档管理。</li>
+<li>logging.logback.rollingpolicy.max-file-size：日志文件大小上限，达到该上限后，会自动压缩。</li>
+<li>logging.logback.rollingpolicy.total-size-cap：日志文件被删除之前，可以容纳的最大大小。</li>
+<li>logging.logback.rollingpolicy.max-history：日志文件保存的天数。</li>
+</ul>
+<p>日志文件归档这块，小伙伴们感兴趣可以自己试下，可以首先将 max-file-size 属性调小，这样方便看到效果：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.logback.rollingpolicy.max-file-size</span>=<span class="string">1MB</span></span><br></pre></td></tr></table></figure>
+
+<p>然后添加如下接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = getLogger(HelloController<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000</span>; i++) &#123;</span><br><span class="line">            logger.info(<span class="string">"hello javaboy"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>访问该接口，可以看到最终生成的日志文件被自动压缩了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0006.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>application.properties 中还可以配置日志分组。</p>
+<p>日志分组能够把相关的 logger 放到一个组统一管理。</p>
+<p>例如我们可以定义一个 tomcat 组：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.group.tomcat</span>=<span class="string">org.apache.catalina,org.apache.coyote, org.apache.tomcat</span></span><br></pre></td></tr></table></figure>
+
+<p>然后统一管理 tomcat 组中的所有 logger：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">logging.level.tomcat</span>=<span class="string">TRACE</span></span><br></pre></td></tr></table></figure>
+
+<p>Spring Boot 中还预定义了两个日志分组 web 和 sql，如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/logger/springboot-logger-0001.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>不过在 application.properties 中只能实现对日志一些非常简单的配置，如果想实现更加细粒度的日志配置，那就需要使用日志实现的原生配置，例如 <code>Logback</code> 的 <code>classpath:logback.xml</code>，<code>Log4j</code> 的 <code>classpath:log4j.xml</code> 等。如果这些日志配置文件存在于 classpath 下，那么默认情况下，Spring Boot 就会自动加载这些配置文件。</p>
+<h3 id="2-2-Logback-配置"><a href="#2-2-Logback-配置" class="headerlink" title="2.2 Logback 配置"></a>2.2 Logback 配置</h3><h4 id="2-2-1-基本配置"><a href="#2-2-1-基本配置" class="headerlink" title="2.2.1 基本配置"></a>2.2.1 基本配置</h4><p>默认的 <code>Logback</code> 配置文件名有两种：</p>
+<ul>
+<li><code>logback.xml</code>：这种配置文件会直接被日志框架加载。</li>
+<li><code>logback-spring.xml</code>：这种配置文件不会被日志框架直接加载，而是由 Spring Boot 去解析日志配置，可以使用 Spring Boot 的高级 Profile 功能。</li>
+</ul>
+<p>Spring Boot 中为 <code>Logback</code> 提供了四个默认的配置文件，位置在 <code>org/springframework/boot/logging/logback/</code>，分别是：</p>
+<ul>
+<li>defaults.xml：提供了公共的日志配置，日志输出规则等。</li>
+<li>console-appender.xml：使用 CONSOLE_LOG_PATTERN 添加一个ConsoleAppender。</li>
+<li>file-appender.xml：添加一个 RollingFileAppender。</li>
+<li>base.xml：为了兼容旧版 Spring Boot 而提供的。</li>
+</ul>
+<p>如果需要自定义 <code>logback.xml</code> 文件，可以在自定义时使用这些默认的配置文件，也可以不使用。一个典型的 <code>logback.xml</code> 文件如下（resources/logback.xml）：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">resource</span>=<span class="string">"org/springframework/boot/logging/logback/defaults.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">resource</span>=<span class="string">"org/springframework/boot/logging/logback/console-appender.xml"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"INFO"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"CONSOLE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">logger</span> <span class="attr">name</span>=<span class="string">"org.springframework.web"</span> <span class="attr">level</span>=<span class="string">"DEBUG"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以通过 include 引入 Spring Boot 已经提供的配置文件，也可以自定义。</p>
+<h4 id="2-2-2-输出到文件"><a href="#2-2-2-输出到文件" class="headerlink" title="2.2.2 输出到文件"></a>2.2.2 输出到文件</h4><p>如果想禁止控制台的日志输出，转而将日志内容输出到一个文件，我们可以自定义一个 <code>logback-spring.xml</code> 文件，并引入前面所说的 <code>file-appender.xml</code> 文件。</p>
+<p>像下面这样（<code>resources/logback-spring.xml</code>）：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">resource</span>=<span class="string">"org/springframework/boot/logging/logback/defaults.xml"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"LOG_FILE"</span> <span class="attr">value</span>=<span class="string">"$&#123;LOG_FILE:-$&#123;LOG_PATH:-$&#123;LOG_TEMP:-$&#123;java.io.tmpdir:-/tmp&#125;&#125;/&#125;spring.log&#125;"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">resource</span>=<span class="string">"org/springframework/boot/logging/logback/file-appender.xml"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"INFO"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"FILE"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-Log4j-配置"><a href="#2-3-Log4j-配置" class="headerlink" title="2.3 Log4j 配置"></a>2.3 Log4j 配置</h3><p>如果 classpath 下存在 <code>Log4j2</code> 的依赖，Spring Boot 会自动进行配置。</p>
+<p>默认情况下 classpath 下当然不存在 <code>Log4j2</code> 的依赖，如果想使用 <code>Log4j2</code>，可以排除已有的 <code>Logback</code>，然后再引入 <code>Log4j2</code>，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-log4j2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Log4j2</code> 的配置就比较容易了，在 reources 目录下新建 log4j2.xml 文件，内容如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span> <span class="attr">status</span>=<span class="string">"warn"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">"app_name"</span>&gt;</span>logging<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Property</span> <span class="attr">name</span>=<span class="string">"log_path"</span>&gt;</span>logs/$&#123;app_name&#125;<span class="tag">&lt;/<span class="name">Property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">appenders</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">console</span> <span class="attr">name</span>=<span class="string">"Console"</span> <span class="attr">target</span>=<span class="string">"SYSTEM_OUT"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"[%d][%t][%p][%l] %m%n"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">console</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">"RollingFileInfo"</span> <span class="attr">fileName</span>=<span class="string">"$&#123;log_path&#125;/info.log"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">"$&#123;log_path&#125;/$$&#123;date:yyyy-MM&#125;/info-%d&#123;yyyy-MM-dd&#125;-%i.log.gz"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Filters</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">"INFO"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">"WARN"</span> <span class="attr">onMatch</span>=<span class="string">"DENY"</span></span></span><br><span class="line"><span class="tag">                                 <span class="attr">onMismatch</span>=<span class="string">"NEUTRAL"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Filters</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"[%d][%t][%p][%c:%L] %m%n"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">TimeBasedTriggeringPolicy</span> <span class="attr">interval</span>=<span class="string">"1"</span> <span class="attr">modulate</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">"2 MB"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">DefaultRolloverStrategy</span> <span class="attr">compressionLevel</span>=<span class="string">"0"</span> <span class="attr">max</span>=<span class="string">"10"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">"RollingFileWarn"</span> <span class="attr">fileName</span>=<span class="string">"$&#123;log_path&#125;/warn.log"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">"$&#123;log_path&#125;/$$&#123;date:yyyy-MM&#125;/warn-%d&#123;yyyy-MM-dd&#125;-%i.log.gz"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Filters</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">"WARN"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">"ERROR"</span> <span class="attr">onMatch</span>=<span class="string">"DENY"</span></span></span><br><span class="line"><span class="tag">                                 <span class="attr">onMismatch</span>=<span class="string">"NEUTRAL"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Filters</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"[%d][%t][%p][%c:%L] %m%n"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">TimeBasedTriggeringPolicy</span> <span class="attr">interval</span>=<span class="string">"1"</span> <span class="attr">modulate</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">"2 MB"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">DefaultRolloverStrategy</span> <span class="attr">compressionLevel</span>=<span class="string">"0"</span> <span class="attr">max</span>=<span class="string">"10"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">RollingFile</span> <span class="attr">name</span>=<span class="string">"RollingFileError"</span> <span class="attr">fileName</span>=<span class="string">"$&#123;log_path&#125;/error.log"</span></span></span><br><span class="line"><span class="tag">                     <span class="attr">filePattern</span>=<span class="string">"$&#123;log_path&#125;/$$&#123;date:yyyy-MM&#125;/error-%d&#123;yyyy-MM-dd&#125;-%i.log.gz"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ThresholdFilter</span> <span class="attr">level</span>=<span class="string">"ERROR"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">PatternLayout</span> <span class="attr">pattern</span>=<span class="string">"[%d][%t][%p][%c:%L] %m%n"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">Policies</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">TimeBasedTriggeringPolicy</span> <span class="attr">interval</span>=<span class="string">"1"</span> <span class="attr">modulate</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">SizeBasedTriggeringPolicy</span> <span class="attr">size</span>=<span class="string">"2 MB"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Policies</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">DefaultRolloverStrategy</span> <span class="attr">compressionLevel</span>=<span class="string">"0"</span> <span class="attr">max</span>=<span class="string">"10"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">RollingFile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">appenders</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">loggers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">root</span> <span class="attr">level</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"Console"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"RollingFileInfo"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"RollingFileWarn"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">appender-ref</span> <span class="attr">ref</span>=<span class="string">"RollingFileError"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">loggers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>首先在 properties 节点中指定了应用名称以及日志文件位置。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-31T12:49:26.007Z" itemprop="dateUpdated">2020-12-31 20:49:26</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/Exception/" rel="tag">Exception</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/spring/" rel="tag">spring</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/&title=《统一异常处理》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/&title=《统一异常处理》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《统一异常处理》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/12/15/services/spring/springboot/SpringBootStarters%20%E6%9C%89%E5%93%AA%E4%BA%9B%E5%91%A2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Spring Boot starters 有哪些</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/12/15/services/spring/upload/%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">图片上传 单张多张使用 ？</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/&title=《统一异常处理》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/&title=《统一异常处理》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《统一异常处理》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/12/15/services/spring/springboot/SpringBoot-%E6%97%A5%E5%BF%97%E6%95%B4%E5%90%88/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/11/28/plugin/docker/Docker-1/">
+    
+    
+    <title>Docker简介 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="docker">
+    <meta name="description" content="Docker简介 Docker是开源应用容器引擎，轻量级容器技术。 基于Go语言，并遵循Apache2.0协议开源 Docker可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的Linux系统上，也可以实现虚拟化 容器完全使用沙箱技术，相互之间不会有任何接口 类似于虚拟机技术(vmware、vitural)，但docker直接运行在操作系统(Linux)上，而不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker简介">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="Docker简介 Docker是开源应用容器引擎，轻量级容器技术。 基于Go语言，并遵循Apache2.0协议开源 Docker可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的Linux系统上，也可以实现虚拟化 容器完全使用沙箱技术，相互之间不会有任何接口 类似于虚拟机技术(vmware、vitural)，但docker直接运行在操作系统(Linux)上，而不">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-28T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-12T12:16:40.331Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Docker简介</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Docker简介</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-28T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-11-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Docker简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">Docker简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Docker核心概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">Docker核心概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Docker安装及启停"><span class="post-toc-number">3.</span> <span class="post-toc-text">Docker安装及启停</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-查看centos版本"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. 查看centos版本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-升级软件包及内核-可选"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2 升级软件包及内核(可选)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-安装docker"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3. 安装docker</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-启动docker"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. 启动docker</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-将docker服务设为开机启动"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5. 将docker服务设为开机启动</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-停止docker"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">5. 停止docker</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Docker常用命令及操作"><span class="post-toc-number">4.</span> <span class="post-toc-text">Docker常用命令及操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-1-docker镜像命令"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">4.1 docker镜像命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-1-1-镜像检索"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">4.1.1 镜像检索</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-1-2-镜像下载"><span class="post-toc-number">4.1.2.</span> <span class="post-toc-text">4.1.2 镜像下载</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-1-3-镜像列表"><span class="post-toc-number">4.1.3.</span> <span class="post-toc-text">4.1.3 镜像列表</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-1-1-镜像删除"><span class="post-toc-number">4.1.4.</span> <span class="post-toc-text">4.1.1 镜像删除</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-2-容器操作"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">4.2 容器操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-1-搜索镜像"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">4.2.1 搜索镜像</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-2-下载镜像"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">4.2.2 下载镜像</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-3-根据镜像启动容器"><span class="post-toc-number">4.2.3.</span> <span class="post-toc-text">4.2.3 根据镜像启动容器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-4-查看运行中容器"><span class="post-toc-number">4.2.4.</span> <span class="post-toc-text">4.2.4 查看运行中容器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-5-停止运行中容器"><span class="post-toc-number">4.2.5.</span> <span class="post-toc-text">4.2.5 停止运行中容器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-5-查看所有的容器"><span class="post-toc-number">4.2.6.</span> <span class="post-toc-text">4.2.5 查看所有的容器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-6-启动容器"><span class="post-toc-number">4.2.7.</span> <span class="post-toc-text">4.2.6 启动容器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-7-删除容器"><span class="post-toc-number">4.2.8.</span> <span class="post-toc-text">4.2.7 删除容器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-8-启动做端口映射的容器"><span class="post-toc-number">4.2.9.</span> <span class="post-toc-text">4.2.8 启动做端口映射的容器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-9-查看容器日志"><span class="post-toc-number">4.2.10.</span> <span class="post-toc-text">4.2.9 查看容器日志</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-10-查看端口映射"><span class="post-toc-number">4.2.11.</span> <span class="post-toc-text">4.2.10 查看端口映射</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-11-登录退出容器"><span class="post-toc-number">4.2.12.</span> <span class="post-toc-text">4.2.11 登录退出容器</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-plugin/docker/Docker-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Docker简介</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-28 08:30:00" datetime="2020-11-28T00:30:00.000Z"  itemprop="datePublished">2020-11-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h3><ul>
+<li>Docker是开源应用容器引擎，轻量级容器技术。</li>
+<li>基于Go语言，并遵循Apache2.0协议开源</li>
+<li>Docker可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的Linux系统上，也可以实现虚拟化</li>
+<li>容器完全使用沙箱技术，相互之间不会有任何接口</li>
+<li>类似于虚拟机技术(vmware、vitural)，但docker直接运行在操作系统(Linux)上，而不是运行在虚拟机中，速度快，性能开销极低</li>
+</ul>
+<p><strong>白话文，简介就是:</strong></p>
+<blockquote>
+<p>Docker支持将软件编译成一个镜像，然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像。<br>运行中的这个镜像称为容器，容器启动是非常快速的。类似windows里面的ghost操 作系统，安装好后什么都有了。</p>
+</blockquote>
+<h3 id="Docker核心概念"><a href="#Docker核心概念" class="headerlink" title="Docker核心概念"></a>Docker核心概念</h3><ul>
+<li>docker镜像(Images)：Docker镜像是用于创建Docker容器的模板</li>
+<li>docker容器(Container)：镜像启动后的一个实例称为容器，容器是独立运行的一个或一组应用，</li>
+<li>docker客户端(Client)：客户端通过命令行或其他工具使用Docker API(<a href="https://docs.docker.com/reference/api/docker_remote_api)与Docker的守护进程进行通信" target="_blank" rel="noopener">https://docs.docker.com/reference/api/docker_remote_api)与Docker的守护进程进行通信</a></li>
+<li>docker主机(Host)：一个物理或虚拟的机器用来执行Docker守护进程和容器</li>
+<li>docker仓库(Registry)：Docker仓库用来存储镜像，可以理解为代码控制中的代码仓库，Docker Hub(<a href="https://hub.docker.com" target="_blank" rel="noopener">https://hub.docker.com</a>) 提供了庞大的镜像集合供使用</li>
+</ul>
+<h3 id="Docker安装及启停"><a href="#Docker安装及启停" class="headerlink" title="Docker安装及启停"></a>Docker安装及启停</h3><h4 id="1-查看centos版本"><a href="#1-查看centos版本" class="headerlink" title="1. 查看centos版本"></a>1. 查看centos版本</h4><blockquote>
+<p>Docker 要求 CentOS 系统的内核版本高于 3.10</p>
+</blockquote>
+<p>通过命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure>
+
+<p>查看当前centos版本，如版本不符，需升级系统版本</p>
+<h4 id="2-升级软件包及内核-可选"><a href="#2-升级软件包及内核-可选" class="headerlink" title="2 升级软件包及内核(可选)"></a>2 升级软件包及内核(可选)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-安装docker"><a href="#3-安装docker" class="headerlink" title="3. 安装docker"></a>3. 安装docker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-启动docker"><a href="#4-启动docker" class="headerlink" title="4. 启动docker"></a>4. 启动docker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-将docker服务设为开机启动"><a href="#5-将docker服务设为开机启动" class="headerlink" title="5. 将docker服务设为开机启动"></a>5. 将docker服务设为开机启动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemtctl enable docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-停止docker"><a href="#5-停止docker" class="headerlink" title="5. 停止docker"></a>5. 停止docker</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemtctl stop docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker常用命令及操作"><a href="#Docker常用命令及操作" class="headerlink" title="Docker常用命令及操作"></a>Docker常用命令及操作</h3><h4 id="4-1-docker镜像命令"><a href="#4-1-docker镜像命令" class="headerlink" title="4.1 docker镜像命令"></a>4.1 docker镜像命令</h4><blockquote>
+<p>通常情况下，Docker的镜像都放在Docker的官网 Docker Hub上，点此前往官网</p>
+</blockquote>
+<h5 id="4-1-1-镜像检索"><a href="#4-1-1-镜像检索" class="headerlink" title="4.1.1 镜像检索"></a>4.1.1 镜像检索</h5><p>除了可以在Docker Hub上搜索镜像外，还可以通过命令 <code>docker search xxx</code> 进行搜索，下面以 mysql 为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-1-2-镜像下载"><a href="#4-1-2-镜像下载" class="headerlink" title="4.1.2 镜像下载"></a>4.1.2 镜像下载</h5><p>下载命名为：<code>docker pull 镜像名:tag</code>，其中<code>tag</code>多为系统的版本，可选的，默认为<code>least</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-1-3-镜像列表"><a href="#4-1-3-镜像列表" class="headerlink" title="4.1.3 镜像列表"></a>4.1.3 镜像列表</h5><p>获取已下载镜像列表命令：<code>docker images</code></p>
+<p>其中，</p>
+<p><code>RESPOSITORY</code>为镜像名<br><code>TAG</code>为镜像版本，<code>least</code>代表最新版<br><code>IMAGE_ID</code>为该镜像唯一ID<br><code>CREATED</code>为该镜像创建时间<br><code>SIZE</code>为该镜像大小</p>
+<h5 id="4-1-1-镜像删除"><a href="#4-1-1-镜像删除" class="headerlink" title="4.1.1 镜像删除"></a>4.1.1 镜像删除</h5><p>删除指定镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi image-id</span><br></pre></td></tr></table></figure>
+
+<p>删除所有镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi $(docker images -q)</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-容器操作"><a href="#4-2-容器操作" class="headerlink" title="4.2 容器操作"></a>4.2 容器操作</h4><blockquote>
+<p>可以理解为软件下载(下载QQ)–&gt;安装(QQ)–&gt;运行(QQ)的过程。<br>下面以Tomcat为例</p>
+</blockquote>
+<h5 id="4-2-1-搜索镜像"><a href="#4-2-1-搜索镜像" class="headerlink" title="4.2.1 搜索镜像"></a>4.2.1 搜索镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search tomcat</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-2-下载镜像"><a href="#4-2-2-下载镜像" class="headerlink" title="4.2.2 下载镜像"></a>4.2.2 下载镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull tomcat</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-3-根据镜像启动容器"><a href="#4-2-3-根据镜像启动容器" class="headerlink" title="4.2.3 根据镜像启动容器"></a>4.2.3 根据镜像启动容器</h5><p>最简单的运行镜像为容器的命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name container-name -d image-name</span><br></pre></td></tr></table></figure>
+
+<p>运行一个容器，使用<code>docker run</code>命令即可。</p>
+<p><code>-- name</code>：为容器起一个名称<br><code>-d</code>：detached，执行完这句命令后，控制台将不会阻塞，可以继续输入命令操作<br><code>image-name</code>：要运行的镜像名称</p>
+<h5 id="4-2-4-查看运行中容器"><a href="#4-2-4-查看运行中容器" class="headerlink" title="4.2.4 查看运行中容器"></a>4.2.4 查看运行中容器</h5><p>可通过如下命令，查看运行中的容器列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p><code>CONTAINER ID</code>：启动时生成的ID<br><code>IMAGE</code>：该容器使用的镜像<br><code>COMMAND</code>：容器启动时执行的命令<br><code>CREATED</code>：容器创建时间<br><code>STATUS</code>：当前容器状态<br><code>PORTS</code>：当前容器所使用的默认端口号<br><code>NAMES</code>：启动时给容器设置的名称</p>
+<h5 id="4-2-5-停止运行中容器"><a href="#4-2-5-停止运行中容器" class="headerlink" title="4.2.5 停止运行中容器"></a>4.2.5 停止运行中容器</h5><p>通过以下命令来停止运行中的容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop container-name&#x2F;container-id</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-5-查看所有的容器"><a href="#4-2-5-查看所有的容器" class="headerlink" title="4.2.5 查看所有的容器"></a>4.2.5 查看所有的容器</h5><p>通过以下命令可查看运行和停止的所有容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-6-启动容器"><a href="#4-2-6-启动容器" class="headerlink" title="4.2.6 启动容器"></a>4.2.6 启动容器</h5><p>通过以下命令启动容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start container-name&#x2F;container-id</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-7-删除容器"><a href="#4-2-7-删除容器" class="headerlink" title="4.2.7 删除容器"></a>4.2.7 删除容器</h5><p>删除单个容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm container-id</span><br></pre></td></tr></table></figure>
+
+<p>删除所有容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm $(docker ps -a -q )</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-8-启动做端口映射的容器"><a href="#4-2-8-启动做端口映射的容器" class="headerlink" title="4.2.8 启动做端口映射的容器"></a>4.2.8 启动做端口映射的容器</h5><p>Docker运行容器之后却发现没IP，没端口，也就是说，启动容器的时候如果不指定对应参数，在容器外部是无法通过网络来访问容器内的网络应用和服务的。 所以需要通过Docker端口映射来实现网络访问。</p>
+<p>Docker的端口映射通过<code>-p</code>参数实现，命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name tomcat1 -d tomcat</span><br><span class="line">docker run --name tomcat2 -d -p 8888:8080 tomcat</span><br></pre></td></tr></table></figure>
+
+<p>如上，就把主机端口8888请求映射到Docker容器内部端口8080了。</p>
+<p>执行完这两条命令后，通过<code>docker ps</code>查看：</p>
+<p>通过<code>PORTS</code>可以看出，<code>tomcat2</code>是做了端口映射的，<code>tomcat1</code>是没进行映射过的。</p>
+<p>分别通过浏览器访问：</p>
+<p><code>http://*.*.*.*:8080/</code> // tomcat1默认端口</p>
+<p><code>http://*.*.*.*:8888/</code> // 做过端口映射的Tomcat2，8888会转发请求到tomcat2的8080</p>
+<p>结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">第一个请求是无法请求到的，原因开篇处说过了。</span><br><span class="line">第二个请求是可以正常进行请求的，会由tomcat2容器进行处理</span><br></pre></td></tr></table></figure>
+
+<p>端口映射格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ip:hostport:containerport  </span><br><span class="line"></span><br><span class="line">#指定ip、指定主机port、指定容器port</span><br><span class="line">ip::containerport        </span><br><span class="line"></span><br><span class="line">#指定ip、未指定主机port、指定容器port</span><br><span class="line">hostport:container         </span><br><span class="line"></span><br><span class="line">#未指定ip port、指定主机port、指定容器port</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-9-查看容器日志"><a href="#4-2-9-查看容器日志" class="headerlink" title="4.2.9 查看容器日志"></a>4.2.9 查看容器日志</h5><p>查看当前容器日志，可通过如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs container-id&#x2F;container-name</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-2-10-查看端口映射"><a href="#4-2-10-查看端口映射" class="headerlink" title="4.2.10 查看端口映射"></a>4.2.10 查看端口映射</h5><p>可以通过如下命令查看容器映射了哪些端口及协议：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker port container-id</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@docker ~]#docker port 46114af6b44e</span><br><span class="line">8080&#x2F;tcp -&gt; 0.0.0.0:8888</span><br><span class="line">[root@docker ~]#docker port cea668ee4db0</span><br></pre></td></tr></table></figure>
+
+<p>如果返回空，则代表没进行端口映射。</p>
+<h5 id="4-2-11-登录退出容器"><a href="#4-2-11-登录退出容器" class="headerlink" title="4.2.11 登录退出容器"></a>4.2.11 登录退出容器</h5><p>运行中的容器其实是一个功能完备的Linux操作系统，所以我们可以像常规系统一样进行登陆及退出操作。</p>
+<p>登录命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it container-id&#x2F;container-name bash</span><br></pre></td></tr></table></figure>
+
+<p>退出命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-12T12:16:40.331Z" itemprop="dateUpdated">2020-12-12 20:16:40</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/11/28/plugin/docker/Docker-1/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/docker/" rel="tag">docker</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/&title=《Docker简介》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/&title=《Docker简介》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Docker简介》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/11/28/plugin/docker/Docker-2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">什么是 Docker ？</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/11/20/services/java/io/io/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">io实例读写</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/&title=《Docker简介》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/&title=《Docker简介》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Docker简介》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

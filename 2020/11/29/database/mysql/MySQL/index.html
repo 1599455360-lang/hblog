@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/11/29/database/mysql/MySQL/">
+    
+    
+    <title>MySQL实用的语法格式 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="database,mysql">
+    <meta name="description" content="MySQL实用的语法格式1   函数的使用有哪些1     时间函数时间相差多少天 123456789101112131415select TIMESTAMPDIFF( DAY, &#39;2020-07-1&#39;, &#39;2020-11-24&#39;)    时间增加4天select TIMESTAMPADD(DAY,4,now());   参数格式day- FRAC_SECOND：表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL实用的语法格式">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="MySQL实用的语法格式1   函数的使用有哪些1     时间函数时间相差多少天 123456789101112131415select TIMESTAMPDIFF( DAY, &#39;2020-07-1&#39;, &#39;2020-11-24&#39;)    时间增加4天select TIMESTAMPADD(DAY,4,now());   参数格式day- FRAC_SECOND：表">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-29T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-29T05:22:36.871Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MySQL实用的语法格式</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">MySQL实用的语法格式</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-29T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-11-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0/">时间函数</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MySQL实用的语法格式"><span class="post-toc-number">1.</span> <span class="post-toc-text">MySQL实用的语法格式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-函数的使用有哪些"><span class="post-toc-number">2.</span> <span class="post-toc-text">1   函数的使用有哪些</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-时间函数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1     时间函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-获取为空的函数"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2     获取为空的函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-以问号截取表中的相关数据"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3  以问号截取表中的相关数据</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-FOUND-ROWS-函数"><span class="post-toc-number">3.</span> <span class="post-toc-text">4     FOUND_ROWS() 函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-ROW-COUNT-函数"><span class="post-toc-number">4.</span> <span class="post-toc-text">5 .    ROW_COUNT() 函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-数据库相关操作"><span class="post-toc-number">5.</span> <span class="post-toc-text">2     数据库相关操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-获取表中的相关描述字段信息"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">1      获取表中的相关描述字段信息</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-database/mysql/MySQL"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">MySQL实用的语法格式</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-29 08:30:00" datetime="2020-11-29T00:30:00.000Z"  itemprop="datePublished">2020-11-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0/">时间函数</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="MySQL实用的语法格式"><a href="#MySQL实用的语法格式" class="headerlink" title="MySQL实用的语法格式"></a>MySQL实用的语法格式</h3><h3 id="1-函数的使用有哪些"><a href="#1-函数的使用有哪些" class="headerlink" title="1   函数的使用有哪些"></a>1   函数的使用有哪些</h3><h4 id="1-时间函数"><a href="#1-时间函数" class="headerlink" title="1     时间函数"></a>1     时间函数</h4><p>时间相差多少天</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">select TIMESTAMPDIFF( DAY, &#39;2020-07-1&#39;, &#39;2020-11-24&#39;)    时间增加4天</span><br><span class="line">select TIMESTAMPADD(DAY,4,now());   </span><br><span class="line">参数格式day</span><br><span class="line">- FRAC_SECOND：表示间隔是毫秒</span><br><span class="line">- SECOND：秒</span><br><span class="line">- MINUTE：分钟</span><br><span class="line">- HOUR：小时</span><br><span class="line">- DAY：天</span><br><span class="line">- WEEK：星期</span><br><span class="line">- MONTH：月</span><br><span class="line">- QUARTER：季度</span><br><span class="line">- YEAR：年</span><br><span class="line">select DATEDIFF(create_time,NOW())&#x3D;-1   -- 获取昨天的时间 -1昨天 大昨天 大大昨天  一直递增 -1++ </span><br><span class="line">select SUBDATE(DATE_FORMAT(now() , &#39;%Y-%m-%d&#39;),INTERVAL 10  DAY)-- 从今天往前的10天  参数有 day second 周 等等详情百度</span><br><span class="line">select  SUBDATE(DATE_FORMAT(now() , &#39;%Y-%m-%d&#39;),INTERVAL -10  DAY)  -- 从今天往后的10天</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-获取为空的函数"><a href="#2-获取为空的函数" class="headerlink" title="2     获取为空的函数"></a>2     获取为空的函数</h4><p>FNULL() 函数用于判断第一个表达式是否为 NULL，如果为 NULL 则返回第二个参数的值，如果不为 NULL 则返回第一个参数的值。</p>
+<p>IFNULL() 函数语法格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IFNULL(expression, alt_value)</span><br></pre></td></tr></table></figure>
+
+<p>如果第一个参数的表达式 expression 为 NULL，则返回第二个参数的备用值。</p>
+<h4 id="3-以问号截取表中的相关数据"><a href="#3-以问号截取表中的相关数据" class="headerlink" title="3  以问号截取表中的相关数据"></a>3  以问号截取表中的相关数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--  以问号截取 1 是指 问号的位数  如果以 hi截取 就是2 </span><br><span class="line"> update tc_shift_file_url set file_url&#x3D; SUBSTRING_INDEX(file_url,&#39;?&#39;,1)</span><br><span class="line"> -- mybaits中 like 一般用以 concat(&#39;%&#39;,#&#123;placeOriginCode&#125;,&#39;%&#39;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-FOUND-ROWS-函数"><a href="#4-FOUND-ROWS-函数" class="headerlink" title="4     FOUND_ROWS() 函数"></a>4     FOUND_ROWS() 函数</h3><p>（1） FOUND_ROWS()函数返回的是上一条 SELECT 语句（或 SHOW语句等）查询结果集的记录数。注意，是上一条 SELECT 语句（即执行该函数前的最近一条SELECT语句），而不是上一条 SQL 语句；因为上一条SQL语句不一定是 SELECT 语句。且，像 SELECT ROW_COUNT() 这种语句也是 SELECT 语句，它们的结果集也会被 FOUND_ROWS() 函数查出来。</p>
+<p>（2）如果上一条 SELECT 语句查询结果为空，则返回 0。</p>
+<p>（3）SHOW XXX（例如，show tables、show databases、show status）语句也会被 FOUND_ROWS() 函数查出来。</p>
+<h3 id="5-ROW-COUNT-函数"><a href="#5-ROW-COUNT-函数" class="headerlink" title="5 .    ROW_COUNT() 函数"></a>5 .    ROW_COUNT() 函数</h3><p>1）FOUND_ROWS()函数返回的是上一条SQL语句，对表数据进行修改操作后影响的记录数。如果上一条SQL语句不是修改操作语句（INSERT/UPDATE/DELETE 等），而是查询语句（SELECT/SHOW 等）则返回-1。如果是修改操作语句，则返回修改（增/删/该）影响的记录数。注意，这里是上一条SQL语句（即执行该函数前的上一条SQL语句），和上面有所区别。</p>
+<p>（2）如果上一条SQL语句是UPDATE语句，但是UPDATE后所有数据的值并没有改变，则返回 0。</p>
+<p>（3）如果上一条SQL语句是建表语句（创建表或临时表），但创建的是空表，则返回 0。</p>
+<p>如果是删除表（DROP语句），则返回的还是 0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select FOUND_ROWS() AS &#39;查询受影响行数FOUND_ROW&#39;;</span><br><span class="line">SELECT ROW_COUNT() as &#39;执行结果ROW_COUNT&#39;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-数据库相关操作"><a href="#2-数据库相关操作" class="headerlink" title="2     数据库相关操作"></a>2     数据库相关操作</h3><h4 id="1-获取表中的相关描述字段信息"><a href="#1-获取表中的相关描述字段信息" class="headerlink" title="1      获取表中的相关描述字段信息"></a>1      获取表中的相关描述字段信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select  *  from information_schema.COLUMNS where table_name &#x3D; &#39;表明&#39;;</span><br><span class="line">-- 查询执行表字段 </span><br><span class="line">select ordinal_position, column_name,column_comment,column_type from  information_schema.columns where table_name&#x3D;&#39;表明&#39;;</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-29T05:22:36.871Z" itemprop="dateUpdated">2020-11-29 13:22:36</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/11/29/database/mysql/MySQL/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/database/" rel="tag">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/&title=《MySQL实用的语法格式》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/&title=《MySQL实用的语法格式》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL实用的语法格式》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MySQL中授权(grant)和撤销授权(revoke)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/11/28/plugin/docker/Docker-2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">什么是 Docker ？</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/&title=《MySQL实用的语法格式》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/&title=《MySQL实用的语法格式》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL实用的语法格式》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/MySQL/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

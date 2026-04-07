@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/11/28/plugin/docker/Docker-2/">
+    
+    
+    <title>什么是 Docker ？ | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="docker">
+    <meta name="description" content="一、什么是 Docker？Docker 是现在最主流的开源容器，遵循 Apache 2.0 协议，使用 GO 语言进行开发，始于 2013 年，现已加入 Linux 基金会。 Docker 的核心思想是：”Build once, Run anywhere“，即：一次构建，处处运行，这里可以是一个操作系统、一个 Web 应用，或者一个数据库服务等。 我们可以将 Docker 理解为一个轻量级的沙盒，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="什么是 Docker ？">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="一、什么是 Docker？Docker 是现在最主流的开源容器，遵循 Apache 2.0 协议，使用 GO 语言进行开发，始于 2013 年，现已加入 Linux 基金会。 Docker 的核心思想是：”Build once, Run anywhere“，即：一次构建，处处运行，这里可以是一个操作系统、一个 Web 应用，或者一个数据库服务等。 我们可以将 Docker 理解为一个轻量级的沙盒，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00002.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00001.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00003.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00004.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00005.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00006.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00007.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00008.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00009.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00010.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00011.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00012.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00013.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00014.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00015.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00016.png">
+<meta property="article:published_time" content="2020-11-28T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-12T12:16:14.928Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00002.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">什么是 Docker ？</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">什么是 Docker ？</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-28T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-11-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、什么是-Docker？"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、什么是 Docker？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、安装-Docker"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、安装 Docker</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、启动-Docker"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、启动 Docker</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、第一个-Docker-应用"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、第一个 Docker 应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#客户端运行"><span class="post-toc-number">4.0.1.</span> <span class="post-toc-text">客户端运行</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命令行运行"><span class="post-toc-number">4.0.2.</span> <span class="post-toc-text">命令行运行</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#I-使用-Docker-部署-Spring-Boot-项目"><span class="post-toc-number">5.</span> <span class="post-toc-text">I   使用 Docker 部署 Spring Boot 项目</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、Maven-插件配置"><span class="post-toc-number">6.</span> <span class="post-toc-text">一、Maven 插件配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、Docker-配置"><span class="post-toc-number">7.</span> <span class="post-toc-text">二、Docker 配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、添加测试接口"><span class="post-toc-number">8.</span> <span class="post-toc-text">三、添加测试接口</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、构建-Docker-镜像"><span class="post-toc-number">9.</span> <span class="post-toc-text">四、构建 Docker 镜像</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、IDEA-怎么操作-Docker？"><span class="post-toc-number">10.</span> <span class="post-toc-text">五、IDEA 怎么操作 Docker？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#六、创建并运行容器"><span class="post-toc-number">11.</span> <span class="post-toc-text">六、创建并运行容器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#七、总结"><span class="post-toc-number">12.</span> <span class="post-toc-text">七、总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-plugin/docker/Docker-2"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">什么是 Docker ？</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-28 08:30:00" datetime="2020-11-28T00:30:00.000Z"  itemprop="datePublished">2020-11-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、什么是-Docker？"><a href="#一、什么是-Docker？" class="headerlink" title="一、什么是 Docker？"></a>一、什么是 Docker？</h2><p>Docker 是现在最主流的开源容器，遵循 Apache 2.0 协议，使用 GO 语言进行开发，始于 2013 年，现已加入 Linux 基金会。</p>
+<p>Docker 的核心思想是：”<strong>Build once, Run anywhere</strong>“，即：<strong>一次构建，处处运行</strong>，这里可以是一个操作系统、一个 Web 应用，或者一个数据库服务等。</p>
+<p>我们可以将 Docker 理解为一个轻量级的沙盒，Docker 容器完全使用沙盒机制，每个容器内都有其独立运行的环境和组件，容器之间是相互隔离互不影响的，也可以进行容器间的通信。</p>
+<p>Docker 支持所有主流的操作系统，如：Linux/Mac/Windows，所有主流的云服务也支持 Docker，所以，我们可以将应用及依赖、环境信息等打包到一个 Docker 容器中，可以很轻松的实现应用发布、迁移等。</p>
+<p>Docker 官网：</p>
+<blockquote>
+<p><a href="https://www.docker.com/" target="_blank" rel="noopener">https://www.docker.com/</a></p>
+</blockquote>
+<p>Docker 代码托管：</p>
+<blockquote>
+<p><a href="https://github.com/docker" target="_blank" rel="noopener">https://github.com/docker</a></p>
+</blockquote>
+<h2 id="二、安装-Docker"><a href="#二、安装-Docker" class="headerlink" title="二、安装 Docker"></a>二、安装 Docker</h2><p>Docker 有社区版、企业版。社区版是开源免费的，企业版是收费的，当然也会有更牛逼的特性和服务，一般的应用社区版的足够了。</p>
+<p>Docker 的安装十分简单，栈长这里以 Mac 和 Docker 社区版为例作为安装演示。</p>
+<p>打开 Docker 开始页：</p>
+<blockquote>
+<p><a href="https://www.docker.com/get-started" target="_blank" rel="noopener">https://www.docker.com/get-started</a></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00002.png" alt="00001" title="">
+                </div>
+                <div class="image-caption">00001</div>
+            </figure>
+
+<p>下载 Mac 版 Docker 安装包直接安装即可。</p>
+<p>安装完后使用 <code>docker -v</code> 命令进行可以查看 Docker 版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker -v</span><br><span class="line">Docker version 19.03.13, build 4484c46d9d、</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>docker version</code> 还可以看到完整版本信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Cloud integration  0.1.18</span><br><span class="line"> Version:           19.03.13</span><br><span class="line"> API version:       1.40</span><br><span class="line"> Go version:        go1.13.15</span><br><span class="line"> Git commit:        4484c46d9d</span><br><span class="line"> Built:             Wed Sep 16 16:58:31 2020</span><br><span class="line"> OS&#x2F;Arch:           darwin&#x2F;amd64</span><br><span class="line"> Experimental:      false</span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          19.03.13</span><br><span class="line">  API version:      1.40 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.13.15</span><br><span class="line">  Git commit:       4484c46d9d</span><br><span class="line">  Built:            Wed Sep 16 17:07:04 2020</span><br><span class="line">  OS&#x2F;Arch:          linux&#x2F;amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> containerd:</span><br><span class="line">  Version:          v1.3.7</span><br><span class="line">  GitCommit:        8fba4e9a7d01810a393d5d25a3621dc101981175</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.0.0-rc10</span><br><span class="line">  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.18.0</span><br><span class="line">  GitCommit:        fec3683</span><br></pre></td></tr></table></figure>
+
+<p>看到 Docker 版本信息表示安装成功了。</p>
+<h2 id="三、启动-Docker"><a href="#三、启动-Docker" class="headerlink" title="三、启动 Docker"></a>三、启动 Docker</h2><p>Mac 版本的 Docker 只要点击应用图标进入就自动启动了，也可以设置开机自动启动。</p>
+<p>Mac 版 Docker 官方就自带了控制台客户端，通过 <code>Dashboard</code> 菜单进入。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00001.png" alt="00002" title="">
+                </div>
+                <div class="image-caption">00002</div>
+            </figure>
+<p>通过控制台可以进行容器、镜像的管理、设置等。</p>
+<p>总之 Docker 的安装和启动都非常简单，不同的系统环境都可以轻松完成。</p>
+<h2 id="四、第一个-Docker-应用"><a href="#四、第一个-Docker-应用" class="headerlink" title="四、第一个 Docker 应用"></a>四、第一个 Docker 应用</h2><p>熟悉 Tomcat 的朋友都知道，Tomcat 安装后 Webapp 下面会自带一些 Web 项目。关于 Tomcat 系列教程可以关注公众号Java技术栈搜索阅读，这里不再展开。</p>
+<p>Docker 也是如此，Docker 安装完后也会自带一些镜像，可以在控制台中看到，也可以使用<code>docker images</code> 命令查看本地所有 Docker  镜像。</p>
+<p>如下图所示，切换到 Images：</p>
+<p>镜像只是一个只读的静态文件，不能运行，容器才是镜像的运行实例，所以需要新增一个容器来运行。</p>
+<h4 id="客户端运行"><a href="#客户端运行" class="headerlink" title="客户端运行"></a>客户端运行</h4><p>最简单的方法是点击该镜像右边的运行按钮：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00003.png" alt="00003" title="">
+                </div>
+                <div class="image-caption">00003</div>
+            </figure>
+
+<p>在上面的对话框中填写容器的必要信息，如这里容器的端口和映射本机的端口都是 80，最后点击运行按钮。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00004.png" alt="00004" title="">
+                </div>
+                <div class="image-caption">00004</div>
+            </figure>
+
+<p>这里 Docker 容器中多了一个刚才新建的 docker-tutorial 容器，并且运行在 80 端口。</p>
+<p>那么我们来访问一下这个 Docker 应用，通过该容器右侧的打开浏览器或者输入 <code>http://localhost/</code> 进行访问：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00005.png" alt="00005" title="">
+                </div>
+                <div class="image-caption">00005</div>
+            </figure>
+
+<p>恭喜你，已经运行成功了！</p>
+<h4 id="命令行运行"><a href="#命令行运行" class="headerlink" title="命令行运行"></a>命令行运行</h4><p>客户端操作只是辅助，命令行才是精髓，学习 Docker 我们也要记住常用的命令，其实我们刚才新建容器、运行容器都是通过这条命令一次完成的：</p>
+<blockquote>
+<p>docker run -d -p 80:80 docker/getting-started</p>
+</blockquote>
+<p>这样就等同于基于镜像新建容器、再运行该容器。</p>
+<p>简单解释下各个参数的意思：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00006.png" alt="00006" title="">
+                </div>
+                <div class="image-caption">00006</div>
+            </figure>
+
+<p>也可以缩简成：</p>
+<blockquote>
+<p>docker run -dp 80:80 docker/getting-started</p>
+</blockquote>
+<p>所以还是以这个镜像为例，先在客户端停掉该容器，然后再用命令来启动下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -dp 80:80 docker101tutorial</span><br><span class="line">9df38488adcc2a53dad65691854ffc603e1fb3e25954183b83200809805b0d93</span><br></pre></td></tr></table></figure>
+
+<p>启动成功会输出该容器的 ID.</p>
+<p>通过 <code>docker ps</code> 命令可以查看所有正在运行中的容器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                NAMES</span><br><span class="line">9df38488adcc        docker101tutorial   &quot;&#x2F;docker-entrypoint.…&quot;   3 minutes ago       Up 3 minutes        0.0.0.0:80-&gt;80&#x2F;tcp   hopeful_gauss</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，我们的 docker101tutorial 容器又运行起来了，也可以正常访问。</p>
+<p>另外，通过 <code>docker ps -a</code> 命令可以查看所有容器。</p>
+<p>更多 Docker 命令参考：</p>
+<blockquote>
+<p><a href="https://mmc_jj.gitee.io/hblog/2020/11/28/plugin/docker/Docker-1/" target="_blank" rel="noopener">Docker 核心概念、安装及常用操作命令</a></p>
+</blockquote>
+<h2 id="I-使用-Docker-部署-Spring-Boot-项目"><a href="#I-使用-Docker-部署-Spring-Boot-项目" class="headerlink" title="I   使用 Docker 部署 Spring Boot 项目"></a>I   使用 Docker 部署 Spring Boot 项目</h2><p>Docker 一次构建、处处运行及快速启停的特性，在微服务架构中有着举足轻重的地位，具体的概念性的东西就不介绍了，不懂的点击<a href="https://mp.weixin.qq.com/s?__biz=MzI3ODcxMzQzMw==&mid=2247504648&idx=2&sn=a91e92c17b8aabafde2672f599ea2f43&scene=21#wechat_redirect" target="_blank" rel="noopener">这里</a>阅读 Docker 基础教程。</p>
+<p>本篇栈长主要介绍下如何通过 IntelliJ IDEA、Maven 来操作 Docker 部署 Spring Boot 项目，这也是我们 Java 程序员最关心的开发实战。</p>
+<h2 id="一、Maven-插件配置"><a href="#一、Maven-插件配置" class="headerlink" title="一、Maven 插件配置"></a>一、Maven 插件配置</h2><p>首先在 Maven pom.xml 配置文件中加入 Docker 的 Maven 插件。</p>
+<p>我看网上很多人还在用 <code>docker-maven-plugin</code> 插件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">    &lt;docker.image.prefix&gt;docker&lt;&#x2F;docker.image.prefix&gt;</span><br><span class="line">&lt;&#x2F;properties&gt;</span><br><span class="line"></span><br><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;com.spotify&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;docker-maven-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.2.2&lt;&#x2F;version&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;imageName&gt;$&#123;docker.image.prefix&#125;&#x2F;$&#123;project.artifactId&#125;&lt;&#x2F;imageName&gt;</span><br><span class="line">                &lt;dockerDirectory&gt;src&#x2F;main&#x2F;docker&lt;&#x2F;dockerDirectory&gt;</span><br><span class="line">                &lt;resources&gt;</span><br><span class="line">                    &lt;resource&gt;</span><br><span class="line">                        &lt;targetPath&gt;&#x2F;&lt;&#x2F;targetPath&gt;</span><br><span class="line">                        &lt;directory&gt;$&#123;project.build.directory&#125;&lt;&#x2F;directory&gt;</span><br><span class="line">                        &lt;include&gt;$&#123;project.build.finalName&#125;.jar&lt;&#x2F;include&gt;</span><br><span class="line">                    &lt;&#x2F;resource&gt;</span><br><span class="line">                &lt;&#x2F;resources&gt;</span><br><span class="line">            &lt;&#x2F;configuration&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">    &lt;&#x2F;plugins&gt;</span><br><span class="line">&lt;&#x2F;build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>你们还在用这个插件吗？</p>
+<p>栈长从官方仓库看到，这个插件官方已经不维护了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00007.png" alt="00007" title="">
+                </div>
+                <div class="image-caption">00007</div>
+            </figure>
+
+<p>所以这个插件我就不推荐大家使用了，而是推荐官方的另外一个插件：<strong>dockerfile-maven</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;com.spotify&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;dockerfile-maven-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.4.13&lt;&#x2F;version&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;id&gt;default&lt;&#x2F;id&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;build&lt;&#x2F;goal&gt;</span><br><span class="line">                        &lt;goal&gt;push&lt;&#x2F;goal&gt;</span><br><span class="line">                    &lt;&#x2F;goals&gt;</span><br><span class="line">                &lt;&#x2F;execution&gt;</span><br><span class="line">            &lt;&#x2F;executions&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;repository&gt;javastack&#x2F;$&#123;project.name&#125;&lt;&#x2F;repository&gt;</span><br><span class="line">                &lt;tag&gt;$&#123;project.version&#125;&lt;&#x2F;tag&gt;</span><br><span class="line">                &lt;buildArgs&gt;</span><br><span class="line">                    &lt;JAR_FILE&gt;$&#123;project.build.finalName&#125;.jar&lt;&#x2F;JAR_FILE&gt;</span><br><span class="line">                &lt;&#x2F;buildArgs&gt;</span><br><span class="line">                &lt;dockerfile&gt;src&#x2F;main&#x2F;docker&#x2F;Dockerfile&lt;&#x2F;dockerfile&gt;</span><br><span class="line">            &lt;&#x2F;configuration&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">    &lt;&#x2F;plugins&gt;</span><br><span class="line">&lt;&#x2F;build&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这个插件使用简单，功能更强大。</p>
+<p><strong>新插件地址：</strong></p>
+<blockquote>
+<p><a href="https://github.com/spotify/dockerfile-maven" target="_blank" rel="noopener">https://github.com/spotify/dockerfile-maven</a></p>
+</blockquote>
+<p><strong>最新版插件的环境要求：</strong></p>
+<ul>
+<li>JDK 7+</li>
+<li>Apache Maven 3.5.2+</li>
+</ul>
+<p><strong>这个插件的牛逼之处在于：</strong></p>
+<p>1、从插件名称就可以知道，这个插件是基于 Dockerfile 文件进行构建 Docker 项目的，专注 Dockerfile 文件，所以需要一个 Dockerfile 文件，Dockerfile 也是构建 Docker 项目的基石。</p>
+<p>2、把 Docker 的构建过程集成到了 Maven 的构建过程之中，如果使用默认的配置，使用 <code>mvn package</code> 命令就能打包成一个 Docker 镜像，使用 <code>mvn deploy</code> 命令就能推送到 Docker 仓库。</p>
+<p>3、使我们的构建目标更明确，如我们先使用 <code>mvn dockerfile:build</code> 然后再 <code>mvn dockerfile:tag</code>，然后再 <code>mvn dockerfile:push</code>，也可以满足同时构建再推送的场景，如：<code>mvn dockerfile:build dockerfile:push</code>，这都没问题的。</p>
+<p>4、与 Maven 构建集成，我们可以在一个项目中依赖另外一个项目的 Docker 镜像，Maven 将以正确的顺序构建项目。当我们运行涉及多个服务的集成测试用例时，这很有用的。</p>
+<h2 id="二、Docker-配置"><a href="#二、Docker-配置" class="headerlink" title="二、Docker 配置"></a>二、Docker 配置</h2><p>Dockerfile 是创建 Docker 镜像的基本配置文件，本身是一个文本文件。</p>
+<p>插件默认加载位置为项目所在根目录，因为我在上面的 Maven 插件配置中指明了路径。所以，在 src/main/docker/ 目录下添加一个 Dockerfile 文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 添加 Java 8 镜像来源</span><br><span class="line">FROM java:8</span><br><span class="line"></span><br><span class="line"># 添加参数</span><br><span class="line">ARG JAR_FILE</span><br><span class="line"></span><br><span class="line"># 添加 Spring Boot 包</span><br><span class="line">ADD target&#x2F;$&#123;JAR_FILE&#125; app.jar</span><br><span class="line"></span><br><span class="line"># 执行启动命令</span><br><span class="line">ENTRYPOINT [&quot;java&quot;,&quot;-Djava.security.egd&#x3D;file:&#x2F;dev&#x2F;.&#x2F;urandom&quot;,&quot;-jar&quot;,&quot;&#x2F;app.jar&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>值得说一下的是，上面的 <code>JAR_FILE</code> 参数就是从 Docker Maven 插件中指定的构建参数，这也是这个插件的强大之处，可以翻到文章上面去看一下。</p>
+<p>具体的 <code>Dockerfile</code> 文件细节比较多，这里就不展开详细介绍了，后面我再开一篇单独介绍，关注公众号Java技术栈第一时间推送。</p>
+<h2 id="三、添加测试接口"><a href="#三、添加测试接口" class="headerlink" title="三、添加测试接口"></a>三、添加测试接口</h2><p>添加一个测试接口，以便后面部署测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package cn.javastack.springboot.docker;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.Banner;</span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.boot.builder.SpringApplicationBuilder;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 微信公众号：Java技术栈</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestController</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class DockerApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(DockerApplication.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;docker&#x2F;hello&quot;)</span><br><span class="line">    public String helloDocker() &#123;</span><br><span class="line">        return &quot;hello docker&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Spring Boot 基础性的知识和搭建过程就不介绍了，不熟悉的可以关注公众号Java技术栈，在后台回复关键字 “boot” 阅读我之前写的系列教程。</p>
+<p>所有 Spring Boot 教程实战源码在下面个仓库：</p>
+<blockquote>
+<p><a href="https://github.com/javastacks/spring-boot-best-practice" target="_blank" rel="noopener">https://github.com/javastacks/spring-boot-best-practice</a></p>
+</blockquote>
+<p>本篇所有实战源码到时也会全部同步到上面，大家 Star 一下吧！</p>
+<h2 id="四、构建-Docker-镜像"><a href="#四、构建-Docker-镜像" class="headerlink" title="四、构建 Docker 镜像"></a>四、构建 Docker 镜像</h2><p>配置了 Maven 插件和 Dockerfile 文件后就可以开始构建 Docker 镜像了。</p>
+<p>上面也说了，Docker 构建过程已经集成到了 Maven 的构建过程之中，那么可以直接使用 <code>mvn package</code> 就可以同时打包和构建 Docker 镜像了。</p>
+<p>在 IDEA 中可以直接点击插件对应的命令运行：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00008.png" alt="00008" title="">
+                </div>
+                <div class="image-caption">00008</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00009.png" alt="00009" title="">
+                </div>
+                <div class="image-caption">00009</div>
+            </figure>
+
+<p>插件会根据 Dockerfile 文件构建，文件中有多少条命令，就分为几个步骤构建，如果没问题就会构建成功。</p>
+<h2 id="五、IDEA-怎么操作-Docker？"><a href="#五、IDEA-怎么操作-Docker？" class="headerlink" title="五、IDEA 怎么操作 Docker？"></a>五、IDEA 怎么操作 Docker？</h2><p>一旦我们创建了 Dockerfile 文件，IDEA 就会自动识别并提示我们创建 Docker 连接，当然，我们也可以调出 Services 面板进行手动创建。</p>
+<p>打开 IDEA 中的 Services 面板：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00010.png" alt="00010" title="">
+                </div>
+                <div class="image-caption">00010</div>
+            </figure>
+
+<p>然后点击 Add service &gt; Docker Connection 来添加一个 Docker 连接：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00011.png" alt="00011" title="">
+                </div>
+                <div class="image-caption">00011</div>
+            </figure>
+
+<p>创建完后会自动连接上，点击展开会显示 Docker 本地所有镜像和容器：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00012.png" alt="00012" title="">
+                </div>
+                <div class="image-caption">00012</div>
+            </figure>
+
+<p>如上图所示，就是我们刚构建的镜像。</p>
+<h2 id="六、创建并运行容器"><a href="#六、创建并运行容器" class="headerlink" title="六、创建并运行容器"></a>六、创建并运行容器</h2><p>右击上面的镜像，选择 “Create Container” 菜单来创建并运行一个容器。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00013.png" alt="000013" title="">
+                </div>
+                <div class="image-caption">000013</div>
+            </figure>
+
+<p>填写相应的运行参数，再点击运行按钮，容器即开始运行。</p>
+<p>然后在 Build Log 和 Log 面板中可以看到容器运行日志和应用程序运行日志：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00014.png" alt="00014" title="">
+                </div>
+                <div class="image-caption">00014</div>
+            </figure>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00015.png" alt="00015" title="">
+                </div>
+                <div class="image-caption">00015</div>
+            </figure>
+
+<p>项目在 Docker 中运行起来了，然后再访问下上面写的测试接口：</p>
+<blockquote>
+<p><a href="http://localhost:8080/docker/hello" target="_blank" rel="noopener">http://localhost:8080/docker/hello</a></p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/plugin/docker/00016.png" alt="00016" title="">
+                </div>
+                <div class="image-caption">00016</div>
+            </figure>
+
+<p>OK,到这里就部署并运行成功了。</p>
+<h2 id="七、总结"><a href="#七、总结" class="headerlink" title="七、总结"></a>七、总结</h2><p>本文使用 IntelliJ IDEA、Maven 用 Docker 部署了一个 Spring Boot 项目</p>
+<p>但在实际工作中，Docker 就很有用了，Docker 一次将应用代码、JDK、环境变量、配置文件、以及其他配置信息都打包到一个镜像里面了，一次构建，处处运行，所以再也不用担心环境和配置问题了，开发测试运维都爽死。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-12T12:16:14.928Z" itemprop="dateUpdated">2020-12-12 20:16:14</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/11/28/plugin/docker/Docker-2/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/docker/" rel="tag">docker</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/&title=《什么是 Docker ？》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/&title=《什么是 Docker ？》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《什么是 Docker ？》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/11/29/database/mysql/MySQL/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MySQL实用的语法格式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/11/28/plugin/docker/Docker-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Docker简介</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/&title=《什么是 Docker ？》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/&title=《什么是 Docker ？》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《什么是 Docker ？》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/11/28/plugin/docker/Docker-2/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

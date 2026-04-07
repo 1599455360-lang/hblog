@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/">
+    
+    
+    <title>常用的mysql函数使用 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="database,mysql">
+    <meta name="description" content="Mysql系列  —— 001常用的mysql函数使用环境：mysql5.7.25，cmd命令中进行演示。 MySQL 数值型函数   函数名称 作 用    abs 求绝对值   sqrt 求二次方根   mod 求余数   ceil 和 ceiling 两个函数功能相同，都是返回不小于参数的最小整数，即向上取整   floor 向下取整，返回值转化为一个BIGINT   rand 生成一个0~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用的mysql函数使用">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="Mysql系列  —— 001常用的mysql函数使用环境：mysql5.7.25，cmd命令中进行演示。 MySQL 数值型函数   函数名称 作 用    abs 求绝对值   sqrt 求二次方根   mod 求余数   ceil 和 ceiling 两个函数功能相同，都是返回不小于参数的最小整数，即向上取整   floor 向下取整，返回值转化为一个BIGINT   rand 生成一个0~">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-12T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-31T12:08:39.458Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">常用的mysql函数使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">常用的mysql函数使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-12-12T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-12-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/mysql%E5%87%BD%E6%95%B0/">mysql函数</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mysql系列-——-001"><span class="post-toc-number">1.</span> <span class="post-toc-text">Mysql系列  —— 001</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用的mysql函数使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">常用的mysql函数使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MySQL-数值型函数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">MySQL 数值型函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#abs-求绝对值"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">abs:求绝对值</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#sqrt-求二次方跟（开方）"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">sqrt:求二次方跟（开方）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#mod-求余数"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">mod:求余数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ceil和ceiling-向上取整"><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">ceil和ceiling:向上取整</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#floor-向下取整"><span class="post-toc-number">2.1.5.</span> <span class="post-toc-text">floor:向下取整</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#rand-生成一个随机数"><span class="post-toc-number">2.1.6.</span> <span class="post-toc-text">rand:生成一个随机数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#round-四舍五入函数"><span class="post-toc-number">2.1.7.</span> <span class="post-toc-text">round:四舍五入函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#sign-返回参数的符号"><span class="post-toc-number">2.1.8.</span> <span class="post-toc-text">sign:返回参数的符号</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#pow-和-power-次方函数"><span class="post-toc-number">2.1.9.</span> <span class="post-toc-text">pow 和 power:次方函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#sin-正弦函数"><span class="post-toc-number">2.1.10.</span> <span class="post-toc-text">sin:正弦函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MySQL-字符串函数"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">MySQL 字符串函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#length-返回字符串直接长度"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">length:返回字符串直接长度</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#concat-合并字符串"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">concat:合并字符串</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#insert-替换字符串"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">insert:替换字符串</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#lower-将字母转换成小写"><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">lower:将字母转换成小写</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#upper-将字母转换成大写"><span class="post-toc-number">2.2.5.</span> <span class="post-toc-text">upper:将字母转换成大写</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#left-从左侧截取字符串"><span class="post-toc-number">2.2.6.</span> <span class="post-toc-text">left:从左侧截取字符串</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#right-从右侧截取字符串"><span class="post-toc-number">2.2.7.</span> <span class="post-toc-text">right:从右侧截取字符串</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#trim-删除字符串两侧空格"><span class="post-toc-number">2.2.8.</span> <span class="post-toc-text">trim:删除字符串两侧空格</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#replace-字符串替换"><span class="post-toc-number">2.2.9.</span> <span class="post-toc-text">replace:字符串替换</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#substr-和-substring-截取字符串"><span class="post-toc-number">2.2.10.</span> <span class="post-toc-text">substr 和 substring:截取字符串</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#reverse-反转字符串"><span class="post-toc-number">2.2.11.</span> <span class="post-toc-text">reverse:反转字符串</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MySQL-日期和时间函数"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">MySQL 日期和时间函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#curdate-和-current-date-两个函数作用相同，返回当前系统的日期值"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">curdate 和 current_date:两个函数作用相同，返回当前系统的日期值</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#curtime-和-current-time-获取系统当前时间"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">curtime 和 current_time:获取系统当前时间</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#now-和-sysdate-获取当前时间日期"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">now 和 sysdate:获取当前时间日期</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#unix-timestamp-获取UNIX时间戳"><span class="post-toc-number">2.3.4.</span> <span class="post-toc-text">unix_timestamp:获取UNIX时间戳</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#from-unixtime-时间戳转日期"><span class="post-toc-number">2.3.5.</span> <span class="post-toc-text">from_unixtime:时间戳转日期</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#month-获取指定日期的月份"><span class="post-toc-number">2.3.6.</span> <span class="post-toc-text">month:获取指定日期的月份</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#monthname-获取指定日期月份的英文名称"><span class="post-toc-number">2.3.7.</span> <span class="post-toc-text">monthname:获取指定日期月份的英文名称</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#dayname-获取指定日期的星期名称"><span class="post-toc-number">2.3.8.</span> <span class="post-toc-text">dayname:获取指定日期的星期名称</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#dayofweek-获取日期对应的周索引"><span class="post-toc-number">2.3.9.</span> <span class="post-toc-text">dayofweek:获取日期对应的周索引</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#week-获取指定日期是一年中的第几周"><span class="post-toc-number">2.3.10.</span> <span class="post-toc-text">week:获取指定日期是一年中的第几周</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#dayofyear-获取指定日期在一年中的位置"><span class="post-toc-number">2.3.11.</span> <span class="post-toc-text">dayofyear:获取指定日期在一年中的位置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#dayofmonth-获取指定日期在一个月的位置"><span class="post-toc-number">2.3.12.</span> <span class="post-toc-text">dayofmonth:获取指定日期在一个月的位置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#year-获取年份"><span class="post-toc-number">2.3.13.</span> <span class="post-toc-text">year:获取年份</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#time-to-sec-将时间转换为秒值"><span class="post-toc-number">2.3.14.</span> <span class="post-toc-text">time_to_sec:将时间转换为秒值</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#sec-to-time-将秒值转换为时间格式"><span class="post-toc-number">2.3.15.</span> <span class="post-toc-text">sec_to_time:将秒值转换为时间格式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#date-add和adddate-向日期添加指定时间间隔"><span class="post-toc-number">2.3.16.</span> <span class="post-toc-text">date_add和adddate:向日期添加指定时间间隔</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#date-sub和subdate-日期减法运算"><span class="post-toc-number">2.3.17.</span> <span class="post-toc-text">date_sub和subdate:日期减法运算</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#addtime-时间加法运算"><span class="post-toc-number">2.3.18.</span> <span class="post-toc-text">addtime:时间加法运算</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#subtime-时间减法运算"><span class="post-toc-number">2.3.19.</span> <span class="post-toc-text">subtime:时间减法运算</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#datediff-获取两个日期的时间间隔"><span class="post-toc-number">2.3.20.</span> <span class="post-toc-text">datediff:获取两个日期的时间间隔</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#date-format-格式化指定的日期"><span class="post-toc-number">2.3.21.</span> <span class="post-toc-text">date_format:格式化指定的日期</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#weekday-获取指定日期在一周内的索引位置"><span class="post-toc-number">2.3.22.</span> <span class="post-toc-text">weekday:获取指定日期在一周内的索引位置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MySQL-聚合函数"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">MySQL 聚合函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MySQL-流程控制函数"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">MySQL 流程控制函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#if-判断"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">if:判断</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ifnull-判断是否为空"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">ifnull:判断是否为空</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#case-搜索语句-类似于java中的if-else-if-else"><span class="post-toc-number">2.5.3.</span> <span class="post-toc-text">case:搜索语句,类似于java中的if..else if..else</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他函数"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">其他函数</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-database/mysql/Mysql系列-001"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">常用的mysql函数使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-12-12 08:30:00" datetime="2020-12-12T00:30:00.000Z"  itemprop="datePublished">2020-12-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/mysql%E5%87%BD%E6%95%B0/">mysql函数</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Mysql系列-——-001"><a href="#Mysql系列-——-001" class="headerlink" title="Mysql系列  —— 001"></a>Mysql系列  —— 001</h2><h2 id="常用的mysql函数使用"><a href="#常用的mysql函数使用" class="headerlink" title="常用的mysql函数使用"></a>常用的mysql函数使用</h2><p>环境：mysql5.7.25，cmd命令中进行演示。</p>
+<h3 id="MySQL-数值型函数"><a href="#MySQL-数值型函数" class="headerlink" title="MySQL 数值型函数"></a>MySQL 数值型函数</h3><table>
+<thead>
+<tr>
+<th align="left">函数名称</th>
+<th align="left">作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">abs</td>
+<td align="left">求绝对值</td>
+</tr>
+<tr>
+<td align="left">sqrt</td>
+<td align="left">求二次方根</td>
+</tr>
+<tr>
+<td align="left">mod</td>
+<td align="left">求余数</td>
+</tr>
+<tr>
+<td align="left">ceil 和 ceiling</td>
+<td align="left">两个函数功能相同，都是返回不小于参数的最小整数，即向上取整</td>
+</tr>
+<tr>
+<td align="left">floor</td>
+<td align="left">向下取整，返回值转化为一个BIGINT</td>
+</tr>
+<tr>
+<td align="left">rand</td>
+<td align="left">生成一个0~1之间的随机数，传入整数参数是，用来产生重复序列</td>
+</tr>
+<tr>
+<td align="left">round</td>
+<td align="left">对所传参数进行四舍五入</td>
+</tr>
+<tr>
+<td align="left">sign</td>
+<td align="left">返回参数的符号</td>
+</tr>
+<tr>
+<td align="left">pow 和 power</td>
+<td align="left">两个函数的功能相同，都是所传参数的次方的结果值</td>
+</tr>
+<tr>
+<td align="left">sin</td>
+<td align="left">求正弦值</td>
+</tr>
+<tr>
+<td align="left">asin</td>
+<td align="left">求反正弦值，与函数 SIN 互为反函数</td>
+</tr>
+<tr>
+<td align="left">cos</td>
+<td align="left">求余弦值</td>
+</tr>
+<tr>
+<td align="left">acos</td>
+<td align="left">求反余弦值，与函数 COS 互为反函数</td>
+</tr>
+<tr>
+<td align="left">tan</td>
+<td align="left">求正切值</td>
+</tr>
+<tr>
+<td align="left">atan</td>
+<td align="left">求反正切值，与函数 TAN 互为反函数</td>
+</tr>
+<tr>
+<td align="left">cot</td>
+<td align="left">求余切值</td>
+</tr>
+</tbody></table>
+<h4 id="abs-求绝对值"><a href="#abs-求绝对值" class="headerlink" title="abs:求绝对值"></a>abs:求绝对值</h4><blockquote>
+<p>函数 ABS(x) 返回 x 的绝对值。正数的绝对值是其本身，负数的绝对值为其相反数，0 的绝对值是 0。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select abs(5),abs(-2.4),abs(-24),abs(0);</span><br><span class="line">+--------+-----------+----------+--------+</span><br><span class="line">| abs(5) | abs(-2.4) | abs(-24) | abs(0) |</span><br><span class="line">+--------+-----------+----------+--------+</span><br><span class="line">|      5 |       2.4 |       24 |      0 |</span><br><span class="line">+--------+-----------+----------+--------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="sqrt-求二次方跟（开方）"><a href="#sqrt-求二次方跟（开方）" class="headerlink" title="sqrt:求二次方跟（开方）"></a>sqrt:求二次方跟（开方）</h4><blockquote>
+<p>函数 SQRT(x) 返回非负数 x 的二次方根。负数没有平方根，返回结果为 NULL。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sqrt(25),sqrt(120),sqrt(-9);</span><br><span class="line">+----------+--------------------+----------+</span><br><span class="line">| sqrt(25) | sqrt(120)          | sqrt(-9) |</span><br><span class="line">+----------+--------------------+----------+</span><br><span class="line">|        5 | 10.954451150103322 |     NULL |</span><br><span class="line">+----------+--------------------+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="mod-求余数"><a href="#mod-求余数" class="headerlink" title="mod:求余数"></a>mod:求余数</h4><blockquote>
+<p>函数 MOD(x,y) 返回 x 被 y 除后的余数，MOD() 对于带有小数部分的数值也起作用，它返回除法运算后的余数。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select mod(63,8),mod(120,10),mod(15.5,3);</span><br><span class="line">+-----------+-------------+-------------+</span><br><span class="line">| mod(63,8) | mod(120,10) | mod(15.5,3) |</span><br><span class="line">+-----------+-------------+-------------+</span><br><span class="line">|         7 |           0 |         0.5 |</span><br><span class="line">+-----------+-------------+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="ceil和ceiling-向上取整"><a href="#ceil和ceiling-向上取整" class="headerlink" title="ceil和ceiling:向上取整"></a>ceil和ceiling:向上取整</h4><blockquote>
+<p>函数 CEIL(x) 和 CEILING(x) 的意义相同，返回不小于 x 的最小整数值，返回值转化为一个 BIGINT。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select ceil(-2.5),ceiling(2.5);</span><br><span class="line">+------------+--------------+</span><br><span class="line">| ceil(-2.5) | ceiling(2.5) |</span><br><span class="line">+------------+--------------+</span><br><span class="line">|         -2 |            3 |</span><br><span class="line">+------------+--------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="floor-向下取整"><a href="#floor-向下取整" class="headerlink" title="floor:向下取整"></a>floor:向下取整</h4><blockquote>
+<p>floor(x) 函数返回小于 x 的最大整数值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select floor(5),floor(5.66),floor(-4),floor(-4.66);</span><br><span class="line">+----------+-------------+-----------+--------------+</span><br><span class="line">| floor(5) | floor(5.66) | floor(-4) | floor(-4.66) |</span><br><span class="line">+----------+-------------+-----------+--------------+</span><br><span class="line">|        5 |           5 |        -4 |           -5 |</span><br><span class="line">+----------+-------------+-----------+--------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="rand-生成一个随机数"><a href="#rand-生成一个随机数" class="headerlink" title="rand:生成一个随机数"></a>rand:生成一个随机数</h4><blockquote>
+<p>生成一个0~1之间的随机数，传入整数参数是，用来产生重复序列</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select rand(), rand(), rand();</span><br><span class="line">+--------------------+--------------------+--------------------+</span><br><span class="line">| rand()             | rand()             | rand()             |</span><br><span class="line">+--------------------+--------------------+--------------------+</span><br><span class="line">| 0.5224735778965741 | 0.3678060549942833 | 0.2716095720153391 |</span><br><span class="line">+--------------------+--------------------+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select rand(1),rand(2),rand(1);</span><br><span class="line">+---------------------+--------------------+---------------------+</span><br><span class="line">| rand(1)             | rand(2)            | rand(1)             |</span><br><span class="line">+---------------------+--------------------+---------------------+</span><br><span class="line">| 0.40540353712197724 | 0.6555866465490187 | 0.40540353712197724 |</span><br><span class="line">+---------------------+--------------------+---------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select rand(1),rand(2),rand(1);</span><br><span class="line">+---------------------+--------------------+---------------------+</span><br><span class="line">| rand(1)             | rand(2)            | rand(1)             |</span><br><span class="line">+---------------------+--------------------+---------------------+</span><br><span class="line">| 0.40540353712197724 | 0.6555866465490187 | 0.40540353712197724 |</span><br><span class="line">+---------------------+--------------------+---------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="round-四舍五入函数"><a href="#round-四舍五入函数" class="headerlink" title="round:四舍五入函数"></a>round:四舍五入函数</h4><blockquote>
+<p>返回最接近于参数 x 的整数；ROUND(x,y) 函数对参数x进行四舍五入的操作，返回值保留小数点后面指定的y位。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select round(-6.6),round(-8.44),round(3.44);</span><br><span class="line">+-------------+--------------+-------------+</span><br><span class="line">| round(-6.6) | round(-8.44) | round(3.44) |</span><br><span class="line">+-------------+--------------+-------------+</span><br><span class="line">|          -7 |           -8 |           3 |</span><br><span class="line">+-------------+--------------+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select round(-6.66,1),round(3.33,3),round(88.66,-1),round(88.46,-2);</span><br><span class="line">+----------------+---------------+-----------------+-----------------+</span><br><span class="line">| round(-6.66,1) | round(3.33,3) | round(88.66,-1) | round(88.46,-2) |</span><br><span class="line">+----------------+---------------+-----------------+-----------------+</span><br><span class="line">|           -6.7 |         3.330 |              90 |             100 |</span><br><span class="line">+----------------+---------------+-----------------+-----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="sign-返回参数的符号"><a href="#sign-返回参数的符号" class="headerlink" title="sign:返回参数的符号"></a>sign:返回参数的符号</h4><blockquote>
+<p>返回参数的符号，x 的值为负、零和正时返回结果依次为 -1、0 和 1。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sign(-6),sign(0),sign(34);</span><br><span class="line">+----------+---------+----------+</span><br><span class="line">| sign(-6) | sign(0) | sign(34) |</span><br><span class="line">+----------+---------+----------+</span><br><span class="line">|       -1 |       0 |        1 |</span><br><span class="line">+----------+---------+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="pow-和-power-次方函数"><a href="#pow-和-power-次方函数" class="headerlink" title="pow 和 power:次方函数"></a>pow 和 power:次方函数</h4><blockquote>
+<p>POW(x,y) 函数和 POWER(x,y) 函数用于计算 x 的 y 次方。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select pow(5,-2),pow(10,3),pow(100,0),power(4,3),power(6,-3);</span><br><span class="line">+-----------+-----------+------------+------------+----------------------+</span><br><span class="line">| pow(5,-2) | pow(10,3) | pow(100,0) | power(4,3) | power(6,-3)          |</span><br><span class="line">+-----------+-----------+------------+------------+----------------------+</span><br><span class="line">|      0.04 |      1000 |          1 |         64 | 0.004629629629629629 |</span><br><span class="line">+-----------+-----------+------------+------------+----------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="sin-正弦函数"><a href="#sin-正弦函数" class="headerlink" title="sin:正弦函数"></a>sin:正弦函数</h4><blockquote>
+<p>SIN(x) 返回 x 的正弦值，其中 x 为弧度值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sin(1),sin(0.5*pi()),pi();</span><br><span class="line">+--------------------+---------------+----------+</span><br><span class="line">| sin(1)             | sin(0.5*pi()) | pi()     |</span><br><span class="line">+--------------------+---------------+----------+</span><br><span class="line">| 0.8414709848078965 |             1 | 3.141593 |</span><br><span class="line">+--------------------+---------------+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：PI() 函数返回圆周率（3.141593）</p>
+</blockquote>
+<p><strong>其他几个三角函数在此就不说了，有兴趣的可以自己去练习一下。</strong></p>
+<h3 id="MySQL-字符串函数"><a href="#MySQL-字符串函数" class="headerlink" title="MySQL 字符串函数"></a>MySQL 字符串函数</h3><table>
+<thead>
+<tr>
+<th align="left">函数名称</th>
+<th align="left">作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">length</td>
+<td align="left">计算字符串长度函数，返回字符串的字节长度</td>
+</tr>
+<tr>
+<td align="left">concat</td>
+<td align="left">合并字符串函数，返回结果为连接参数产生的字符串，参数可以使一个或多个</td>
+</tr>
+<tr>
+<td align="left">insert</td>
+<td align="left">替换字符串函数</td>
+</tr>
+<tr>
+<td align="left">lower</td>
+<td align="left">将字符串中的字母转换为小写</td>
+</tr>
+<tr>
+<td align="left">upper</td>
+<td align="left">将字符串中的字母转换为大写</td>
+</tr>
+<tr>
+<td align="left">left</td>
+<td align="left">从左侧字截取符串，返回字符串左边的若干个字符</td>
+</tr>
+<tr>
+<td align="left">right</td>
+<td align="left">从右侧字截取符串，返回字符串右边的若干个字符</td>
+</tr>
+<tr>
+<td align="left">trim</td>
+<td align="left">删除字符串左右两侧的空格</td>
+</tr>
+<tr>
+<td align="left">replace</td>
+<td align="left">字符串替换函数，返回替换后的新字符串</td>
+</tr>
+<tr>
+<td align="left">substr 和 substring</td>
+<td align="left">截取字符串，返回从指定位置开始的指定长度的字符换</td>
+</tr>
+<tr>
+<td align="left">reverse</td>
+<td align="left">字符串反转（逆序）函数，返回与原始字符串顺序相反的字符串</td>
+</tr>
+</tbody></table>
+<h4 id="length-返回字符串直接长度"><a href="#length-返回字符串直接长度" class="headerlink" title="length:返回字符串直接长度"></a>length:返回字符串直接长度</h4><blockquote>
+<p>返回值为字符串的字节长度，使用 uft8（UNICODE 的一种变长字符编码，又称万国码）编码字符集时，一个汉字是 3 个字节，一个数字或字母是一个字节。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select length(&#39;javacode2018&#39;),length(&#39;路人甲Java&#39;),length(&#39;路人&#39;);</span><br><span class="line">+------------------------+-------------------------+------------------+</span><br><span class="line">| length(&#39;javacode2018&#39;) | length(&#39;路人甲Java&#39;)    | length(&#39;路人&#39;)   |</span><br><span class="line">+------------------------+-------------------------+------------------+</span><br><span class="line">|                     12 |                      13 |                6 |</span><br><span class="line">+------------------------+-------------------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="concat-合并字符串"><a href="#concat-合并字符串" class="headerlink" title="concat:合并字符串"></a>concat:合并字符串</h4><blockquote>
+<p>CONCAT(sl，s2，…) 函数返回结果为连接参数产生的字符串，或许有一个或多个参数。</p>
+<p>若有任何一个参数为 NULL，则返回值为 NULL。若所有参数均为非二进制字符串，则结果为非二进制字符串。若自变量中含有任一二进制字符串，则结果为一个二进制字符串。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select concat(&#39;路人甲&#39;,&#39;java&#39;),concat(&#39;路人甲&#39;,null,&#39;java&#39;);</span><br><span class="line">+----------------------------+---------------------------------+</span><br><span class="line">| concat(&#39;路人甲&#39;,&#39;java&#39;)    | concat(&#39;路人甲&#39;,null,&#39;java&#39;)    |</span><br><span class="line">+----------------------------+---------------------------------+</span><br><span class="line">| 路人甲java                 | NULL                            |</span><br><span class="line">+----------------------------+---------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="insert-替换字符串"><a href="#insert-替换字符串" class="headerlink" title="insert:替换字符串"></a>insert:替换字符串</h4><blockquote>
+<p>INSERT(s1，x，len，s2) 返回字符串 s1，子字符串起始于 x 位置，并且用 len 个字符长的字符串代替 s2。</p>
+<p>x的值从1开始，第一个字符的x=1，若 x 超过字符串长度，则返回值为原始字符串。</p>
+<p>假如 len 的长度大于其他字符串的长度，则从位置 x 开始替换。</p>
+<p>若任何一个参数为 NULL，则返回值为 NULL。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select</span><br><span class="line">    -&gt;   insert(&#39;路人甲Java&#39;, 2, 4, &#39;**&#39;) AS col1,</span><br><span class="line">    -&gt;   insert(&#39;路人甲Java&#39;, -1, 4,&#39;**&#39;) AS col2,</span><br><span class="line">    -&gt;   insert(&#39;路人甲Java&#39;, 3, 20,&#39;**&#39;) AS col3;</span><br><span class="line">+---------+---------------+----------+</span><br><span class="line">| col1    | col2          | col3     |</span><br><span class="line">+---------+---------------+----------+</span><br><span class="line">| 路**va  | 路人甲Java    | 路人**   |</span><br><span class="line">+---------+---------------+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="lower-将字母转换成小写"><a href="#lower-将字母转换成小写" class="headerlink" title="lower:将字母转换成小写"></a>lower:将字母转换成小写</h4><blockquote>
+<p>LOWER(str) 可以将字符串 str 中的字母字符全部转换成小写。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select lower(&#39;路人甲JAVA&#39;);</span><br><span class="line">+------------------------+</span><br><span class="line">| lower(&#39;路人甲JAVA&#39;)    |</span><br><span class="line">+------------------------+</span><br><span class="line">| 路人甲java             |</span><br><span class="line">+------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="upper-将字母转换成大写"><a href="#upper-将字母转换成大写" class="headerlink" title="upper:将字母转换成大写"></a>upper:将字母转换成大写</h4><blockquote>
+<p>UPPER(str) 可以将字符串 str 中的字母字符全部转换成大写。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select upper(&#39;路人甲java&#39;);</span><br><span class="line">+------------------------+</span><br><span class="line">| upper(&#39;路人甲java&#39;)    |</span><br><span class="line">+------------------------+</span><br><span class="line">| 路人甲JAVA             |</span><br><span class="line">+------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="left-从左侧截取字符串"><a href="#left-从左侧截取字符串" class="headerlink" title="left:从左侧截取字符串"></a>left:从左侧截取字符串</h4><blockquote>
+<p>LEFT(s，n) 函数返回字符串 s 最左边的 n 个字符，s=1表示第一个字符。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select left(&#39;路人甲JAVA&#39;,2),left(&#39;路人甲JAVA&#39;,10),left(&#39;路人甲JAVA&#39;,-1);</span><br><span class="line">+-------------------------+--------------------------+--------------------------+</span><br><span class="line">| left(&#39;路人甲JAVA&#39;,2)    | left(&#39;路人甲JAVA&#39;,10)    | left(&#39;路人甲JAVA&#39;,-1)    |</span><br><span class="line">+-------------------------+--------------------------+--------------------------+</span><br><span class="line">| 路人                    | 路人甲JAVA               |                          |</span><br><span class="line">+-------------------------+--------------------------+--------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="right-从右侧截取字符串"><a href="#right-从右侧截取字符串" class="headerlink" title="right:从右侧截取字符串"></a>right:从右侧截取字符串</h4><blockquote>
+<p>RIGHT(s，n) 函数返回字符串 s 最右边的 n 个字符。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select right(&#39;路人甲JAVA&#39;,1),right(&#39;路人甲JAVA&#39;,10),right(&#39;路人甲JAVA&#39;,-1);</span><br><span class="line">+--------------------------+---------------------------+---------------------------+</span><br><span class="line">| right(&#39;路人甲JAVA&#39;,1)    | right(&#39;路人甲JAVA&#39;,10)    | right(&#39;路人甲JAVA&#39;,-1)    |</span><br><span class="line">+--------------------------+---------------------------+---------------------------+</span><br><span class="line">| A                        | 路人甲JAVA                |                           |</span><br><span class="line">+--------------------------+---------------------------+---------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="trim-删除字符串两侧空格"><a href="#trim-删除字符串两侧空格" class="headerlink" title="trim:删除字符串两侧空格"></a>trim:删除字符串两侧空格</h4><blockquote>
+<p>TRIM(s) 删除字符串 s 两侧的空格。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select &#39;[   路人甲Java   ]&#39;,concat(&#39;[&#39;,trim(&#39;   路人甲Java   &#39;),&#39;]&#39;);</span><br><span class="line">+-----------------------+---------------------------------------------+</span><br><span class="line">| [   路人甲Java   ]    | concat(&#39;[&#39;,trim(&#39;   路人甲Java   &#39;),&#39;]&#39;)    |</span><br><span class="line">+-----------------------+---------------------------------------------+</span><br><span class="line">| [   路人甲Java   ]    | [路人甲Java]                                |</span><br><span class="line">+-----------------------+---------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="replace-字符串替换"><a href="#replace-字符串替换" class="headerlink" title="replace:字符串替换"></a>replace:字符串替换</h4><blockquote>
+<p>REPLACE(s，s1，s2) 使用字符串 s2 替换字符串 s 中所有的字符串 s1。</p>
+</blockquote>
+<h4 id="substr-和-substring-截取字符串"><a href="#substr-和-substring-截取字符串" class="headerlink" title="substr 和 substring:截取字符串"></a>substr 和 substring:截取字符串</h4><blockquote>
+<p>substr(str,pos)</p>
+<p>substr(str from pos)</p>
+<p>substr(str,pos,len)</p>
+<p>substr(str from pos for len)</p>
+<p>substr()是substring()的同义词。</p>
+<p>没有len参数的形式是字符串str从位置pos开始返回一个子字符串。</p>
+<p>带有len参数的形式是字符串str从位置pos开始返回长度为len的子字符串。</p>
+<p>使用FROM的形式是标准的SQL语法。</p>
+<p>也可以对pos使用负值，在这种情况下，子字符串的开头是字符串末尾的pos字符，而不是开头。在这个函数的任何形式中pos可以使用负值。</p>
+<p>对于所有形式的substring()，从中提取子串的字符串中第一个字符的位置被认为是1。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;** 第三个字符之后的子字符串：inese **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39;, 3);</span><br><span class="line">&#x2F;** 倒数第三个字符之后的子字符串：ese **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39;, -3);</span><br><span class="line">&#x2F;** 第三个字符之后的两个字符：in **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39;, 3, 2);</span><br><span class="line">&#x2F;** 倒数第三个字符之后的两个字符：es **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39;, -3, 2);</span><br><span class="line">&#x2F;** 第三个字符之后的子字符串：inese **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39; FROM 3);</span><br><span class="line">&#x2F;** 倒数第三个字符之后的子字符串：ese **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39; FROM -3);</span><br><span class="line">&#x2F;** 第三个字符之后的两个字符：in **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39; FROM 3 FOR 2);</span><br><span class="line">&#x2F;** 倒数第三个字符之后的两个字符：es **&#x2F;</span><br><span class="line">SELECT substring(&#39;chinese&#39; FROM -3 FOR 2);</span><br></pre></td></tr></table></figure>
+
+<h4 id="reverse-反转字符串"><a href="#reverse-反转字符串" class="headerlink" title="reverse:反转字符串"></a>reverse:反转字符串</h4><blockquote>
+<p>REVERSE(s) 可以将字符串 s 反转，返回的字符串的顺序和 s 字符串的顺序相反。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select reverse(&#39;路人甲Java&#39;);</span><br><span class="line">+--------------------------+</span><br><span class="line">| reverse(&#39;路人甲Java&#39;)    |</span><br><span class="line">+--------------------------+</span><br><span class="line">| avaJ甲人路               |</span><br><span class="line">+--------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL-日期和时间函数"><a href="#MySQL-日期和时间函数" class="headerlink" title="MySQL 日期和时间函数"></a>MySQL 日期和时间函数</h3><table>
+<thead>
+<tr>
+<th align="left">函数名称</th>
+<th align="left">作 用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">curdate 和 current_date</td>
+<td align="left">两个函数作用相同，返回当前系统的日期值</td>
+</tr>
+<tr>
+<td align="left">curtime 和 current_time</td>
+<td align="left">两个函数作用相同，返回当前系统的时间值</td>
+</tr>
+<tr>
+<td align="left">now 和 sysdate</td>
+<td align="left">两个函数作用相同，返回当前系统的日期和时间值</td>
+</tr>
+<tr>
+<td align="left">unix_timestamp</td>
+<td align="left">获取UNIX时间戳函数，返回一个以 UNIX 时间戳为基础的无符号整数</td>
+</tr>
+<tr>
+<td align="left">from_unixtime</td>
+<td align="left">将 UNIX 时间戳转换为时间格式，与UNIX_TIMESTAMP互为反函数</td>
+</tr>
+<tr>
+<td align="left">month</td>
+<td align="left">获取指定日期中的月份</td>
+</tr>
+<tr>
+<td align="left">monthname</td>
+<td align="left">获取指定日期中的月份英文名称</td>
+</tr>
+<tr>
+<td align="left">dayname</td>
+<td align="left">获取指定曰期对应的星期几的英文名称</td>
+</tr>
+<tr>
+<td align="left">dayofweek</td>
+<td align="left">获取指定日期是一周中是第几天，返回值范围是1~7,1=周日</td>
+</tr>
+<tr>
+<td align="left">week</td>
+<td align="left">获取指定日期是一年中的第几周，返回值的范围是否为 0〜52 或 1〜53</td>
+</tr>
+<tr>
+<td align="left">dayofyear</td>
+<td align="left">获取指定曰期是一年中的第几天，返回值范围是1~366</td>
+</tr>
+<tr>
+<td align="left">dayofmonth</td>
+<td align="left">获取指定日期是一个月中是第几天，返回值范围是1~31</td>
+</tr>
+<tr>
+<td align="left">year</td>
+<td align="left">获取年份，返回值范围是 1970〜2069</td>
+</tr>
+<tr>
+<td align="left">time_to_sec</td>
+<td align="left">将时间参数转换为秒数</td>
+</tr>
+<tr>
+<td align="left">sec_to_time</td>
+<td align="left">将秒数转换为时间，与TIME_TO_SEC 互为反函数</td>
+</tr>
+<tr>
+<td align="left">date_add 和 adddate</td>
+<td align="left">两个函数功能相同，都是向日期添加指定的时间间隔</td>
+</tr>
+<tr>
+<td align="left">date_sub 和 subdate</td>
+<td align="left">两个函数功能相同，都是向日期减去指定的时间间隔</td>
+</tr>
+<tr>
+<td align="left">addtime</td>
+<td align="left">时间加法运算，在原始时间上添加指定的时间</td>
+</tr>
+<tr>
+<td align="left">subtime</td>
+<td align="left">时间减法运算，在原始时间上减去指定的时间</td>
+</tr>
+<tr>
+<td align="left">datediff</td>
+<td align="left">获取两个日期之间间隔，返回参数 1 减去参数 2 的值</td>
+</tr>
+<tr>
+<td align="left">date_format</td>
+<td align="left">格式化指定的日期，根据参数返回指定格式的值</td>
+</tr>
+<tr>
+<td align="left">weekday</td>
+<td align="left">获取指定日期在一周内的对应的工作日索引</td>
+</tr>
+</tbody></table>
+<h4 id="curdate-和-current-date-两个函数作用相同，返回当前系统的日期值"><a href="#curdate-和-current-date-两个函数作用相同，返回当前系统的日期值" class="headerlink" title="curdate 和 current_date:两个函数作用相同，返回当前系统的日期值"></a>curdate 和 current_date:两个函数作用相同，返回当前系统的日期值</h4><blockquote>
+<p>CURDATE() 和 CURRENT_DATE() 函数的作用相同，将当前日期按照“YYYY-MM-DD”或“YYYYMMDD”格式的值返回，具体格式根据函数用在字符串或数字语境中而定，返回的<code>date</code>类型。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select curdate(),current_date(),current_date()+1;</span><br><span class="line">+------------+----------------+------------------+</span><br><span class="line">| curdate()  | current_date() | current_date()+1 |</span><br><span class="line">+------------+----------------+------------------+</span><br><span class="line">| 2019-09-17 | 2019-09-17     |         20190918 |</span><br><span class="line">+------------+----------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="curtime-和-current-time-获取系统当前时间"><a href="#curtime-和-current-time-获取系统当前时间" class="headerlink" title="curtime 和 current_time:获取系统当前时间"></a>curtime 和 current_time:获取系统当前时间</h4><blockquote>
+<p>CURTIME() 和 CURRENT_TIME() 函数的作用相同，将当前时间以“HH：MM：SS”或“HHMMSS”格式返回，具体格式根据函数用在字符串或数字语境中而定，返回<code>time</code>类型。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select curtime(),current_time(),current_time()+1;</span><br><span class="line">+-----------+----------------+------------------+</span><br><span class="line">| curtime() | current_time() | current_time()+1 |</span><br><span class="line">+-----------+----------------+------------------+</span><br><span class="line">| 16:11:25  | 16:11:25       |           161126 |</span><br><span class="line">+-----------+----------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="now-和-sysdate-获取当前时间日期"><a href="#now-和-sysdate-获取当前时间日期" class="headerlink" title="now 和 sysdate:获取当前时间日期"></a>now 和 sysdate:获取当前时间日期</h4><blockquote>
+<p>NOW() 和 SYSDATE() 函数的作用相同，都是返回当前日期和时间值，格式为“YYYY-MM-DD HH：MM：SS”或“YYYYMMDDHHMMSS”，具体格式根据函数用在字符串或数字语境中而定，返回<code>datetime</code>类型。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),sysdate();</span><br><span class="line">+---------------------+---------------------+</span><br><span class="line">| now()               | sysdate()           |</span><br><span class="line">+---------------------+---------------------+</span><br><span class="line">| 2019-09-17 16:13:28 | 2019-09-17 16:13:28 |</span><br><span class="line">+---------------------+---------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="unix-timestamp-获取UNIX时间戳"><a href="#unix-timestamp-获取UNIX时间戳" class="headerlink" title="unix_timestamp:获取UNIX时间戳"></a>unix_timestamp:获取UNIX时间戳</h4><blockquote>
+<p>UNIX_TIMESTAMP(date) 若无参数调用，返回一个无符号整数类型的 UNIX 时间戳（’1970-01-01 00:00:00’GMT之后的秒数）。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select unix_timestamp(),unix_timestamp(now()),now(),unix_timestamp(&#39;2019-09-17 12:00:00&#39;);</span><br><span class="line">+------------------+-----------------------+---------------------+---------------------------------------+</span><br><span class="line">| unix_timestamp() | unix_timestamp(now()) | now()               | unix_timestamp(&#39;2019-09-17 12:00:00&#39;) |</span><br><span class="line">+------------------+-----------------------+---------------------+---------------------------------------+</span><br><span class="line">|       1568710893 |            1568710893 | 2019-09-17 17:01:33 |                            1568692800 |</span><br><span class="line">+------------------+-----------------------+---------------------+---------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="from-unixtime-时间戳转日期"><a href="#from-unixtime-时间戳转日期" class="headerlink" title="from_unixtime:时间戳转日期"></a>from_unixtime:时间戳转日期</h4><blockquote>
+<p>FROM_UNIXTIME(unix_timestamp[,format]) 函数把 UNIX 时间戳转换为普通格式的日期时间值，与 <code>UNIX_TIMESTAMP ()</code> 函数互为反函数。</p>
+<p>有2个参数：</p>
+<p>unix_timestamp：时间戳（秒）</p>
+<p>format：要转化的格式 比如“”%Y-%m-%d“” 这样格式化之后的时间就是 2017-11-30</p>
+<p>可以有的形式：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">格式</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">%M</td>
+<td align="left">月名字(January～December)</td>
+</tr>
+<tr>
+<td align="left">%W</td>
+<td align="left">星期名字(Sunday～Saturday)</td>
+</tr>
+<tr>
+<td align="left">%D</td>
+<td align="left">有英语前缀的月份的日期(1st, 2nd, 3rd, 等等）</td>
+</tr>
+<tr>
+<td align="left">%Y</td>
+<td align="left">年, 数字, 4 位</td>
+</tr>
+<tr>
+<td align="left">%y</td>
+<td align="left">年, 数字, 2 位</td>
+</tr>
+<tr>
+<td align="left">%a</td>
+<td align="left">缩写的星期名字(Sun～Sat)</td>
+</tr>
+<tr>
+<td align="left">%d</td>
+<td align="left">月份中的天数, 数字(00～31)</td>
+</tr>
+<tr>
+<td align="left">%e</td>
+<td align="left">月份中的天数, 数字(0～31)</td>
+</tr>
+<tr>
+<td align="left">%m</td>
+<td align="left">月, 数字(01～12)</td>
+</tr>
+<tr>
+<td align="left">%c</td>
+<td align="left">月, 数字(1～12)</td>
+</tr>
+<tr>
+<td align="left">%b</td>
+<td align="left">缩写的月份名字(Jan～Dec)</td>
+</tr>
+<tr>
+<td align="left">%j</td>
+<td align="left">一年中的天数(001～366)</td>
+</tr>
+<tr>
+<td align="left">%H</td>
+<td align="left">小时(00～23)</td>
+</tr>
+<tr>
+<td align="left">%k</td>
+<td align="left">小时(0～23)</td>
+</tr>
+<tr>
+<td align="left">%h</td>
+<td align="left">小时(01～12)</td>
+</tr>
+<tr>
+<td align="left">%I（i的大写）</td>
+<td align="left">小时(01～12)</td>
+</tr>
+<tr>
+<td align="left">%l（L的小写）</td>
+<td align="left">小时(1～12)</td>
+</tr>
+<tr>
+<td align="left">%i</td>
+<td align="left">分钟, 数字(00～59)</td>
+</tr>
+<tr>
+<td align="left">%r</td>
+<td align="left">时间,12 小时(hh:mm:ss [AP]M)</td>
+</tr>
+<tr>
+<td align="left">%T</td>
+<td align="left">时间,24 小时(hh:mm:ss)</td>
+</tr>
+<tr>
+<td align="left">%S</td>
+<td align="left">秒(00～59)</td>
+</tr>
+<tr>
+<td align="left">%s</td>
+<td align="left">秒(00～59)</td>
+</tr>
+<tr>
+<td align="left">%p</td>
+<td align="left">AM或PM</td>
+</tr>
+<tr>
+<td align="left">%W</td>
+<td align="left">一个星期中的天数英文名称(Sunday~Saturday）</td>
+</tr>
+<tr>
+<td align="left">%w</td>
+<td align="left">一个星期中的天数(0=Sunday ～6=Saturday）</td>
+</tr>
+<tr>
+<td align="left">%U</td>
+<td align="left">星期(0～52), 这里星期天是星期的第一天</td>
+</tr>
+<tr>
+<td align="left">%u</td>
+<td align="left">星期(0～52), 这里星期一是星期的第一天</td>
+</tr>
+<tr>
+<td align="left">%%</td>
+<td align="left">输出%</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select from_unixtime(1568710866),from_unixtime(1568710866,&#39;%Y-%m-%d %H:%h:%s&#39;);</span><br><span class="line">+---------------------------+-----------------------------------------------+</span><br><span class="line">| from_unixtime(1568710866) | from_unixtime(1568710866,&#39;%Y-%m-%d %H:%h:%s&#39;) |</span><br><span class="line">+---------------------------+-----------------------------------------------+</span><br><span class="line">| 2019-09-17 17:01:06       | 2019-09-17 17:05:06                           |</span><br><span class="line">+---------------------------+-----------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="month-获取指定日期的月份"><a href="#month-获取指定日期的月份" class="headerlink" title="month:获取指定日期的月份"></a>month:获取指定日期的月份</h4><blockquote>
+<p>MONTH(date) 函数返回指定 date 对应的月份，范围为 1～12。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select month(&#39;2017-12-15&#39;),month(now());</span><br><span class="line">+---------------------+--------------+</span><br><span class="line">| month(&#39;2017-12-15&#39;) | month(now()) |</span><br><span class="line">+---------------------+--------------+</span><br><span class="line">|                  12 |            9 |</span><br><span class="line">+---------------------+--------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="monthname-获取指定日期月份的英文名称"><a href="#monthname-获取指定日期月份的英文名称" class="headerlink" title="monthname:获取指定日期月份的英文名称"></a>monthname:获取指定日期月份的英文名称</h4><blockquote>
+<p>MONTHNAME(date) 函数返回日期 date 对应月份的英文全名。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select monthname(&#39;2017-12-15&#39;),monthname(now());</span><br><span class="line">+-------------------------+------------------+</span><br><span class="line">| monthname(&#39;2017-12-15&#39;) | monthname(now()) |</span><br><span class="line">+-------------------------+------------------+</span><br><span class="line">| December                | September        |</span><br><span class="line">+-------------------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="dayname-获取指定日期的星期名称"><a href="#dayname-获取指定日期的星期名称" class="headerlink" title="dayname:获取指定日期的星期名称"></a>dayname:获取指定日期的星期名称</h4><blockquote>
+<p>DAYNAME(date) 函数返回 date 对应的工作日英文名称，例如 Sunday、Monday 等。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),dayname(now());</span><br><span class="line">+---------------------+----------------+</span><br><span class="line">| now()               | dayname(now()) |</span><br><span class="line">+---------------------+----------------+</span><br><span class="line">| 2019-09-17 17:13:08 | Tuesday        |</span><br><span class="line">+---------------------+----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="dayofweek-获取日期对应的周索引"><a href="#dayofweek-获取日期对应的周索引" class="headerlink" title="dayofweek:获取日期对应的周索引"></a>dayofweek:获取日期对应的周索引</h4><blockquote>
+<p>DAYOFWEEK(d) 函数返回 d 对应的一周中的索引（位置）。1 表示周日，2 表示周一，……，7 表示周六。这些索引值对应于ODBC标准。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),dayofweek(now());</span><br><span class="line">+---------------------+------------------+</span><br><span class="line">| now()               | dayofweek(now()) |</span><br><span class="line">+---------------------+------------------+</span><br><span class="line">| 2019-09-17 17:14:21 |                3 |</span><br><span class="line">+---------------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="week-获取指定日期是一年中的第几周"><a href="#week-获取指定日期是一年中的第几周" class="headerlink" title="week:获取指定日期是一年中的第几周"></a>week:获取指定日期是一年中的第几周</h4><blockquote>
+<p>WEEK(date[,mode]) 函数计算日期 date 是一年中的第几周。WEEK(date,mode) 函数允许指定星期是否起始于周日或周一，以及返回值的范围是否为 0～52 或 1～53。</p>
+<p>WEEK函数接受两个参数：</p>
+<ul>
+<li><code>date</code>是要获取周数的日期。</li>
+<li><code>mode</code>是一个可选参数，用于确定周数计算的逻辑。它允许您指定本周是从星期一还是星期日开始，返回的周数应在<code>0</code>到<code>52</code>之间或<code>0</code>到<code>53</code>之间。</li>
+</ul>
+<p>如果忽略<code>mode</code>参数，默认情况下<code>WEEK</code>函数将使用<code>default_week_format</code>系统变量的值。</p>
+<p>要获取<code>default_week_format</code>变量的当前值，请使用<code>SHOW VARIABLES</code>语句如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW VARIABLES LIKE &#39;default_week_format&#39;;</span><br><span class="line">+---------------------+-------+</span><br><span class="line">| Variable_name       | Value |</span><br><span class="line">+---------------------+-------+</span><br><span class="line">| default_week_format | 0     |</span><br><span class="line">+---------------------+-------+</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>在我们的服务器中，<code>default_week_format</code>的默认值为<code>0</code>，下表格说明了<code>mode</code>参数如何影响<code>WEEK</code>函数：</p>
+<table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">一周的第一天</th>
+<th align="left">范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">星期日</td>
+<td align="left">0-53</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">星期一</td>
+<td align="left">0-53</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">星期日</td>
+<td align="left">1-53</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">星期一</td>
+<td align="left">1-53</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">星期日</td>
+<td align="left">0-53</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">星期一</td>
+<td align="left">0-53</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">星期日</td>
+<td align="left">1-53</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">星期一</td>
+<td align="left">1-53</td>
+</tr>
+</tbody></table>
+<p>上表中“今年有4天以上”表示：</p>
+<ul>
+<li>如果星期包含1月1日，并且在新的一年中有<code>4</code>天或更多天，那么这周是第<code>1</code>周。</li>
+<li>否则，这一周的数字是前一年的最后一周，下周是第1周。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),week(now());</span><br><span class="line">+---------------------+-------------+</span><br><span class="line">| now()               | week(now()) |</span><br><span class="line">+---------------------+-------------+</span><br><span class="line">| 2019-09-17 17:20:28 |          37 |</span><br><span class="line">+---------------------+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="dayofyear-获取指定日期在一年中的位置"><a href="#dayofyear-获取指定日期在一年中的位置" class="headerlink" title="dayofyear:获取指定日期在一年中的位置"></a>dayofyear:获取指定日期在一年中的位置</h4><blockquote>
+<p>DAYOFYEAR(d) 函数返回 d 是一年中的第几天，范围为 1～366。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),dayofyear(now()),dayofyear(&#39;2019-01-01&#39;);</span><br><span class="line">+---------------------+------------------+-------------------------+</span><br><span class="line">| now()               | dayofyear(now()) | dayofyear(&#39;2019-01-01&#39;) |</span><br><span class="line">+---------------------+------------------+-------------------------+</span><br><span class="line">| 2019-09-17 17:22:00 |              260 |                       1 |</span><br><span class="line">+---------------------+------------------+-------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="dayofmonth-获取指定日期在一个月的位置"><a href="#dayofmonth-获取指定日期在一个月的位置" class="headerlink" title="dayofmonth:获取指定日期在一个月的位置"></a>dayofmonth:获取指定日期在一个月的位置</h4><blockquote>
+<p>DAYOFMONTH(d) 函数返回 d 是一个月中的第几天，范围为 1～31。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),dayofmonth(now()),dayofmonth(&#39;2019-01-01&#39;);</span><br><span class="line">+---------------------+-------------------+--------------------------+</span><br><span class="line">| now()               | dayofmonth(now()) | dayofmonth(&#39;2019-01-01&#39;) |</span><br><span class="line">+---------------------+-------------------+--------------------------+</span><br><span class="line">| 2019-09-17 17:23:09 |                17 |                        1 |</span><br><span class="line">+---------------------+-------------------+--------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="year-获取年份"><a href="#year-获取年份" class="headerlink" title="year:获取年份"></a>year:获取年份</h4><blockquote>
+<p>YEAR() 函数可以从指定日期值中来获取年份值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),year(now()),year(&#39;2019-01-02&#39;);</span><br><span class="line">+---------------------+-------------+--------------------+</span><br><span class="line">| now()               | year(now()) | year(&#39;2019-01-02&#39;) |</span><br><span class="line">+---------------------+-------------+--------------------+</span><br><span class="line">| 2019-09-17 17:28:10 |        2019 |               2019 |</span><br><span class="line">+---------------------+-------------+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="time-to-sec-将时间转换为秒值"><a href="#time-to-sec-将时间转换为秒值" class="headerlink" title="time_to_sec:将时间转换为秒值"></a>time_to_sec:将时间转换为秒值</h4><blockquote>
+<p>TIME_TO_SEC(time) 函数返回将参数 time 转换为秒数的时间值，转换公式为“小时 ×3600+ 分钟 ×60+ 秒”。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select time_to_sec(&#39;15:15:15&#39;),now(),time_to_sec(now());</span><br><span class="line">+-------------------------+---------------------+--------------------+</span><br><span class="line">| time_to_sec(&#39;15:15:15&#39;) | now()               | time_to_sec(now()) |</span><br><span class="line">+-------------------------+---------------------+--------------------+</span><br><span class="line">|                   54915 | 2019-09-17 17:30:44 |              63044 |</span><br><span class="line">+-------------------------+---------------------+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="sec-to-time-将秒值转换为时间格式"><a href="#sec-to-time-将秒值转换为时间格式" class="headerlink" title="sec_to_time:将秒值转换为时间格式"></a>sec_to_time:将秒值转换为时间格式</h4><blockquote>
+<p>SEC_TO_TIME(seconds) 函数返回将参数 seconds 转换为小时、分钟和秒数的时间值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select sec_to_time(100),sec_to_time(10000);</span><br><span class="line">+------------------+--------------------+</span><br><span class="line">| sec_to_time(100) | sec_to_time(10000) |</span><br><span class="line">+------------------+--------------------+</span><br><span class="line">| 00:01:40         | 02:46:40           |</span><br><span class="line">+------------------+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="date-add和adddate-向日期添加指定时间间隔"><a href="#date-add和adddate-向日期添加指定时间间隔" class="headerlink" title="date_add和adddate:向日期添加指定时间间隔"></a>date_add和adddate:向日期添加指定时间间隔</h4><blockquote>
+<p>DATE_ADD(date,INTERVAL expr type)</p>
+<p>date：参数是合法的日期表达式。<em>expr</em> 参数是您希望添加的时间间隔。</p>
+<p>type：参数可以是下列值</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">Type 值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">MICROSECOND</td>
+</tr>
+<tr>
+<td align="left">SECOND</td>
+</tr>
+<tr>
+<td align="left">MINUTE</td>
+</tr>
+<tr>
+<td align="left">HOUR</td>
+</tr>
+<tr>
+<td align="left">DAY</td>
+</tr>
+<tr>
+<td align="left">WEEK</td>
+</tr>
+<tr>
+<td align="left">MONTH</td>
+</tr>
+<tr>
+<td align="left">QUARTER</td>
+</tr>
+<tr>
+<td align="left">YEAR</td>
+</tr>
+<tr>
+<td align="left">SECOND_MICROSECOND</td>
+</tr>
+<tr>
+<td align="left">MINUTE_MICROSECOND</td>
+</tr>
+<tr>
+<td align="left">MINUTE_SECOND</td>
+</tr>
+<tr>
+<td align="left">HOUR_MICROSECOND</td>
+</tr>
+<tr>
+<td align="left">HOUR_SECOND</td>
+</tr>
+<tr>
+<td align="left">HOUR_MINUTE</td>
+</tr>
+<tr>
+<td align="left">DAY_MICROSECOND</td>
+</tr>
+<tr>
+<td align="left">DAY_SECOND</td>
+</tr>
+<tr>
+<td align="left">DAY_MINUTE</td>
+</tr>
+<tr>
+<td align="left">DAY_HOUR</td>
+</tr>
+<tr>
+<td align="left">YEAR_MONTH</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select date_add(&#39;2019-01-01&#39;,INTERVAL 10 day),adddate(&#39;2019-01-01 16:00:00&#39;,interval 100 SECOND);</span><br><span class="line">+----------------------------------------+----------------------------------------------------+</span><br><span class="line">| date_add(&#39;2019-01-01&#39;,INTERVAL 10 day) | adddate(&#39;2019-01-01 16:00:00&#39;,interval 100 SECOND) |</span><br><span class="line">+----------------------------------------+----------------------------------------------------+</span><br><span class="line">| 2019-01-11                             | 2019-01-01 16:01:40                                |</span><br><span class="line">+----------------------------------------+----------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select date_add(&#39;2019-01-01&#39;,INTERVAL -10 day),adddate(&#39;2019-01-01 16:00:00&#39;,interval -100 SECOND);</span><br><span class="line">+-----------------------------------------+-----------------------------------------------------+</span><br><span class="line">| date_add(&#39;2019-01-01&#39;,INTERVAL -10 day) | adddate(&#39;2019-01-01 16:00:00&#39;,interval -100 SECOND) |</span><br><span class="line">+-----------------------------------------+-----------------------------------------------------+</span><br><span class="line">| 2018-12-22                              | 2019-01-01 15:58:20                                 |</span><br><span class="line">+-----------------------------------------+-----------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="date-sub和subdate-日期减法运算"><a href="#date-sub和subdate-日期减法运算" class="headerlink" title="date_sub和subdate:日期减法运算"></a>date_sub和subdate:日期减法运算</h4><blockquote>
+<p>DATE_SUB(date,INTERVAL expr type)</p>
+<p>date：参数是合法的日期表达式。<em>expr</em> 参数是您希望添加的时间间隔。</p>
+<p>type的类型和date_add中的type一样。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select date_sub(&#39;2019-01-01&#39;,INTERVAL 10 day),subdate(&#39;2019-01-01 16:00:00&#39;,interval 100 SECOND);</span><br><span class="line">+----------------------------------------+----------------------------------------------------+</span><br><span class="line">| date_sub(&#39;2019-01-01&#39;,INTERVAL 10 day) | subdate(&#39;2019-01-01 16:00:00&#39;,interval 100 SECOND) |</span><br><span class="line">+----------------------------------------+----------------------------------------------------+</span><br><span class="line">| 2018-12-22                             | 2019-01-01 15:58:20                                |</span><br><span class="line">+----------------------------------------+----------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select date_sub(&#39;2019-01-01&#39;,INTERVAL -10 day),subdate(&#39;2019-01-01 16:00:00&#39;,interval -100 SECOND);</span><br><span class="line">+-----------------------------------------+-----------------------------------------------------+</span><br><span class="line">| date_sub(&#39;2019-01-01&#39;,INTERVAL -10 day) | subdate(&#39;2019-01-01 16:00:00&#39;,interval -100 SECOND) |</span><br><span class="line">+-----------------------------------------+-----------------------------------------------------+</span><br><span class="line">| 2019-01-11                              | 2019-01-01 16:01:40                                 |</span><br><span class="line">+-----------------------------------------+-----------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="addtime-时间加法运算"><a href="#addtime-时间加法运算" class="headerlink" title="addtime:时间加法运算"></a>addtime:时间加法运算</h4><blockquote>
+<p>ADDTIME(time,expr) 函数用于执行时间的加法运算。添加 expr 到 time 并返回结果。</p>
+<p>其中：time 是一个时间或日期时间表达式，expr 是一个时间表达式。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select addtime(&#39;2019-09-18 23:59:59&#39;,&#39;0:1:1&#39;), addtime(&#39;10:30:59&#39;,&#39;5:10:37&#39;);</span><br><span class="line">+----------------------------------------+-------------------------------+</span><br><span class="line">| addtime(&#39;2019-09-18 23:59:59&#39;,&#39;0:1:1&#39;) | addtime(&#39;10:30:59&#39;,&#39;5:10:37&#39;) |</span><br><span class="line">+----------------------------------------+-------------------------------+</span><br><span class="line">| 2019-09-19 00:01:00                    | 15:41:36                      |</span><br><span class="line">+----------------------------------------+-------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="subtime-时间减法运算"><a href="#subtime-时间减法运算" class="headerlink" title="subtime:时间减法运算"></a>subtime:时间减法运算</h4><blockquote>
+<p>SUBTIME(time,expr) 函数用于执行时间的减法运算。</p>
+<p>函数返回 time。expr 表示的值和格式 time 相同。time 是一个时间或日期时间表达式， expr 是一个时间。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select subtime(&#39;2019-09-18 23:59:59&#39;,&#39;0:1:1&#39;),subtime(&#39;10:30:59&#39;,&#39;5:12:37&#39;);</span><br><span class="line">+----------------------------------------+-------------------------------+</span><br><span class="line">| subtime(&#39;2019-09-18 23:59:59&#39;,&#39;0:1:1&#39;) | subtime(&#39;10:30:59&#39;,&#39;5:12:37&#39;) |</span><br><span class="line">+----------------------------------------+-------------------------------+</span><br><span class="line">| 2019-09-18 23:58:58                    | 05:18:22                      |</span><br><span class="line">+----------------------------------------+-------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="datediff-获取两个日期的时间间隔"><a href="#datediff-获取两个日期的时间间隔" class="headerlink" title="datediff:获取两个日期的时间间隔"></a>datediff:获取两个日期的时间间隔</h4><blockquote>
+<p>DATEDIFF(date1，date2) 返回起始时间 date1 和结束时间 date2 之间的天数。date1 和 date2 为日期或 date-and-time 表达式。计算时只用到这些值的日期部分。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select datediff(&#39;2017-11-30&#39;,&#39;2017-11-29&#39;) as col1, datediff(&#39;2017-11-30&#39;,&#39;2017-12-15&#39;) as col2;</span><br><span class="line">+------+------+</span><br><span class="line">| col1 | col2 |</span><br><span class="line">+------+------+</span><br><span class="line">|    1 |  -15 |</span><br><span class="line">+------+------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="date-format-格式化指定的日期"><a href="#date-format-格式化指定的日期" class="headerlink" title="date_format:格式化指定的日期"></a>date_format:格式化指定的日期</h4><blockquote>
+<p>DATE_FORMAT(date，format) 函数是根据 format 指定的格式显示 date 值。</p>
+<p>DATE_FORMAT() 函数接受两个参数：</p>
+<p>date：是要格式化的有效日期值format：是由预定义的说明符组成的格式字符串，每个说明符前面都有一个百分比字符(%)。</p>
+<p>format：格式和上面的函数<code>from_unixtime</code>中的format一样，可以参考上面的。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select date_format(&#39;2017-11-30&#39;,&#39;%Y%m%d&#39;) as col0,now() as col1, date_format(now(),&#39;%Y%m%d%H%i%s&#39;) as col2;</span><br><span class="line">+----------+---------------------+----------------+</span><br><span class="line">| col0     | col1                | col2           |</span><br><span class="line">+----------+---------------------+----------------+</span><br><span class="line">| 20171130 | 2019-09-17 17:56:12 | 20190917175612 |</span><br><span class="line">+----------+---------------------+----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="weekday-获取指定日期在一周内的索引位置"><a href="#weekday-获取指定日期在一周内的索引位置" class="headerlink" title="weekday:获取指定日期在一周内的索引位置"></a>weekday:获取指定日期在一周内的索引位置</h4><blockquote>
+<p>WEEKDAY(date) 返回date的星期索引(0=星期一，1=星期二, ……6= 星期天)。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select now(),weekday(now());</span><br><span class="line">+---------------------+----------------+</span><br><span class="line">| now()               | weekday(now()) |</span><br><span class="line">+---------------------+----------------+</span><br><span class="line">| 2019-09-17 18:01:34 |              1 |</span><br><span class="line">+---------------------+----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select now(),dayofweek(now());</span><br><span class="line">+---------------------+------------------+</span><br><span class="line">| now()               | dayofweek(now()) |</span><br><span class="line">+---------------------+------------------+</span><br><span class="line">| 2019-09-17 18:01:34 |                3 |</span><br><span class="line">+---------------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL-聚合函数"><a href="#MySQL-聚合函数" class="headerlink" title="MySQL 聚合函数"></a>MySQL 聚合函数</h3><table>
+<thead>
+<tr>
+<th align="left">函数名称</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">max</td>
+<td align="left">查询指定列的最大值</td>
+</tr>
+<tr>
+<td align="left">min</td>
+<td align="left">查询指定列的最小值</td>
+</tr>
+<tr>
+<td align="left">count</td>
+<td align="left">统计查询结果的行数</td>
+</tr>
+<tr>
+<td align="left">sum</td>
+<td align="left">求和，返回指定列的总和</td>
+</tr>
+<tr>
+<td align="left">avg</td>
+<td align="left">求平均值，返回指定列数据的平均值</td>
+</tr>
+</tbody></table>
+<h3 id="MySQL-流程控制函数"><a href="#MySQL-流程控制函数" class="headerlink" title="MySQL 流程控制函数"></a>MySQL 流程控制函数</h3><table>
+<thead>
+<tr>
+<th align="left">函数名称</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">if</td>
+<td align="left">判断，流程控制</td>
+</tr>
+<tr>
+<td align="left">ifnull</td>
+<td align="left">判断是否为空</td>
+</tr>
+<tr>
+<td align="left">case</td>
+<td align="left">搜索语句</td>
+</tr>
+</tbody></table>
+<h4 id="if-判断"><a href="#if-判断" class="headerlink" title="if:判断"></a>if:判断</h4><blockquote>
+<p>IF(expr,v1,v2)</p>
+<p>当 expr 为真是返回 v1 的值，否则返回 v2</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select if(1&lt;2,1,0) c1,if(1&gt;5,&#39;√&#39;,&#39;×&#39;) c2,if(strcmp(&#39;abc&#39;,&#39;ab&#39;),&#39;yes&#39;,&#39;no&#39;) c3;</span><br><span class="line">+----+----+-----+</span><br><span class="line">| c1 | c2 | c3  |</span><br><span class="line">+----+----+-----+</span><br><span class="line">|  1 | ×  | yes |</span><br><span class="line">+----+----+-----+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="ifnull-判断是否为空"><a href="#ifnull-判断是否为空" class="headerlink" title="ifnull:判断是否为空"></a>ifnull:判断是否为空</h4><blockquote>
+<p>IFNULL(v1,v2)：v1为空返回v2，否则返回v1。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select ifnull(null,&#39;路人甲Java&#39;),ifnull(&#39;非空&#39;,&#39;为空&#39;);</span><br><span class="line">+------------------------------+---------------------------+</span><br><span class="line">| ifnull(null,&#39;路人甲Java&#39;)    | ifnull(&#39;非空&#39;,&#39;为空&#39;)     |</span><br><span class="line">+------------------------------+---------------------------+</span><br><span class="line">| 路人甲Java                   | 非空                      |</span><br><span class="line">+------------------------------+---------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h4 id="case-搜索语句-类似于java中的if-else-if-else"><a href="#case-搜索语句-类似于java中的if-else-if-else" class="headerlink" title="case:搜索语句,类似于java中的if..else if..else"></a>case:搜索语句,类似于java中的if..else if..else</h4><blockquote>
+<p>类似于java中的if..else if..else</p>
+</blockquote>
+<p><strong>有2种写法</strong></p>
+<p><strong>方式1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CASE  &lt;表达式&gt;</span><br><span class="line">   WHEN &lt;值1&gt; THEN &lt;操作&gt;</span><br><span class="line">   WHEN &lt;值2&gt; THEN &lt;操作&gt;</span><br><span class="line">   ...</span><br><span class="line">   ELSE &lt;操作&gt;</span><br><span class="line">END CASE;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CASE</span><br><span class="line">    WHEN &lt;条件1&gt; THEN &lt;命令&gt;</span><br><span class="line">    WHEN &lt;条件2&gt; THEN &lt;命令&gt;</span><br><span class="line">    ...</span><br><span class="line">    ELSE commands</span><br><span class="line">END CASE;</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<p>准备数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE t_stu (</span><br><span class="line">  id   INT AUTO_INCREMENT  COMMENT &#39;编号&#39;,</span><br><span class="line">  name VARCHAR(10) COMMENT &#39;姓名&#39;,</span><br><span class="line">  sex  TINYINT COMMENT &#39;性别,0:未知,1:男,2:女&#39;,</span><br><span class="line">  PRIMARY KEY (id)</span><br><span class="line">) COMMENT &#39;学生表&#39;;</span><br><span class="line"></span><br><span class="line">insert into t_stu (name,sex) VALUES </span><br><span class="line">  (&#39;张学友&#39;,1),</span><br><span class="line">  (&#39;刘德华&#39;,1),</span><br><span class="line">  (&#39;郭富城&#39;,1),</span><br><span class="line">  (&#39;蔡依林&#39;,2),</span><br><span class="line">  (&#39;xxx&#39;,0);</span><br><span class="line">mysql&gt; select * from t_stu;</span><br><span class="line">+----+-----------+------+</span><br><span class="line">| id | name      | sex  |</span><br><span class="line">+----+-----------+------+</span><br><span class="line">|  1 | 张学友    |    1 |</span><br><span class="line">|  2 | 刘德华    |    1 |</span><br><span class="line">|  3 | 郭富城    |    1 |</span><br><span class="line">|  4 | 蔡依林    |    2 |</span><br><span class="line">|  5 | xxx       |    0 |</span><br><span class="line">+----+-----------+------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>需求：查询所有学生信息，输出：姓名，性别（男、女、未知），如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT</span><br><span class="line">      t.name 姓名,</span><br><span class="line">      (CASE t.sex</span><br><span class="line">       WHEN 1</span><br><span class="line">         THEN &#39;男&#39;</span><br><span class="line">       WHEN 2</span><br><span class="line">         THEN &#39;女&#39;</span><br><span class="line">       ELSE &#39;未知&#39; END) 性别</span><br><span class="line">    FROM t_stu t;</span><br><span class="line">+-----------+--------+</span><br><span class="line">| 姓名      | 性别   |</span><br><span class="line">+-----------+--------+</span><br><span class="line">| 张学友    | 男     |</span><br><span class="line">| 刘德华    | 男     |</span><br><span class="line">| 郭富城    | 男     |</span><br><span class="line">| 蔡依林    | 女     |</span><br><span class="line">| xxx       | 未知   |</span><br><span class="line">+-----------+--------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT</span><br><span class="line">    t.name          姓名,</span><br><span class="line">    (CASE</span><br><span class="line">    WHEN t.sex &#x3D; 1</span><br><span class="line">    THEN &#39;男&#39;</span><br><span class="line">    WHEN t.sex &#x3D; 2</span><br><span class="line">    THEN &#39;女&#39;</span><br><span class="line">    ELSE &#39;未知&#39; END) 性别</span><br><span class="line">    FROM t_stu t;</span><br><span class="line">+-----------+--------+</span><br><span class="line">| 姓名      | 性别   |</span><br><span class="line">+-----------+--------+</span><br><span class="line">| 张学友    | 男     |</span><br><span class="line">| 刘德华    | 男     |</span><br><span class="line">| 郭富城    | 男     |</span><br><span class="line">| 蔡依林    | 女     |</span><br><span class="line">| xxx       | 未知   |</span><br><span class="line">+-----------+--------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<h3 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h3><table>
+<thead>
+<tr>
+<th align="left">函数名称</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">version</td>
+<td align="left">数据库版本号</td>
+</tr>
+<tr>
+<td align="left">database</td>
+<td align="left">当前的数据库</td>
+</tr>
+<tr>
+<td align="left">user</td>
+<td align="left">当前连接用户</td>
+</tr>
+<tr>
+<td align="left">password</td>
+<td align="left">返回字符串密码形式</td>
+</tr>
+<tr>
+<td align="left">md5</td>
+<td align="left">返回字符串的md5数据</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT version();</span><br><span class="line">+------------+</span><br><span class="line">| version()  |</span><br><span class="line">+------------+</span><br><span class="line">| 5.7.25-log |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT database();</span><br><span class="line">+--------------+</span><br><span class="line">| database()   |</span><br><span class="line">+--------------+</span><br><span class="line">| javacode2018 |</span><br><span class="line">+--------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT user();</span><br><span class="line">+----------------+</span><br><span class="line">| user()         |</span><br><span class="line">+----------------+</span><br><span class="line">| root@localhost |</span><br><span class="line">+----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT  password(&#39;123456&#39;);</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">| password(&#39;123456&#39;)                        |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">| *6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9 |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT md5(&#39;123456&#39;);</span><br><span class="line">+----------------------------------+</span><br><span class="line">| md5(&#39;123456&#39;)                    |</span><br><span class="line">+----------------------------------+</span><br><span class="line">| e10adc3949ba59abbe56e057f20f883e |</span><br><span class="line">+----------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-31T12:08:39.458Z" itemprop="dateUpdated">2020-12-31 20:08:39</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/database/" rel="tag">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/&title=《常用的mysql函数使用》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/&title=《常用的mysql函数使用》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常用的mysql函数使用》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-002/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">如何正确的使用索引 ?</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">链接生成二维码</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/&title=《常用的mysql函数使用》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/&title=《常用的mysql函数使用》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《常用的mysql函数使用》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

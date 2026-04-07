@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/">
+    
+    
+    <title>链接生成二维码 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="spring">
+    <meta name="description" content="链接生成二维码1   一维码的产生  ？ 了解二维码的同时这里想先了解一下条形码 一维码的由来  ​         条形码技术（bar code technology，BCT）是在计算机的应用实践中产生和发展起来的一种自动识别技术。它是为实现对信息的自动扫描而设计的，它是实现快速、准确而可靠地采集数据的有效手段。条形码技术的应用解决了数据录入和数据采集的瓶颈问题，为物流管理提供了有利的技术支持。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链接生成二维码">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="链接生成二维码1   一维码的产生  ？ 了解二维码的同时这里想先了解一下条形码 一维码的由来  ​         条形码技术（bar code technology，BCT）是在计算机的应用实践中产生和发展起来的一种自动识别技术。它是为实现对信息的自动扫描而设计的，它是实现快速、准确而可靠地采集数据的有效手段。条形码技术的应用解决了数据录入和数据采集的瓶颈问题，为物流管理提供了有利的技术支持。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00004.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00003.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00002.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00001.jpg">
+<meta property="article:published_time" content="2020-12-10T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-31T12:03:08.055Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00004.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">链接生成二维码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">链接生成二维码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-12-10T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-12-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E4%BA%8C%E7%BB%B4%E7%A0%81%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90/">二维码链接生成</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链接生成二维码"><span class="post-toc-number">1.</span> <span class="post-toc-text">链接生成二维码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-一维码的产生-？"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1   一维码的产生  ？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-一维码的使用"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2 一维码的使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浏览器调用"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">浏览器调用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-二维码的产生？"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">3   二维码的产生？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-二维码-的使用"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">*4   二维码 的使用 *</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#生成二维码用到的包文件"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">生成二维码用到的包文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#封装工具类用于调用生成"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">封装工具类用于调用生成</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#接口对外调用"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text">接口对外调用</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-效果-展示"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">5 效果 展示</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#展示不带图片效果"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">展示不带图片效果</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#展示不带图片效果-1"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">展示不带图片效果</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-services/spring/towCode/链接生成二维码"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">链接生成二维码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-12-10 08:30:00" datetime="2020-12-10T00:30:00.000Z"  itemprop="datePublished">2020-12-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E4%BA%8C%E7%BB%B4%E7%A0%81%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90/">二维码链接生成</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="链接生成二维码"><a href="#链接生成二维码" class="headerlink" title="链接生成二维码"></a><strong>链接生成二维码</strong></h2><h3 id="1-一维码的产生-？"><a href="#1-一维码的产生-？" class="headerlink" title="1   一维码的产生  ？"></a><strong>1   一维码的产生  ？</strong></h3><ul>
+<li><p>了解二维码的同时这里想先了解一下条形码 一维码的由来</p>
+</li>
+<li><p>​         条形码技术（bar code technology，BCT）是在计算机的应用实践中产生和发展起来的一种自动识别技术。它是为实现对信息的自动扫描而设计的，它是实现快速、准确而可靠地采集数据的有效手段。条形码技术的应用解决了数据录入和数据采集的瓶颈问题，为物流管理提供了有利的技术支持。条形码是由一组规则的条空及对应字符组成的符号，用于表示一定的信息。条形码技术的核心内容是通过利用光电扫描设备识读这些条形码符号来实现机器的自动识别，并快速、准确地把数据录入计算机进行数据处理，从而达到自动管理的目的<a href="https://baike.baidu.com/item/%E6%9D%A1%E5%BD%A2%E7%A0%81/278988?fr=aladdin" target="_blank" rel="noopener">详情了解</a></p>
+</li>
+<li><p>2   直观想法 条形码在在计算的世界就是一堆画图展示接下来就来开始画图 ,用画图工具 </p>
+</li>
+</ul>
+<p><img src="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00004.jpg" alt=""><br>毫无疑问, 跑题了 这是不可能的,  显然是不行的  😀 。  谷歌的图片绘图很推荐 </p>
+<h3 id="2-一维码的使用"><a href="#2-一维码的使用" class="headerlink" title="2 一维码的使用"></a><strong>2 一维码的使用</strong></h3><ul>
+<li>引入包 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;com.google.zxing&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;core&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;3.3.1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>封装画图类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">import com.google.zxing.BarcodeFormat;</span><br><span class="line">import com.google.zxing.EncodeHintType;</span><br><span class="line">import com.google.zxing.WriterException;</span><br><span class="line">import com.google.zxing.client.j2se.MatrixToImageWriter;</span><br><span class="line">import com.google.zxing.common.BitMatrix;</span><br><span class="line">import com.google.zxing.oned.Code128Writer;</span><br><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line"></span><br><span class="line">import javax.imageio.ImageIO;</span><br><span class="line">import java.awt.*;</span><br><span class="line">import java.awt.image.BufferedImage;</span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Created by daijie on 2019&#x2F;9&#x2F;5</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class BarCodeUtil &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;** 条形码宽度 *&#x2F;</span><br><span class="line">    private static final int WIDTH &#x3D; 325;</span><br><span class="line"></span><br><span class="line">    &#x2F;** 条形码高度 *&#x2F;</span><br><span class="line">    private static final int HEIGHT &#x3D; 50;</span><br><span class="line"></span><br><span class="line">    &#x2F;** 加文字 条形码 *&#x2F;</span><br><span class="line">    private static final int WORDHEIGHT &#x3D; 75;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 设置 条形码参数</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static Map&lt;EncodeHintType, Object&gt; hints &#x3D; new HashMap&lt;EncodeHintType, Object&gt;() &#123;</span><br><span class="line">        private static final long serialVersionUID &#x3D; 1L;</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F; 设置编码方式</span><br><span class="line">            put(EncodeHintType.CHARACTER_SET, &quot;utf-8&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 生成 图片缓冲</span><br><span class="line">     * @param vaNumber  VA 码</span><br><span class="line">     * @return 返回BufferedImage</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static BufferedImage getBarCode(String vaNumber)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Code128Writer writer &#x3D; new Code128Writer();</span><br><span class="line">            &#x2F;&#x2F; 编码内容, 编码类型, 宽度, 高度, 设置参数</span><br><span class="line">            BitMatrix bitMatrix &#x3D; writer.encode(vaNumber, BarcodeFormat.CODE_128, WIDTH, HEIGHT, hints);</span><br><span class="line">            return MatrixToImageWriter.toBufferedImage(bitMatrix);</span><br><span class="line">        &#125; catch (WriterException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 把带logo的条形码下面加上文字</span><br><span class="line">     * @param image  条形码图片</span><br><span class="line">     * @param words  文字</span><br><span class="line">     * @return 返回BufferedImage</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static BufferedImage insertWords(BufferedImage image, String words)&#123;</span><br><span class="line">        &#x2F;&#x2F; 新的图片，把带logo的二维码下面加上文字</span><br><span class="line">        if (StringUtils.isNotEmpty(words)) &#123;</span><br><span class="line"></span><br><span class="line">            BufferedImage outImage &#x3D; new BufferedImage(WIDTH, WORDHEIGHT, BufferedImage.TYPE_INT_RGB);</span><br><span class="line"></span><br><span class="line">            Graphics2D g2d &#x3D; outImage.createGraphics();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 抗锯齿</span><br><span class="line">            setGraphics2D(g2d);</span><br><span class="line">            &#x2F;&#x2F; 设置白色</span><br><span class="line">            setColorWhite(g2d);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 画条形码到新的面板</span><br><span class="line">            g2d.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);</span><br><span class="line">            &#x2F;&#x2F; 画文字到新的面板</span><br><span class="line">            Color color&#x3D;new Color(0, 0, 0);</span><br><span class="line">            g2d.setColor(color);</span><br><span class="line">            &#x2F;&#x2F; 字体、字型、字号</span><br><span class="line">            g2d.setFont(new Font(&quot;微软雅黑&quot;, Font.PLAIN, 18));</span><br><span class="line">            &#x2F;&#x2F;文字长度</span><br><span class="line">            int strWidth &#x3D; g2d.getFontMetrics().stringWidth(words);</span><br><span class="line">            &#x2F;&#x2F;总长度减去文字长度的一半  （居中显示）</span><br><span class="line">            int wordStartX&#x3D;(WIDTH - strWidth) &#x2F; 2;</span><br><span class="line">            &#x2F;&#x2F;height + (outImage.getHeight() - height) &#x2F; 2 + 12</span><br><span class="line">            int wordStartY&#x3D;HEIGHT+20;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 画文字</span><br><span class="line">            g2d.drawString(words, wordStartX, wordStartY);</span><br><span class="line">            g2d.dispose();</span><br><span class="line">            outImage.flush();</span><br><span class="line">            return outImage;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 设置 Graphics2D 属性  （抗锯齿）</span><br><span class="line">     * @param g2d  Graphics2D提供对几何形状、坐标转换、颜色管理和文本布局更为复杂的控制</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static void setGraphics2D(Graphics2D g2d)&#123;</span><br><span class="line">        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);</span><br><span class="line">        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_DEFAULT);</span><br><span class="line">        Stroke s &#x3D; new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER);</span><br><span class="line">        g2d.setStroke(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 设置背景为白色</span><br><span class="line">     * @param g2d Graphics2D提供对几何形状、坐标转换、颜色管理和文本布局更为复杂的控制</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static void setColorWhite(Graphics2D g2d)&#123;</span><br><span class="line">        g2d.setColor(Color.WHITE);</span><br><span class="line">        &#x2F;&#x2F;填充整个屏幕</span><br><span class="line">        g2d.fillRect(0,0,600,600);</span><br><span class="line">        &#x2F;&#x2F;设置笔刷</span><br><span class="line">        g2d.setColor(Color.BLACK);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws IOException &#123;</span><br><span class="line">        BufferedImage image &#x3D; insertWords(getBarCode(&quot;123456789&quot;), &quot;123456789&quot;);</span><br><span class="line">        ImageIO.write(image, &quot;jpg&quot;, new File(&quot;D:&#x2F;&#x2F;abc.jpg&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试网页展示条形码展示 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;getBarCode&quot;)</span><br><span class="line">public void getBarCode(String code, HttpServletResponse response) throws Exception&#123;</span><br><span class="line">    BufferedImage image &#x3D; BarCodeUtil.insertWords(BarCodeUtil.getBarCode(code), code);</span><br><span class="line">    ImageIO.write(image, &quot;jpg&quot;, response.getOutputStream());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h3 id="浏览器调用"><a href="#浏览器调用" class="headerlink" title="浏览器调用"></a>浏览器调用</h3></li>
+</ul>
+<p><img src="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00003.jpg" alt=""></p>
+<h3 id="3-二维码的产生？"><a href="#3-二维码的产生？" class="headerlink" title="3   二维码的产生？"></a><strong>3   二维码的产生？</strong></h3><p>二维条码/二维码（2-dimensional bar code）是用某种特定的几何图形按一定规律在平面（二维方向上）分布的、黑白相间的、记录数据符号信息的图形；在代码编制上巧妙地利用构成计算机内部逻辑基础的“0”、“1”比特流的概念，使用若干个与二进制相对应的几何形体来表示文字数值信息，通过图象输入设备或光电扫描设备自动识读以实现信息自动处理：它具有条码技术的一些共性：每种码制有其特定的字符集；每个字符占有一定的宽度；具有一定的校验功能等。同时还具有对不同行的信息自动识别功能、及处理图形旋转变化点。<a href="https://baike.baidu.com/item/%E4%BA%8C%E7%BB%B4%E7%A0%81/2385673?fr=aladdin" target="_blank" rel="noopener">详情了解</a></p>
+<h3 id="4-二维码-的使用"><a href="#4-二维码-的使用" class="headerlink" title="*4   二维码 的使用 *"></a>*<em>4   二维码 的使用 *</em></h3><ul>
+<li><h4 id="生成二维码用到的包文件"><a href="#生成二维码用到的包文件" class="headerlink" title="生成二维码用到的包文件"></a>生成二维码用到的包文件</h4></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;com.google.zxing&lt;&#x2F;groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;javase&lt;&#x2F;artifactId&gt;</span><br><span class="line">   &lt;version&gt;3.3.1&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="封装工具类用于调用生成"><a href="#封装工具类用于调用生成" class="headerlink" title="封装工具类用于调用生成"></a>封装工具类用于调用生成</h4></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br></pre></td><td class="code"><pre><span class="line">import com.google.zxing.BarcodeFormat;</span><br><span class="line">import com.google.zxing.EncodeHintType;</span><br><span class="line">import com.google.zxing.common.BitMatrix;</span><br><span class="line">import com.google.zxing.qrcode.QRCodeWriter;</span><br><span class="line">import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;</span><br><span class="line">import lombok.experimental.UtilityClass;</span><br><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import javax.imageio.ImageIO;</span><br><span class="line">import javax.servlet.ServletOutputStream;</span><br><span class="line">import java.awt.*;</span><br><span class="line">import java.awt.geom.RoundRectangle2D;</span><br><span class="line">import java.awt.image.BufferedImage;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.OutputStream;</span><br><span class="line">import java.net.URL;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line"></span><br><span class="line">@Slf4j</span><br><span class="line">@UtilityClass</span><br><span class="line">public class QRCodeUtil &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 默认宽度</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final Integer WIDTH &#x3D; 140;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 默认高度</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final Integer HEIGHT &#x3D; 140;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * LOGO 默认宽度</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final Integer LOGO_WIDTH &#x3D; 22;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * LOGO 默认高度</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final Integer LOGO_HEIGHT &#x3D; 22;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 图片格式</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final String IMAGE_FORMAT &#x3D; &quot;jpg&quot;;</span><br><span class="line">    private static final String CHARSET &#x3D; &quot;utf-8&quot;;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 生成二维码</span><br><span class="line">     *</span><br><span class="line">     * @param content    内容</span><br><span class="line">     * @param width      二维码宽度</span><br><span class="line">     * @param height     二维码高度</span><br><span class="line">     * @param logoUrl    logo 在线地址</span><br><span class="line">     * @param logoWidth  logo 宽度</span><br><span class="line">     * @param logoHeight logo 高度</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private BufferedImage crateQRCode(String content, Integer width, Integer height, String logoUrl, Integer logoWidth, Integer logoHeight) &#123;</span><br><span class="line">        if (StringUtils.isNotBlank(content)) &#123;</span><br><span class="line">            ServletOutputStream stream &#x3D; null;</span><br><span class="line">            HashMap&lt;EncodeHintType, Comparable&gt; hints &#x3D; new HashMap&lt;&gt;(4);</span><br><span class="line">            &#x2F;&#x2F; 指定字符编码为utf-8</span><br><span class="line">            hints.put(EncodeHintType.CHARACTER_SET, CHARSET);</span><br><span class="line">            &#x2F;&#x2F; 指定二维码的纠错等级为中级</span><br><span class="line">            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);</span><br><span class="line">            &#x2F;&#x2F; 设置图片的边距</span><br><span class="line">            hints.put(EncodeHintType.MARGIN, 2);</span><br><span class="line">            try &#123;</span><br><span class="line">                QRCodeWriter writer &#x3D; new QRCodeWriter();</span><br><span class="line">                BitMatrix bitMatrix &#x3D; writer.encode(content, BarcodeFormat.QR_CODE, width, height, hints);</span><br><span class="line">                BufferedImage bufferedImage &#x3D; new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);</span><br><span class="line">                for (int x &#x3D; 0; x &lt; width; x++) &#123;</span><br><span class="line">                    for (int y &#x3D; 0; y &lt; height; y++) &#123;</span><br><span class="line">                        bufferedImage.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                if (StringUtils.isNotBlank(logoUrl)) &#123;</span><br><span class="line">                    insertLogo(bufferedImage, width, height, logoUrl, logoWidth, logoHeight);</span><br><span class="line">                &#125;</span><br><span class="line">                return bufferedImage;</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                if (stream !&#x3D; null) &#123;</span><br><span class="line">                    try &#123;</span><br><span class="line">                        stream.flush();</span><br><span class="line">                        stream.close();</span><br><span class="line">                    &#125; catch (IOException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 二维码插入logo</span><br><span class="line">     *</span><br><span class="line">     * @param source     二维码</span><br><span class="line">     * @param width      二维码宽度</span><br><span class="line">     * @param height     二维码高度</span><br><span class="line">     * @param logoUrl    logo 在线地址</span><br><span class="line">     * @param logoWidth  logo 宽度</span><br><span class="line">     * @param logoHeight logo 高度</span><br><span class="line">     * @throws Exception</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private void insertLogo(BufferedImage source, Integer width, Integer height, String logoUrl, Integer logoWidth, Integer logoHeight) throws Exception &#123;</span><br><span class="line">        &#x2F;&#x2F; logo 源可为 File&#x2F;InputStream&#x2F;URL</span><br><span class="line">        Image src &#x3D; ImageIO.read(new URL(logoUrl));</span><br><span class="line">        &#x2F;&#x2F; 插入LOGO</span><br><span class="line">        Graphics2D graph &#x3D; source.createGraphics();</span><br><span class="line">        int x &#x3D; (width - logoWidth) &#x2F; 2;</span><br><span class="line">        int y &#x3D; (height - logoHeight) &#x2F; 2;</span><br><span class="line">        graph.drawImage(src, x, y, logoWidth, logoHeight, null);</span><br><span class="line">        Shape shape &#x3D; new RoundRectangle2D.Float(x, y, logoWidth, logoHeight, 6, 6);</span><br><span class="line">        graph.setStroke(new BasicStroke(3f));</span><br><span class="line">        graph.draw(shape);</span><br><span class="line">        graph.dispose();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 获取二维码</span><br><span class="line">     *</span><br><span class="line">     * @param content 内容</span><br><span class="line">     * @param logoUrl logo资源</span><br><span class="line">     * @param output  输出流</span><br><span class="line">     * @throws Exception</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void getQRCode(String content, String logoUrl, OutputStream output) throws Exception &#123;</span><br><span class="line">        BufferedImage image &#x3D; crateQRCode(content, WIDTH, HEIGHT, logoUrl, LOGO_WIDTH, LOGO_HEIGHT);</span><br><span class="line">        ImageIO.write(image, IMAGE_FORMAT, output);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h4 id="接口对外调用"><a href="#接口对外调用" class="headerlink" title="接口对外调用"></a>接口对外调用</h4></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 根据 content 生成二维码</span><br><span class="line"> *&#x2F;</span><br><span class="line">@GetMapping(value &#x3D; &quot;&#x2F;getQRCode&quot;)</span><br><span class="line">public void getQRCode(HttpServletResponse response,</span><br><span class="line">                      @RequestParam(&quot;content&quot;) String content,</span><br><span class="line">                      @RequestParam(value &#x3D; &quot;logoUrl&quot;, required &#x3D; false) String logoUrl) throws Exception &#123;</span><br><span class="line">    ServletOutputStream stream &#x3D; null;</span><br><span class="line">    try &#123;</span><br><span class="line">        stream &#x3D; response.getOutputStream();</span><br><span class="line">        QRCodeUtil.getQRCode(content, logoUrl, stream);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        e.getStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (stream !&#x3D; null) &#123;</span><br><span class="line">            stream.flush();</span><br><span class="line">            stream.close();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-效果-展示"><a href="#5-效果-展示" class="headerlink" title="5 效果 展示"></a><strong>5 效果 展示</strong></h3><h4 id="展示不带图片效果"><a href="#展示不带图片效果" class="headerlink" title="展示不带图片效果"></a>展示不带图片效果</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00002.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h4 id="展示不带图片效果-1"><a href="#展示不带图片效果-1" class="headerlink" title="展示不带图片效果"></a>展示不带图片效果</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/towCode/tow-code-00001.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-31T12:03:08.055Z" itemprop="dateUpdated">2020-12-31 20:03:08</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/spring/" rel="tag">spring</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/&title=《链接生成二维码》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/&title=《链接生成二维码》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《链接生成二维码》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/12/12/database/mysql/Mysql%E7%B3%BB%E5%88%97-001/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">常用的mysql函数使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/11/29/database/mysql/mysql%E7%AC%94%E8%AE%B0/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">数据库基础知识</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/&title=《链接生成二维码》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/&title=《链接生成二维码》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《链接生成二维码》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/12/10/services/spring/towCode/%E9%93%BE%E6%8E%A5%E7%94%9F%E6%88%90%E4%BA%8C%E7%BB%B4%E7%A0%81/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

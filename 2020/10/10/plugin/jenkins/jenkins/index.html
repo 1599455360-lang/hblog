@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/10/10/plugin/jenkins/jenkins/">
+    
+    
+    <title>Jenkins自动化发布Java项目实战 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Jenkins">
+    <meta name="description" content="目录[-] 1、背景2、Jenkins服务器搭建及基本配置3、Jenkins自动化部署SpringBoot项目4、测试1、背景　　在实际开发中，我们经常要一边开发一边测试，当然这里说的测试并不是程序员对自己代码的单元测试，而是同组程序员将代码提交后，由测试人员测试； 　　或者前后端分离后，经常会修改接口，然后重新部署； 　　这些情况都会涉及到频繁的打包部署； 　　手动打包常规步骤： 　　1. 提交">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jenkins自动化发布Java项目实战">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="目录[-] 1、背景2、Jenkins服务器搭建及基本配置3、Jenkins自动化部署SpringBoot项目4、测试1、背景　　在实际开发中，我们经常要一边开发一边测试，当然这里说的测试并不是程序员对自己代码的单元测试，而是同组程序员将代码提交后，由测试人员测试； 　　或者前后端分离后，经常会修改接口，然后重新部署； 　　这些情况都会涉及到频繁的打包部署； 　　手动打包常规步骤： 　　1. 提交">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins1.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins2.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins3.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins4.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins5.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins6.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins7.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins8.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins9.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins10.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins11.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins12.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins13.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins31.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins14.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins15.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins16.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins17.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins18.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins19.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins20.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins21.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins22.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins23.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins24.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins25.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins26.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins27.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins28.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins29.png">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins30.png">
+<meta property="article:published_time" content="2020-10-10T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-29T03:51:42.147Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="Jenkins">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Jenkins自动化发布Java项目实战</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Jenkins自动化发布Java项目实战</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-10T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-10-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/jenkins%E6%90%AD%E5%BB%BA-%E9%83%A8%E7%BD%B2/">jenkins搭建 部署</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1、背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">1、背景</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2、Jenkins服务器搭建及基本配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">2、Jenkins服务器搭建及基本配置</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3、Jenkins自动化部署（springBoot-maven-gitHub）项目"><span class="post-toc-number">3.</span> <span class="post-toc-text">3、Jenkins自动化部署（springBoot+maven+gitHub）项目</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-plugin/jenkins/jenkins"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Jenkins自动化发布Java项目实战</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-10-10 08:30:00" datetime="2020-10-10T00:30:00.000Z"  itemprop="datePublished">2020-10-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/jenkins%E6%90%AD%E5%BB%BA-%E9%83%A8%E7%BD%B2/">jenkins搭建 部署</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>目录[-]</p>
+<h5 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h5><p>2、Jenkins服务器搭建及基本配置<br>3、Jenkins自动化部署SpringBoot项目<br>4、测试<br>1、背景<br>　　在实际开发中，我们经常要一边开发一边测试，当然这里说的测试并不是程序员对自己代码的单元测试，而是同组程序员将代码提交后，由测试人员测试；</p>
+<p>　　或者前后端分离后，经常会修改接口，然后重新部署；</p>
+<p>　　这些情况都会涉及到频繁的打包部署；</p>
+<p>　　手动打包常规步骤：</p>
+<p>　　1. 提交代码</p>
+<p>　　2. 问一下同组小伙伴有没有要提交的代码</p>
+<p>　　3. 拉取代码并打包（war包，或者jar包）</p>
+<p>　　4. 上传到Linux服务器</p>
+<p>　　5. 查看当前程序是否在运行</p>
+<p>　　6. 关闭当前程序</p>
+<p>　　7. 启动新的jar包</p>
+<p>　　8. 观察日志看是否启动成功</p>
+<p>　　9. 如果有同事说，自己还有代码没有提交……再次重复1到8的步骤！！！！！（一上午没了）</p>
+<p>　　那么，有一种工具能够实现，将代码提交到git后就自动打包部署勒，答案是肯定的：Jenkins</p>
+<p>　　当然除了Jenkins以外，也还有其他的工具可以实现自动化部署，如Hudson等</p>
+<p>　　只是Jenkins相对来说，使用得更广泛。</p>
+<h5 id="2、Jenkins服务器搭建及基本配置"><a href="#2、Jenkins服务器搭建及基本配置" class="headerlink" title="2、Jenkins服务器搭建及基本配置"></a>2、Jenkins服务器搭建及基本配置</h5><p>2.1.简介<br>　　Jenkins是一个开源软件项目，是基于Java开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。</p>
+<p>2.2.Jenkins自动化部署实现原理<br>　　<img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins1.png" alt="Alt text"></p>
+<p> 2.3.Jenkins部署环境<br>　　基本环境：</p>
+<p>　　1.jdk环境，Jenkins是java语言开发的，因需要jdk环境。</p>
+<p>　　2.git/svn客户端，因一般代码是放在git/svn服务器上的，我们需要拉取代码。</p>
+<p>　　3.maven客户端，因一般java程序是由maven工程，需要maven打包，当然也有其他打包方式，如：gradle</p>
+<p>　　以上是自动化部署java程序jenkins需要的基本环境，请自己提前安装好，下面着重讲解Jenkins的安装部署配置。</p>
+<p>2.4.Jenkins安装<br>　　1.下载安装包jenkins.war；</p>
+<p>　　2.在安装包根路径下，运行命令 java -jar jenkins.war –httpPort=8080，（linux环境、Windows环境都一样）；</p>
+<p>　　3.打开浏览器进入链接 <a href="https://localhost:8080" target="_blank" rel="noopener">https://localhost:8080</a>.</p>
+<p>　　4.填写初始密码，激活系统</p>
+<p>　　<img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins2.png" alt="Alt text"></p>
+<p>　　5.进入插件安装选择</p>
+<p>　　这里建议选择，推荐安装的插件，保证基本常用的功能可以使用。<br>   <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins3.png" alt="Alt text"></p>
+<p>　　选择后，进入插件安装页面</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins4.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　6.设置初始用户和密码</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins5.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<p>　　7.进入系统，安装完成</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins6.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　注意，如果还是进入不了系统，需要稍等一下，或者刷新页面，如果还是进入不了，需要重新启动jenkinds服务器。</p>
+<p>2.5.Jenkins基本配置<br>2.5.1.系统初始化配置 </p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins7.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>　　</p>
+<p>　　1.Configure System (系统设置)</p>
+<p>　　在系统设置这里，我们只需要设置最后面的一项，配置远程服务器地址，</p>
+<p>　　即我们代码最终运行的服务器地址信息，就像我们之前手动部署时使用xshell登录Linux服务器一样，</p>
+<p>　　当然这里是可以配置多台远程Linux服务器的，配置完成后点击保存即可，为后面我们配置自动化部署做准备，配置如下图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins8.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　2.Configure  Global Security (全局安全配置)</p>
+<p>　　a.配置用户相关的权限</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins9.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>　　</p>
+<p>　　b.配置钩子程序（当用代码更新时通知）访问权限，避免报403错误</p>
+<p>　　默认是勾选上了的，这里去掉勾选</p>
+<p>　　<img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins10.png" alt="Alt text"></p>
+<p>　　3.Global Tool Configuration (全局工具配置 )</p>
+<p>　　a.配置maven的全局settings路径</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins11.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　b.配置jdk</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins12.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　c.配置git</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins13.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<p>　　d.配置maven的安装路径</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins31.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p> 　　4.配置必要插件</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins14.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<p>　　 主要是检查如下这两个插件是否已安装</p>
+<p>　　插件1：Publish over SSH<br>　　插件2：Deploy to container Plugin</p>
+<p>　　到这里，我们配置一个自动化部署的的java程序（springBoot+maven+gitHub），基本必要配置就差不多了，后面配置过程中如果需要在配置。</p>
+<h5 id="3、Jenkins自动化部署（springBoot-maven-gitHub）项目"><a href="#3、Jenkins自动化部署（springBoot-maven-gitHub）项目" class="headerlink" title="3、Jenkins自动化部署（springBoot+maven+gitHub）项目"></a>3、Jenkins自动化部署（springBoot+maven+gitHub）项目</h5><p>　3.1.Jenkins服务器上创建项目和配置<br>　　大体步骤：General(基础配置)–》源码管理–》构建触发器–》构建环境–》构建–》构建后操作</p>
+<p>　　1.创建一个工程</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins15.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>　　</p>
+<p>　　2.General(基础配置)</p>
+<p>　　仅需填写标准部分，其他可不填写</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins16.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　3.源码管理</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins17.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<p>　　上图中点击“添加”按钮添加一组账号和密码</p>
+<p>　　<img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins18.png" alt="Alt text"></p>
+<p>　　4.构建触发器</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins19.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　如上图：当前项目的回调地址为：</p>
+<p>　　<a href="https://localhost:8080/job/jenkinsSpringBootDemo/build?token=token_demo2" target="_blank" rel="noopener">https://localhost:8080/job/jenkinsSpringBootDemo/build?token=token_demo2</a></p>
+<p>　　只要执行这个地址（在浏览器上访问改地址），该项目就会发起一次构建项目，即拉取代码打包部署操作，</p>
+<p>　　在实际中，是由git服务器回调改地址，在后面讲git服务器配置时详细讲解 ，</p>
+<p>　　值得注意的是，如果你是学习测试，使用的是GitHub服务，要确保你的回调地址已经试外网映射过的，即往外网可以访问</p>
+<p>　　5.构建环境（无需配置）</p>
+<p>　　6.构建</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins20.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　7.构建后操作</p>
+<p>　　构建后操作的意思是，jar打包好后，要将jar发送到哪里去，发送后去和启动等</p>
+<p>　　这里需要提前在需要部署的服务器上配置好路径，写好启动和停止项目的脚本，并设置为可以执行的脚本，</p>
+<p>　　其实就是我们平时在Linux上手动部署项目操作的脚本</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins21.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　案例中给出的stop.sh脚本如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">echo &quot;Stop Procedure : demo2-0.0.1-SNAPSHOT.jar&quot;</span><br><span class="line">pid&#x3D;&#96;ps -ef |grep java|grep demo2-0.0.1-SNAPSHOT.jar|awk &#39;&#123;print $2&#125;&#39;&#96;</span><br><span class="line">echo &#39;old Procedure pid:&#39;$pid</span><br><span class="line">if [ -n &quot;$pid&quot; ]</span><br><span class="line">then</span><br><span class="line">kill -9 $pid</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>　　案例中给出的start.sh脚本如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;bash</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_131</span><br><span class="line">echo $&#123;JAVA_HOME&#125;</span><br><span class="line">echo &#39;Start the program : demo2-0.0.1-SNAPSHOT.jar&#39;</span><br><span class="line">chmod 777 &#x2F;home&#x2F;ldp&#x2F;app&#x2F;demo2-0.0.1-SNAPSHOT.jar</span><br><span class="line">echo &#39;-------Starting-------&#39;</span><br><span class="line">cd &#x2F;home&#x2F;ldp&#x2F;app&#x2F;</span><br><span class="line">nohup $&#123;JAVA_HOME&#125;&#x2F;bin&#x2F;java -jar demo2-0.0.1-SNAPSHOT.jar &amp;</span><br><span class="line">echo &#39;start success&#39;</span><br></pre></td></tr></table></figure>
+
+<p> 　　到此，Jenkinds服务器配置完成，接下来我还有要配置Linux服务器和Git服务器。</p>
+<p>3.2.Linux服务器配置<br>　　在Liux服务上，上传上文中的两个脚本，用于启动和停止</p>
+<p>　　<img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins22.png" alt="Alt text"></p>
+<p>3.3.GitHub服务器配置<br>　　在GitHub服务器上的指定项目里面配置上文中提到的回调地址</p>
+<p>　　特别注意：为了保证回调地址网可以使用，</p>
+<p>　　我已经将地址：<a href="https://localhost:8080/job/jenkinsSpringBootDemo/build?token=token_demo2，" target="_blank" rel="noopener">https://localhost:8080/job/jenkinsSpringBootDemo/build?token=token_demo2，</a></p>
+<p>　　通过花生壳进行外网映射为：<a href="https://zhishidi.imwork.net/job/jenkinsSpringBootDemo/build?token=token_demo2" target="_blank" rel="noopener">https://zhishidi.imwork.net/job/jenkinsSpringBootDemo/build?token=token_demo2</a></p>
+<p>　　所以，下面配置的是外网映射地址。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins23.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>　　</p>
+<p>　　到这里所有配置搞定，只需修改代码，提交到git,然后访问程序看是否生效。</p>
+<p> 4、测试<br> 　　1.测试代码</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins24.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+
+<p>　　2.提交代码到git,触发构建</p>
+<p>　　3.在GitHub服务器上去看，是否已经触发</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins25.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>　　</p>
+<p>　　4.在Jenkins的控制台查看是否，正在构建</p>
+<p>　　从下图中可以看出，正在构建</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins26.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>　　</p>
+<p>　　5.查看当次构建的控制台日志</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins27.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+
+<p>　　说明已经启动成功</p>
+<p>　　6.查看Linux服务器，是否上传代码</p>
+<p>　　<img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins28.png" alt="Alt text"></p>
+<p>　　7.在Linux上使用命令jps，查看是否启动</p>
+<p>　　<img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins29.png" alt="Alt text"></p>
+<p>　　8.浏览器上访问，看是否能用</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/jenkins/Jenkins30.png" alt="Alt text" title="">
+                </div>
+                <div class="image-caption">Alt text</div>
+            </figure>
+
+<p>　　</p>
+<p>　　说明，已经正常启动可以使用。</p>
+<p>　　9.再次确认是否能自动化部署</p>
+<p>　　修改代码，重新提交代码，循环1到8步查看。</p>
+<p>如果测试结果是你预期的，那么自动化部署成功。</p>
+<p>官方文档：<a href="https://jenkins.io/zh/doc" target="_blank" rel="noopener">https://jenkins.io/zh/doc</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-29T03:51:42.147Z" itemprop="dateUpdated">2020-11-29 11:51:42</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/10/10/plugin/jenkins/jenkins/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/Jenkins/" rel="tag">Jenkins</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/&title=《Jenkins自动化发布Java项目实战》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/&title=《Jenkins自动化发布Java项目实战》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Jenkins自动化发布Java项目实战》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/10/10/services/net/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">100个网络基础知识普及</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/10/10/services/spring/i18n/i18n/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">i18n国际化变更</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/&title=《Jenkins自动化发布Java项目实战》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/&title=《Jenkins自动化发布Java项目实战》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Jenkins自动化发布Java项目实战》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/10/10/plugin/jenkins/jenkins/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

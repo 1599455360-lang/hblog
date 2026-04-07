@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/10/10/services/spring/i18n/i18n/">
+    
+    
+    <title>i18n国际化变更 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="spring,encodeing">
+    <meta name="description" content="国际化，也叫 i18n，为啥叫这个名字呢？因为国际化英文是 internationalization ，在 i 和 n 之间有 18 个字母，所以叫 i18n。我们的应用如果做了国际化就可以在不同的语言环境下，方便的进行切换，最常见的就是中文和英文之间的切换，国际化这个功能也是相当的常见。在 Spring 中，就通过 AcceptHeaderLocaleResolver 对国际化提供了支持，开发者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="i18n国际化变更">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="国际化，也叫 i18n，为啥叫这个名字呢？因为国际化英文是 internationalization ，在 i 和 n 之间有 18 个字母，所以叫 i18n。我们的应用如果做了国际化就可以在不同的语言环境下，方便的进行切换，最常见的就是中文和英文之间的切换，国际化这个功能也是相当的常见。在 Spring 中，就通过 AcceptHeaderLocaleResolver 对国际化提供了支持，开发者">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n1.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n2.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n3.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n4.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n5.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n6.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n7.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n8.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n9.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n0.jpg">
+<meta property="article:published_time" content="2020-10-10T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-31T13:48:00.097Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="encodeing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n1.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">i18n国际化变更</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">i18n国际化变更</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-10T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-10-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F-%E5%9B%BD%E9%99%85%E5%8C%96-i18n/">编码格式 国际化 i18n</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-services/spring/i18n/i18n"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">i18n国际化变更</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-10-10 08:30:00" datetime="2020-10-10T00:30:00.000Z"  itemprop="datePublished">2020-10-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F-%E5%9B%BD%E9%99%85%E5%8C%96-i18n/">编码格式 国际化 i18n</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>国际化，也叫 i18n，为啥叫这个名字呢？因为国际化英文是 internationalization ，在 i 和 n 之间有 18 个字母，所以叫 i18n。我们的应用如果做了国际化就可以在不同的语言环境下，方便的进行切换，最常见的就是中文和英文之间的切换，国际化这个功能也是相当的常见。<br>在 Spring 中，就通过 AcceptHeaderLocaleResolver 对国际化提供了支持，开发者通过简单配置，就可以在项目中直接使用国际化功能了。</p>
+<p>1.基本使用<br>Spring Boot 和 Spring 一脉相承，对于国际化的支持，默认是通过 AcceptHeaderLocaleResolver 解析器来完成的，这个解析器，默认是通过请求头的 Accept-Language 字段来判断当前请求所属的环境的，进而给出合适的响应。<br>所以在 Spring Boot 中做国际化，这一块我们可以不用配置，直接就开搞。<br>首先创建一个普通的 Spring Boot 项目，添加 web 依赖即可。项目创建成功后，默认的国际化配置文件放在 resources 目录下，所以我们直接在该目录下创建四个测试文件，如下：</p>
+<p>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n1.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>我们的 message 文件是直接创建在 resources 目录下的，IDEA 在展示的时候，会多出一个 Resource Bundle，这个大家不用管，千万别手动去创建这个目录。<br>messages.properties 这个是默认的配置，其他的则是不同语言环境下的配置，en_US 是英语(美国)，zh_CN 是中文简体，zh_TW 是中文繁体（文末附录里边有一个完整的语言简称表格）。</p>
+<p>四个文件创建好之后，第一个默认的我们可以先空着，另外三个分别填入以下内容：</p>
+<p>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n2.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">messages_zh_CN.properties</span><br><span class="line">name&#x3D;*****</span><br><span class="line"></span><br><span class="line">messages_zh_TW.properties</span><br><span class="line">name&#x3D;******</span><br><span class="line">messages_en_US.properties</span><br><span class="line">name&#x3D;*****</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">helloConller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    MessageSource messageSource;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hell"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hell</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> messageSource.getMessage(<span class="string">"name"</span>,<span class="keyword">null</span>, LocaleContextHolder.getLocale());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>创建一个 HelloController ，内容如下：</p>
+<p>在 HelloController 中我们可以直接注入 MessageSource 实例，然后调用该实例中的 getMessage 方法去获取变量的值，第一个参数是要获取变量的 key，第二个参数是如果 value 中有占位符，可以从这里传递参数进去，第三个参数传递一个 Locale 实例即可，这相当于当前的语言环境。<br>接下来我们就可以直接去调用这个接口了。<br>默认情况下，在接口调用时，通过请求头的 Accept-Language 来配置当前的环境，我这里通过 POSTMAN 来进行测试，结果如下：<br>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n3.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>接下来测试访问在postman的headers中设置 请求头 Accept-Language 为 zh-CN，所以拿到的就是简体中文；如果我设置了 zh-TW，就会拿到繁体中文：感觉不太难的呀！<br>2.自定义切换<br>接下来有没有人感觉到疑问？？？<br>觉得切换参数放在请求头里边好像不太方便，那么也可以自定义解析方式。例如参数可以当成普通参数放在地址栏上，通过如下配置可以实现我们的需求。<br>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n4.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhengjunjie</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2020/3/5 - 16:21</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//自定义切换</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//addInterceptors</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        LocaleChangeInterceptor inter = <span class="keyword">new</span> LocaleChangeInterceptor();</span><br><span class="line">        inter.setParamName(<span class="string">"lang"</span>);</span><br><span class="line">        registry.addInterceptor(inter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">LocaleResolver  <span class="title">localeResolver</span><span class="params">()</span></span>&#123;</span><br><span class="line">        SessionLocaleResolver localeResolver = <span class="keyword">new</span> SessionLocaleResolver();</span><br><span class="line">        localeResolver.setDefaultLocale(Locale.SIMPLIFIED_CHINESE);</span><br><span class="line">        <span class="keyword">return</span> localeResolver;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这段配置中，我们首先提供了一个 SessionLocaleResolver 实例，这个实例会替换掉默认的 AcceptHeaderLocaleResolver，不同于 AcceptHeaderLocaleResolver 通过请求头来判断当前的环境信息，SessionLocaleResolver 将客户端的 Locale 保存到 HttpSession 对象中，并且可以进行修改（这意味着当前环境信息，前端给浏览器发送一次即可记住，只要 session 有效，浏览器就不必再次告诉服务端当前的环境信息）。<br>另外我们还配置了一个拦截器，这个拦截器会拦截请求中 key 为 lang 的参数（不配置的话是 locale），这个参数则指定了当前的环境信息。<br>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n5.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n6.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n7.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>3.其他自定义<br> 如何我们不想把文件放在默认的resouce文件夹下面那么试试改一下文件夹这样更好的迎合项目目录：<br>   (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n8.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br> 这里直接间隔文件下 i18n文件夹然后把文件拉进去 ok  不得不说idea有开发工具是真的舒服呀 ！<br> 此时还需要 application.properties 中进行额外配置<br>   (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n9.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br> spring.messages.cache-duration 表示 messages 文件的缓存失效时间，如果不配置则缓存一直有效。<br>spring.messages.fallback-to-system-locale 属性则略显神奇在找不到当前系统对应的资源文件时，如果该属性为 true，则会默认查找当前系统对应的资源文件，否则就返回 null，返回 null 之后，最终又会调用到系统默认的 messages.properties 文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">spring.messages.basename&#x3D;i18n&#x2F;messages</span><br><span class="line">spring.messages.cache-duration&#x3D;3600</span><br><span class="line">spring.messages.encoding&#x3D;UTF-8</span><br><span class="line">spring.messages.fallback-to-system-locale&#x3D;true</span><br></pre></td></tr></table></figure>
+
+<p>4.附录一个语言简称表<br>  (<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/spring/i18n/i18n0.jpg" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-31T13:48:00.097Z" itemprop="dateUpdated">2020-12-31 21:48:00</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/10/10/services/spring/i18n/i18n/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/encodeing/" rel="tag">encodeing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/spring/" rel="tag">spring</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/&title=《i18n国际化变更》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/&title=《i18n国际化变更》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《i18n国际化变更》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/10/10/plugin/jenkins/jenkins/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Jenkins自动化发布Java项目实战</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/10/07/util/FileUtils/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">文件读取类</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/&title=《i18n国际化变更》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/&title=《i18n国际化变更》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《i18n国际化变更》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/10/10/services/spring/i18n/i18n/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

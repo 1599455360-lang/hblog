@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/">
+    
+    
+    <title>MySQL中授权(grant)和撤销授权(revoke) | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="database,mysql">
+    <meta name="description" content="MySQL 赋予用户权限命令的简单格式可概括为： 1 grant 权限 on 数据库对象 to 用户 一、grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利 12341 grant select on testdb._ to common_user@&#39;%&#39;  2 grant insert on testdb._ to common_user@&#39;%&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL中授权(grant)和撤销授权(revoke)">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="MySQL 赋予用户权限命令的简单格式可概括为： 1 grant 权限 on 数据库对象 to 用户 一、grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利 12341 grant select on testdb._ to common_user@&#39;%&#39;  2 grant insert on testdb._ to common_user@&#39;%&amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-29T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-29T04:09:17.606Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="database">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MySQL中授权(grant)和撤销授权(revoke)</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">MySQL中授权(grant)和撤销授权(revoke)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-29T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-11-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/MySQL-grant-%E5%92%8C-revoke/">MySQL(grant)和(revoke)</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-database/mysql/mysql数据库授权"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">MySQL中授权(grant)和撤销授权(revoke)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-29 08:30:00" datetime="2020-11-29T00:30:00.000Z"  itemprop="datePublished">2020-11-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/MySQL-grant-%E5%92%8C-revoke/">MySQL(grant)和(revoke)</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>MySQL 赋予用户权限命令的简单格式可概括为：</p>
+<p>1 grant 权限 on 数据库对象 to 用户</p>
+<p>一、grant 普通数据用户，查询、插入、更新、删除 数据库中所有表数据的权利</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 grant select on testdb._ to common_user@&#39;%&#39;  </span><br><span class="line">2 grant insert on testdb._ to common_user@&#39;%&#39;  </span><br><span class="line">3 grant update on testdb._ to common_user@&#39;%&#39;  </span><br><span class="line">4 grant delete on testdb._ to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
+
+<p>或者，用一条 MySQL 命令来替代：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1 grant select, insert, update, delete on testdb.\* to common_user@&#39;%&#39;</span><br></pre></td></tr></table></figure>
+
+
+<p>二、grant 数据库开发人员，创建表、索引、视图、存储过程、函数等权限</p>
+<p>grant 创建、修改、删除 MySQL 数据表结构权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 grant create on testdb._ to developer@&#39;192.168.0.%&#39;;  </span><br><span class="line">2 grant alter on testdb._ to developer@&#39;192.168.0.%&#39;;  </span><br><span class="line">3 grant drop on testdb.\* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>grant 操作 MySQL 外键权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1 grant references on testdb.\* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+
+<p>grant 操作 MySQL 临时表权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1 grant create temporary tables on testdb.\* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+
+<p>grant 操作 MySQL 索引权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 grant index on testdb.\* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+
+<p>grant 操作 MySQL 视图、查看视图源代码权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 grant create view on testdb._ to developer@&#39;192.168.0.%&#39;;  </span><br><span class="line">2 grant show view on testdb._ to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>grant 操作 MySQL 存储过程、函数权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 grant create routine on testdb._ to developer@&#39;192.168.0.%&#39;; -- now, can show procedure status  </span><br><span class="line">2 grant alter routine on testdb._ to developer@&#39;192.168.0.%&#39;; -- now, you can drop a procedure  </span><br><span class="line">3 grant execute on testdb.\* to developer@&#39;192.168.0.%&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>三、grant 普通 DBA 管理某个 MySQL 数据库的权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 grant all privileges on testdb to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<p>其中，关键字 “privileges” 可以省略。</p>
+<p>四、grant 高级 DBA 管理 MySQL 中所有数据库的权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 grant all on _._ to dba@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+
+<p>五、MySQL grant 权限，分别可以作用在多个层次上</p>
+<ol>
+<li>grant 作用在整个 MySQL 服务器上：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 grant select on _._ to dba@localhost; -- dba 可以查询 MySQL 中所有数据库中的表。  </span><br><span class="line">  2 grant all on _._ to dba@localhost; -- dba 可以管理 MySQL 中的所有数据库</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>grant 作用在单个数据库上：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 grant select on testdb.\* to dba@localhost; -- dba 可以查询 testdb 中的表。</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>grant 作用在单个数据表上：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 grant select, insert, update, delete on testdb.orders to dba@localhost;  </span><br><span class="line">  这里在给一个用户授权多张表时，可以多次执行以上语句。例如：</span><br><span class="line">  1 grant select(user_id,username) on smp.users to mo_user@&#39;%&#39; identified by &#39;123345&#39;;  </span><br><span class="line">  2 grant select on smp.mo_sms to mo_user@&#39;%&#39; identified by &#39;123345&#39;;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>grant 作用在表中的列上：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 grant select(id, se, rank) on testdb.apache_log to dba@localhost;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>grant 作用在存储过程、函数上：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 grant execute on procedure testdb.pr_add to &#39;dba&#39;@&#39;localhost&#39;  </span><br><span class="line"> 2 grant execute on function testdb.fn_add to &#39;dba&#39;@&#39;localhost&#39;</span><br></pre></td></tr></table></figure>
+
+<p>   六、查看 MySQL 用户权限</p>
+<p>查看当前用户（自己）权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 show grants;</span><br></pre></td></tr></table></figure>
+
+<p>查看其他 MySQL 用户权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 show grants for dba@localhost;</span><br></pre></td></tr></table></figure>
+
+<p>七、撤销已经赋予给 MySQL 用户权限的权限。</p>
+<p>revoke 跟 grant 的语法差不多，只需要把关键字 “to” 换成 “from” 即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 grant all on _._ to dba@localhost;  </span><br><span class="line">2 revoke all on _._ from dba@localhost;</span><br></pre></td></tr></table></figure>
+
+
+<p>八、MySQL grant、revoke 用户权限注意事项</p>
+<ol>
+<li><p>grant, revoke 用户权限后，该用户只有重新连接 MySQL 数据库，权限才能生效。</p>
+</li>
+<li><p>如果想让授权的用户，也可以将这些权限 grant 给其他用户，需要选项 “grant option“<br>1 grant select on testdb.* to dba@localhost with grant option;<br>这个特性一般用不到。实际中，数据库权限最好由 DBA 来统一管理。</p>
+</li>
+</ol>
+<p>补充：<br><a href="">mysql 授权表共有 5 个表：user、db、host、tables_priv 和 columns_priv。</a></p>
+<p>授权表的内容有如下用途：<br>user 表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user 表列出可以连接服务器的用户及其口令，并且它指定他们有哪种全局（超级用户）权限。在 user 表启用的任何权限均是全局权限，并适用于所有数据库。例如，如果你启用了 DELETE 权限，在这里列出的用户可以从任何表中删除记录，所以在你这样做之前要认真考虑。</span><br></pre></td></tr></table></figure>
+
+
+<p>db 表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db 表列出数据库，而用户有权限访问它们。在这里指定的权限适用于一个数据库中的所有表。</span><br></pre></td></tr></table></figure>
+
+
+<p>host 表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">host 表与 db 表结合使用在一个较好层次上控制特定主机对数据库的访问权限，这可能比单独使用 db 好些。这个表不受 GRANT 和 REVOKE 语句的影响，所以，你可能发觉你根本不是用它。</span><br></pre></td></tr></table></figure>
+
+
+<p>tables_priv 表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tables_priv 表指定表级权限，在这里指定的一个权限适用于一个表的所有列。</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">columns_priv 表</span><br><span class="line">columns_priv 表指定列级权限。这里指定的权限适用于一个表的特定列。</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-29T04:09:17.606Z" itemprop="dateUpdated">2020-11-29 12:09:17</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/database/" rel="tag">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/&title=《MySQL中授权(grant)和撤销授权(revoke)》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/&title=《MySQL中授权(grant)和撤销授权(revoke)》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL中授权(grant)和撤销授权(revoke)》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/11/29/database/mysql/mysql%E7%AC%94%E8%AE%B0/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">数据库基础知识</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/11/29/database/mysql/MySQL/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MySQL实用的语法格式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/&title=《MySQL中授权(grant)和撤销授权(revoke)》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/&title=《MySQL中授权(grant)和撤销授权(revoke)》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MySQL中授权(grant)和撤销授权(revoke)》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/11/29/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8E%88%E6%9D%83/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/">
+    
+    
+    <title>http请求封装请求 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="util,okHttp">
+    <meta name="description" content="1 首先引入maven坐标 123456789101112      &lt;dependency&gt;	&lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;	&lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;	&lt;version&gt;1.2.47&lt;&#x2F;version&gt;&lt;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http请求封装请求">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="1 首先引入maven坐标 123456789101112      &lt;dependency&gt;	&lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;	&lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;	&lt;version&gt;1.2.47&lt;&#x2F;version&gt;&lt;&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-07T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-31T13:47:57.963Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="util">
+<meta property="article:tag" content="okHttp">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">http请求封装请求</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">http请求封装请求</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-07T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-10-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/OkHttp/">OkHttp</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-util/okHttp请求"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">http请求封装请求</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-10-07 08:30:00" datetime="2020-10-07T00:30:00.000Z"  itemprop="datePublished">2020-10-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/OkHttp/">OkHttp</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>1 首先引入maven坐标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">      &lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.alibaba&lt;&#x2F;groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;fastjson&lt;&#x2F;artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.2.47&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.squareup.okhttp3&lt;&#x2F;groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;okhttp&lt;&#x2F;artifactId&gt;</span><br><span class="line">	&lt;version&gt;3.10.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>1 . AbstractApiJsonClient</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cmhb.common.okhttp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Optional;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.PostConstruct;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.MapUtils;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.cmhb.common.util.JsonUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NonNull;</span><br><span class="line"><span class="keyword">import</span> lombok.SneakyThrows;</span><br><span class="line"><span class="keyword">import</span> lombok.val;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> okhttp3.Headers;</span><br><span class="line"><span class="keyword">import</span> okhttp3.HttpUrl;</span><br><span class="line"><span class="keyword">import</span> okhttp3.MediaType;</span><br><span class="line"><span class="keyword">import</span> okhttp3.OkHttpClient;</span><br><span class="line"><span class="keyword">import</span> okhttp3.Request;</span><br><span class="line"><span class="keyword">import</span> okhttp3.RequestBody;</span><br><span class="line"><span class="keyword">import</span> okhttp3.Response;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractApiJsonClient</span> </span>&#123;</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> MediaType MEDIA_TYPE_JSON = MediaType</span><br><span class="line">			.parse(<span class="string">"application/json; charset=utf-8"</span>);</span><br><span class="line">	<span class="keyword">protected</span> <span class="keyword">static</span> OkHttpClient client = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> readTimeout = <span class="number">3000</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> writeTimeout = <span class="number">3000</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> connectTimeout = <span class="number">3000</span>;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@SneakyThrows</span></span><br><span class="line">	<span class="keyword">protected</span> &lt;T, S&gt; <span class="function">S <span class="title">call</span><span class="params">(@NonNull String url, @NonNull T body,</span></span></span><br><span class="line"><span class="function"><span class="params">			Class&lt;S&gt; clazz)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		String postBody = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// todo body处理逻辑</span></span><br><span class="line">		<span class="keyword">if</span> (StringUtils.isBlank(postBody)) &#123;</span><br><span class="line">			postBody = JSON.toJSONString(body);</span><br><span class="line">		&#125;</span><br><span class="line">		Request request = <span class="keyword">new</span> Request.Builder().url(url)</span><br><span class="line">				.post(RequestBody.create(MEDIA_TYPE_JSON, postBody)).build();</span><br><span class="line">		log.debug(<span class="string">"postBody: &#123;&#125;"</span>, postBody);</span><br><span class="line">		log.debug(<span class="string">"connectTimeoutMillis: &#123;&#125;"</span>, client.connectTimeoutMillis());</span><br><span class="line">		log.debug(<span class="string">"readTimeoutMillis: &#123;&#125;"</span>, client.readTimeoutMillis());</span><br><span class="line">		log.debug(<span class="string">"writeTimeoutMillis: &#123;&#125;"</span>, client.writeTimeoutMillis());</span><br><span class="line">		val response = client.newCall(request).execute();</span><br><span class="line">		val respBody = response.body();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (response.isSuccessful()) &#123;</span><br><span class="line">				<span class="keyword">return</span> JSON.parseObject(respBody.bytes(), clazz);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				log.error(<span class="string">"error, &#123;&#125;"</span>, response.message());</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			log.error(response.message() + <span class="string">"||"</span> + e.toString());</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (respBody != <span class="keyword">null</span>) &#123;</span><br><span class="line">				respBody.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@SneakyThrows</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Response <span class="title">getResponse</span><span class="params">(String url, String methodType,</span></span></span><br><span class="line"><span class="function"><span class="params">			Map&lt;String, String&gt; headerMap, Map&lt;String, Object&gt; queryParams,</span></span></span><br><span class="line"><span class="function"><span class="params">			Object body)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.isBlank(url)) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"未指定url"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		String postBody = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.isBlank(postBody) &amp;&amp; body != <span class="keyword">null</span>) &#123;</span><br><span class="line">			postBody = JsonUtils.toJson(body);</span><br><span class="line">		&#125;</span><br><span class="line">		log.debug(<span class="string">"接口请求参数: &#123;&#125;"</span>, postBody);</span><br><span class="line">		Headers headers;</span><br><span class="line">		<span class="keyword">if</span> (headerMap == <span class="keyword">null</span>) &#123;</span><br><span class="line">			headers = <span class="keyword">new</span> Headers.Builder().build();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			headers = Headers.of(headerMap);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// url添加 QUERY PARAMETERS</span></span><br><span class="line">		HttpUrl httpUrl = HttpUrl.parse(url);</span><br><span class="line">		<span class="keyword">if</span> (httpUrl == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"url错误"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		HttpUrl.Builder builder = httpUrl.newBuilder();</span><br><span class="line">		<span class="keyword">if</span> (MapUtils.isNotEmpty(queryParams)) &#123;</span><br><span class="line">			queryParams.forEach((o, o2) -&gt; builder.addQueryParameter(o,</span><br><span class="line">					Optional.ofNullable(o2).orElse(<span class="string">""</span>).toString()));</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		Request request;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (<span class="string">"get"</span>.equalsIgnoreCase(methodType)) &#123;</span><br><span class="line">			httpUrl = builder.build();</span><br><span class="line">			request = <span class="keyword">new</span> Request.Builder().url(httpUrl).headers(headers).get()</span><br><span class="line">					.build();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"post"</span>.equalsIgnoreCase(methodType)) &#123;</span><br><span class="line">			httpUrl = builder.build();</span><br><span class="line">			request = <span class="keyword">new</span> Request.Builder().url(httpUrl).headers(headers)</span><br><span class="line">					.post(RequestBody.create(MEDIA_TYPE_JSON, postBody))</span><br><span class="line">					.build();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (client == <span class="keyword">null</span>) &#123;</span><br><span class="line">			init();</span><br><span class="line">		&#125;</span><br><span class="line">		log.debug(<span class="string">"-X &#123;&#125; -H &#123;&#125; -d &#123;&#125; &#123;&#125;"</span>, methodType, request.headers(),</span><br><span class="line">				postBody, request.url());</span><br><span class="line">		<span class="keyword">return</span> client.newCall(request).execute();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@SneakyThrows</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Response <span class="title">getResponse</span><span class="params">(Request request)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (client == <span class="keyword">null</span>) &#123;</span><br><span class="line">			init();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> client.newCall(request).execute();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@SuppressWarnings</span>(<span class="string">"deprecation"</span>)</span><br><span class="line">	<span class="meta">@PostConstruct</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		client = <span class="keyword">new</span> OkHttpClient.Builder()</span><br><span class="line">				.readTimeout(readTimeout, TimeUnit.SECONDS)</span><br><span class="line">				.writeTimeout(writeTimeout, TimeUnit.SECONDS)</span><br><span class="line">				.connectTimeout(connectTimeout, TimeUnit.SECONDS)</span><br><span class="line">				.sslSocketFactory(SSLSocketClientUtils.getSSLSocketFactory())</span><br><span class="line">				.hostnameVerifier(SSLSocketClientUtils.getHostnameVerifier())</span><br><span class="line">				.build();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2  SSLSocketClientUtils</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cmhb.common.okhttp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyStore;</span><br><span class="line"><span class="keyword">import</span> java.security.SecureRandom;</span><br><span class="line"><span class="keyword">import</span> java.security.cert.CertificateFactory;</span><br><span class="line"><span class="keyword">import</span> java.security.cert.X509Certificate;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.HostnameVerifier;</span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLContext;</span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLSession;</span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.SSLSocketFactory;</span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.TrustManager;</span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.TrustManagerFactory;</span><br><span class="line"><span class="keyword">import</span> javax.net.ssl.X509TrustManager;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> okhttp3.OkHttpClient;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * https证书服务</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SSLSocketClientUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 通过okhttpClient来设置证书</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> clientBuilder</span></span><br><span class="line"><span class="comment">	 *            OKhttpClient.builder</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> certificates</span></span><br><span class="line"><span class="comment">	 *            读取证书的InputStream</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setCertificates</span><span class="params">(OkHttpClient.Builder clientBuilder,</span></span></span><br><span class="line"><span class="function"><span class="params">			InputStream... certificates)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			CertificateFactory certificateFactory = CertificateFactory</span><br><span class="line">					.getInstance(<span class="string">"X.509"</span>);</span><br><span class="line">			KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());</span><br><span class="line">			keyStore.load(<span class="keyword">null</span>);</span><br><span class="line">			<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span> (InputStream certificate : certificates) &#123;</span><br><span class="line">				String certificateAlias = Integer.toString(index++);</span><br><span class="line">				keyStore.setCertificateEntry(certificateAlias,</span><br><span class="line">						certificateFactory.generateCertificate(certificate));</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> (certificate != <span class="keyword">null</span>) &#123;</span><br><span class="line">						certificate.close();</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">					log.error(<span class="string">"设置https证书服务失败：&#123;&#125;"</span>, e.getMessage());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			TrustManagerFactory trustManagerFactory = TrustManagerFactory</span><br><span class="line">					.getInstance(TrustManagerFactory.getDefaultAlgorithm());</span><br><span class="line">			trustManagerFactory.init(keyStore);</span><br><span class="line">			TrustManager[] trustManagers = trustManagerFactory</span><br><span class="line">					.getTrustManagers();</span><br><span class="line">			<span class="keyword">if</span> (trustManagers.length != <span class="number">1</span></span><br><span class="line">					|| !(trustManagers[<span class="number">0</span>] <span class="keyword">instanceof</span> X509TrustManager)) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(</span><br><span class="line">						<span class="string">"Unexpected default trust managers:"</span></span><br><span class="line">								+ Arrays.toString(trustManagers));</span><br><span class="line">			&#125;</span><br><span class="line">			X509TrustManager trustManager = (X509TrustManager) trustManagers[<span class="number">0</span>];</span><br><span class="line">			SSLContext sslContext = SSLContext.getInstance(<span class="string">"TLS"</span>);</span><br><span class="line">			sslContext.init(<span class="keyword">null</span>, trustManagerFactory.getTrustManagers(),</span><br><span class="line">					<span class="keyword">new</span> SecureRandom());</span><br><span class="line">			SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();</span><br><span class="line">			clientBuilder.sslSocketFactory(sslSocketFactory, trustManager);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 获取这个SSLSocketFactory</span></span><br><span class="line"><span class="comment">	 **/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SSLSocketFactory <span class="title">getSSLSocketFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			SSLContext sslContext = SSLContext.getInstance(<span class="string">"SSL"</span>);</span><br><span class="line">			sslContext.init(<span class="keyword">null</span>, getTrustManager(), <span class="keyword">new</span> SecureRandom());</span><br><span class="line">			<span class="keyword">return</span> sslContext.getSocketFactory();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 获取TrustManager</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> TrustManager[] getTrustManager() &#123;</span><br><span class="line">		TrustManager[] trustAllCerts = <span class="keyword">new</span> TrustManager[] &#123;</span><br><span class="line">				<span class="keyword">new</span> X509TrustManager() &#123;</span><br><span class="line">					<span class="meta">@Override</span></span><br><span class="line">					<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkClientTrusted</span><span class="params">(X509Certificate[] chain,</span></span></span><br><span class="line"><span class="function"><span class="params">							String authType)</span> </span>&#123;</span><br><span class="line">					&#125;</span><br><span class="line"></span><br><span class="line">					<span class="meta">@Override</span></span><br><span class="line">					<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkServerTrusted</span><span class="params">(X509Certificate[] chain,</span></span></span><br><span class="line"><span class="function"><span class="params">							String authType)</span> </span>&#123;</span><br><span class="line">					&#125;</span><br><span class="line"></span><br><span class="line">					<span class="meta">@Override</span></span><br><span class="line">					<span class="keyword">public</span> X509Certificate[] getAcceptedIssuers() &#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="keyword">new</span> X509Certificate[] &#123;&#125;;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">		<span class="keyword">return</span> trustAllCerts;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 获取HostnameVerifier</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HostnameVerifier <span class="title">getHostnameVerifier</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		HostnameVerifier hostnameVerifier = <span class="keyword">new</span> HostnameVerifier() &#123;</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">verify</span><span class="params">(String s, SSLSession sslSession)</span> </span>&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">		<span class="keyword">return</span> hostnameVerifier;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3  ReqClientUtil</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.cmhb.common.okhttp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSON;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONArray;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.cmhb.common.model.ResultModel;</span><br><span class="line"><span class="keyword">import</span> com.cmhb.common.util.JsonUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> okhttp3.MediaType;</span><br><span class="line"><span class="keyword">import</span> okhttp3.Request;</span><br><span class="line"><span class="keyword">import</span> okhttp3.RequestBody;</span><br><span class="line"><span class="keyword">import</span> okhttp3.Response;</span><br><span class="line"><span class="keyword">import</span> okhttp3.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqClientUtil</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> AbstractApiJsonClient client = <span class="keyword">new</span> AbstractApiJsonClient();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JSONObject <span class="title">callPost</span><span class="params">(String url,</span></span></span><br><span class="line"><span class="function"><span class="params">			Map&lt;String, Object&gt; queryParams, Object body)</span> </span>&#123;</span><br><span class="line">		Response response = client.getResponse(url, <span class="string">"post"</span>, <span class="keyword">null</span>, queryParams,</span><br><span class="line">				body);</span><br><span class="line">		ResponseBody respBody = response.body();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (response.isSuccessful()) &#123;</span><br><span class="line">				<span class="keyword">return</span> JSON.parseObject(respBody.bytes(), JSONObject<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (respBody != <span class="keyword">null</span>) &#123;</span><br><span class="line">				respBody.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;S&gt; <span class="function">S <span class="title">post</span><span class="params">(String url, Map&lt;String, String&gt; headerMap, Map&lt;String, Object&gt; queryParams, Object body,</span></span></span><br><span class="line"><span class="function"><span class="params">					  Class&lt;S&gt; clazz)</span> </span>&#123;</span><br><span class="line">		Response response = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			response = client.getResponse(url, <span class="string">"post"</span>, headerMap, queryParams, body);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			log.error(<span class="string">"文件服务器异常."</span> + e.getMessage(), e);</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> convertBody(clazz, response);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> &lt;S&gt; <span class="function">S <span class="title">convertBody</span><span class="params">(Class&lt;S&gt; clazz, Response response)</span> </span>&#123;</span><br><span class="line">        ResponseBody respBody = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            respBody = response.body();</span><br><span class="line">            <span class="keyword">if</span> (respBody == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            String body = respBody.string();</span><br><span class="line">            log.info(<span class="string">"body: &#123;&#125;"</span>, body);</span><br><span class="line">            <span class="keyword">if</span> (response.isSuccessful()) &#123;</span><br><span class="line">                <span class="keyword">return</span> JsonUtils.parse(body, clazz);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                log.error(response.message());</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(e.getMessage(), e);</span><br><span class="line">            log.error(response.message() + <span class="string">"||"</span> + e.toString());</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (respBody != <span class="keyword">null</span>) &#123;</span><br><span class="line">                respBody.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JSONObject <span class="title">callGet</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">		ResponseBody respBody = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Response response = client.getResponse(url, <span class="string">"get"</span>, <span class="keyword">null</span>, <span class="keyword">null</span>,</span><br><span class="line">					<span class="keyword">null</span>);</span><br><span class="line">			respBody = response.body();</span><br><span class="line">			<span class="keyword">if</span> (response.isSuccessful()) &#123;</span><br><span class="line">				<span class="keyword">return</span> JSON.parseObject(respBody.bytes(), JSONObject<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (respBody != <span class="keyword">null</span>) &#123;</span><br><span class="line">				respBody.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">callGetForString</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">		ResponseBody respBody = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Response response = client.getResponse(url, <span class="string">"get"</span>, <span class="keyword">null</span>, <span class="keyword">null</span>,</span><br><span class="line">					<span class="keyword">null</span>);</span><br><span class="line">			respBody = response.body();</span><br><span class="line">			<span class="keyword">if</span> (response.isSuccessful()) &#123;</span><br><span class="line">				BufferedReader br = <span class="keyword">new</span> BufferedReader(</span><br><span class="line">						<span class="keyword">new</span> InputStreamReader(respBody.byteStream(), <span class="string">"UTF-8"</span>));</span><br><span class="line">				String buffer = <span class="keyword">null</span>;</span><br><span class="line">				StringBuffer str = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">				<span class="keyword">while</span> ((buffer = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">					str.append(buffer);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> str.toString();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (respBody != <span class="keyword">null</span>) &#123;</span><br><span class="line">				respBody.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">callByType</span><span class="params">(String url, String body, MediaType type)</span> </span>&#123;</span><br><span class="line">		ResponseBody respBody = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Request request = <span class="keyword">new</span> Request.Builder().url(url)</span><br><span class="line">					.post(RequestBody.create(type, body)).build();</span><br><span class="line">			Response response = client.getResponse(request);</span><br><span class="line">			respBody = response.body();</span><br><span class="line">			<span class="keyword">if</span> (response.isSuccessful()) &#123;</span><br><span class="line">				BufferedReader br = <span class="keyword">new</span> BufferedReader(</span><br><span class="line">						<span class="keyword">new</span> InputStreamReader(respBody.byteStream(), <span class="string">"UTF-8"</span>));</span><br><span class="line">				String buffer = <span class="keyword">null</span>;</span><br><span class="line">				StringBuffer str = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">				<span class="keyword">while</span> ((buffer = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">					str.append(buffer);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> str.toString();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (respBody != <span class="keyword">null</span>) &#123;</span><br><span class="line">				respBody.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 用于查询请求 url ： 请求地址 data ：请求查询参数 clazz ：返回查询结果模板</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">search</span><span class="params">(String url, Object data, Class&lt;T&gt; clazz)</span> </span>&#123;</span><br><span class="line">		JSONObject body = callPost(url, <span class="keyword">null</span>, data);</span><br><span class="line">		<span class="keyword">if</span> (body == <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"请求返回为空，请检查网络！"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		ResultModel model = body.toJavaObject(ResultModel<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">		<span class="keyword">if</span> (!model.isResult()) &#123;</span><br><span class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(model.getMessage());</span><br><span class="line">		&#125;</span><br><span class="line">		String str = JSONObject.toJSONString(model.getData());</span><br><span class="line">		<span class="keyword">return</span> JSONArray.parseArray(str, clazz);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 业务操作请求 url ： 请求地址 data ：请求参数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">callPost</span><span class="params">(String url, Object data)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			log.info(<span class="string">"访问路径：&#123;&#125;"</span>, url);</span><br><span class="line">			log.info(<span class="string">"请求参数：&#123;&#125;"</span>, JSONObject.toJSONString(data));</span><br><span class="line">			JSONObject body = callPost(url, <span class="keyword">null</span>, data);</span><br><span class="line">			<span class="keyword">if</span> (body == <span class="keyword">null</span>) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"请求返回为空，请检查网络！"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			ResultModel model = body.toJavaObject(ResultModel<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">			<span class="keyword">if</span> (!model.isResult()) &#123;</span><br><span class="line">				<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(model.getMessage());</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> model.getMessage();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			log.error(<span class="string">"访问路径：&#123;&#125;"</span>, url);</span><br><span class="line">			log.error(<span class="string">"请求参数：&#123;&#125;"</span>, JSONObject.toJSONString(data));</span><br><span class="line">			<span class="keyword">throw</span> e;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JSONObject <span class="title">callPostContainHeader</span><span class="params">(String url, Map&lt;String, String&gt; headerMap, Map&lt;String, Object&gt; queryParams, Object body)</span> </span>&#123;</span><br><span class="line">		Response response = client.getResponse(url, <span class="string">"post"</span>, headerMap, queryParams,</span><br><span class="line">				body);</span><br><span class="line">		ResponseBody respBody = response.body();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (response.isSuccessful()) &#123;</span><br><span class="line">				<span class="keyword">return</span> JSON.parseObject(respBody.bytes(), JSONObject<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> (respBody != <span class="keyword">null</span>) &#123;</span><br><span class="line">				respBody.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-31T13:47:57.963Z" itemprop="dateUpdated">2020-12-31 21:47:57</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/okHttp/" rel="tag">okHttp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/util/" rel="tag">util</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/&title=《http请求封装请求》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/&title=《http请求封装请求》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《http请求封装请求》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/10/07/util/Md5/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">md5加密工具类</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/10/02/util/beanManager/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Bean管理工具类</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/&title=《http请求封装请求》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/&title=《http请求封装请求》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《http请求封装请求》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/10/07/util/okHttp%E8%AF%B7%E6%B1%82/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/">
+    
+    
+    <title>网络常见的 9 大命令 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="cmd">
+    <meta name="description" content="0 )链接网络ip 端口号telnet ip 6379 1．ping 命令 ping 是个使用频率极高的实用程序，主要用于确定网络的连通性。这对确定网络是否正确连接，以及网络连接的状况十分有用。 简单的说，ping 就是一个测试程序，如果 ping 运行正确，大体上就可以排除网络访问层、网卡、Modem 的输入输出线路、电缆和路由器等存在的故障，从而缩小问题的范围。 ping 能够以毫秒为单位显示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络常见的 9 大命令">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="0 )链接网络ip 端口号telnet ip 6379 1．ping 命令 ping 是个使用频率极高的实用程序，主要用于确定网络的连通性。这对确定网络是否正确连接，以及网络连接的状况十分有用。 简单的说，ping 就是一个测试程序，如果 ping 运行正确，大体上就可以排除网络访问层、网卡、Modem 的输入输出线路、电缆和路由器等存在的故障，从而缩小问题的范围。 ping 能够以毫秒为单位显示">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd3.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd4.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd5.jpg">
+<meta property="og:image" content="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd5.jpg">
+<meta property="article:published_time" content="2020-11-02T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-11-29T04:25:19.563Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="cmd">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd3.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">网络常见的 9 大命令</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">网络常见的 9 大命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-02T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-11-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">windows常用命令</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-services/liunx/cmd/cmd命令"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">网络常见的 9 大命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-02 08:30:00" datetime="2020-11-02T00:30:00.000Z"  itemprop="datePublished">2020-11-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">windows常用命令</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>0 )链接网络ip 端口号<br>telnet ip 6379</p>
+<p>1．ping 命令</p>
+<p>ping 是个使用频率极高的实用程序，主要用于确定网络的连通性。这对确定网络是否正确连接，以及网络连接的状况十分有用。</p>
+<p>简单的说，ping 就是一个测试程序，如果 ping 运行正确，大体上就可以排除网络访问层、网卡、Modem 的输入输出线路、电缆和路由器等存在的故障，从而缩小问题的范围。</p>
+<p>ping 能够以毫秒为单位显示发送请求到返回应答之间的时间量。如果应答时间短，表示数据报不必通过太多的路由器或网络，连接速度比较快。ping 还能显示 TTL（Time To Live，生存时间）值，通过 TTL 值可以推算数据包通过了多少个路由器。</p>
+<p>命令格式</p>
+<p>ping  主机名</p>
+<p>ping  域名</p>
+<p>ping  IP 地址</p>
+<p>如图所示，使用 ping 命令检查到 IP 地址 210.43.16.17 的计算机的连通性，该例为连接正常。共发送了四个测试数据包，正确接收到四个数据包。</p>
+<p>ping 命令的基本应用</p>
+<p>一般情况下，用户可以通过使用一系列 ping 命令来查找问题出在什么地方，或检验网络运行的情况。</p>
+<p>下面就给出一个典型的检测次序及对应的可能故障：</p>
+<p>① ping 127.0.0.1</p>
+<p>如果测试成功，表明网卡、TCP/IP 协议的安装、IP 地址、子网掩码的设置正常。如果测试不成功，就表示 TCP/IP 的安装或设置存在有问题。</p>
+<p>② ping 本机 IP 地址</p>
+<p>如果测试不成功，则表示本地配置或安装存在问题，应当对网络设备和通讯介质进行测试、检查并排除。</p>
+<p>③ ping 局域网内其他 IP</p>
+<p>如果测试成功，表明本地网络中的网卡和载体运行正确。但如果收到 0 个回送应答，那么表示子网掩码不正确或网卡配置错误或电缆系统有问题。</p>
+<p>④ ping 网关 IP</p>
+<p>这个命令如果应答正确，表示局域网中的网关路由器正在运行并能够做出应答。</p>
+<p>⑤ ping 远程 IP</p>
+<p>如果收到正确应答，表示成功的使用了缺省网关。对于拨号上网用户则表示能够成功的访问 Internet（但不排除 ISP 的 DNS 会有问题）。</p>
+<p>⑥ ping localhost</p>
+<p>local host 是系统的网络保留名，它是 127.0.0.1 的别名，每台计算机都应该能够将该名字转换成该地址。否则，则表示主机文件（/Windows/host）中存在问题。</p>
+<p>⑦ ping <a href="http://www.yahoo.com（一个著名网站域名）" target="_blank" rel="noopener">www.yahoo.com（一个著名网站域名）</a></p>
+<p>对此域名执行 Ping 命令，计算机必须先将域名转换成 IP 地址，通常是通过 DNS 服务器。如果这里出现故障，则表示本机 DNS 服务器的 IP 地址配置不正确，或它所访问的 DNS 服务器有故障</p>
+<p>如果上面所列出的所有 ping 命令都能正常运行，那么计算机进行本地和远程通信基本上就没有问题了。但是，这些命令的成功并不表示你所有的网络配置都没有问题，例如，某些子网掩码错误就可能无法用这些方法检测到。</p>
+<p>ping 命令的常用参数选项</p>
+<p>ping IP -t：连续对 IP 地址执行 ping 命令，直到被用户以 Ctrl+C 中断。</p>
+<p>ping IP -l 2000：指定 ping 命令中的特定数据长度（此处为 2000 字节），而不是缺省的 32 字节。</p>
+<p>ping IP -n 20：执行特定次数（此处是 20）的 ping 命令。</p>
+<p>注意：随着防火墙功能在网络中的广泛使用，当你 ping 其他主机或其他主机 ping 你的主机时，而显示主机不可达的时候，不要草率地下结论。最好与对某台 “设置良好” 主机的 ping 结果进行对比。</p>
+<ol start="2">
+<li>ipconfig 命令</li>
+</ol>
+<p>ipconfig 实用程序可用于显示当前的 TCP/IP 配置的设置值。这些信息一般用来检验人工配置的 TCP/IP 设置是否正确。</p>
+<p>而且，如果计算机和所在的局域网使用了动态主机配置协议 DHCP，使用 ipconfig 命令可以了解到你的计算机是否成功地租用到了一个 IP 地址，如果已经租用到，则可以了解它目前得到的是什么地址，包括 IP 地址、子网掩码和缺省网关等网络配置信息。</p>
+<p>下面给出最常用的选项：</p>
+<p>(1) ipconfig：当使用不带任何参数选项 ipconfig 命令时，显示每个已经配置了的接口的 IP 地址、子网掩码和缺省网关值。</p>
+<p>(2) ipconfig /all：当使用 all 选项时，ipconfig 能为 DNS 和 WINS 服务器显示它已配置且所有使用的附加信息，并且能够显示内置于本地网卡中的物理地址（MAC）。如果 IP 地址是从 DHCP 服务器租用的，ipconfig 将显示 DHCP 服务器分配的 IP 地址和租用地址预计失效的日期。图为运行 ipconfig /all 命令的结果窗口。</p>
+<p>(3) ipconfig /release 和 ipconfig /renew：这两个附加选项，只能在向 DHCP 服务器租用 IP 地址的计算机使用。如果输入 ipconfig /release，那么所有接口的租用 IP 地址便重新交付给 DHCP 服务器（归还 IP 地址）。</p>
+<p>如果用户输入 ipconfig /renew，那么本地计算机便设法与 DHCP 服务器取得联系，并租用一个 IP 地址。大多数情况下网卡将被重新赋予和以前所赋予的相同的 IP 地址。</p>
+<ol start="3">
+<li>arp 命令（地址转换协议）</li>
+</ol>
+<p>ARP 是 TCP/IP 协议族中的一个重要协议，用于确定对应 IP 地址的网卡物理地址。</p>
+<p>使用 arp 命令，能够查看本地计算机或另一台计算机的 ARP 高速缓存中的当前内容。此外，使用 arp 命令可以人工方式设置静态的网卡物理地址 / IP 地址对，使用这种方式可以为缺省网关和本地服务器等常用主机进行本地静态配置，这有助于减少网络上的信息量。</p>
+<p>按照缺省设置，ARP 高速缓存中的项目是动态的，每当向指定地点发送数据并且此时高速缓存中不存在当前项目时，ARP 便会自动添加该项目。</p>
+<p>常用命令选项：</p>
+<p>① arp –a：用于查看高速缓存中的所有项目。<br>    <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd3.jpg" alt="](![Alt text" title="">
+                </div>
+                <div class="image-caption">](![Alt text</div>
+            </figure></p>
+<p>② arp -a IP：如果有多个网卡，那么使用 arp -a 加上接口的 IP 地址，就可以只显示与该接口相关的 ARP 缓存项目。</p>
+<p>③ arp -s IP 物理地址：向 ARP 高速缓存中人工输入一个静态项目。该项目在计算机引导过程中将保持有效状态，或者在出现错误时，人工配置的物理地址将自动更新该项目。</p>
+<p>④ arp -d IP：使用本命令能够人工删除一个静态项目。</p>
+<ol start="4">
+<li>traceroute 命令<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd4.jpg" alt="](![Alt text" title="">
+                </div>
+                <div class="image-caption">](![Alt text</div>
+            </figure>
+
+</li>
+</ol>
+<p>掌握使用 traceroute 命令测量路由情况的技能，即用来显示数据包到达目的主机所经过的路径。</p>
+<p>traceroute 命令的基本用法是，在命令提示符后键入 “tracert host_name” 或 “tracert ip_address”，其中，tracert 是 traceroute 在 Windows 操作系统上的称呼。</p>
+<p>输出有 5 列：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd5.jpg" alt="](![Alt text" title="">
+                </div>
+                <div class="image-caption">](![Alt text</div>
+            </figure>
+<p>第一列是描述路径的第 n 跳的数值，即沿着该路径的路由器序号；</p>
+<p>第二列是第一次往返时延；</p>
+<p>第三列是第二次往返时延；</p>
+<p>第四列是第三次往返时延；</p>
+<p>第五列是路由器的名字及其输入端口的 IP 地址。</p>
+<p>如果源从任何给定的路由器接收到的报文少于 3 条（由于网络中的分组丢失），traceroute 在该路由器号码后面放一个星号，并报告到达那台路由器的少于 3 次的往返时间。</p>
+<p>此外，tracert 命令还可以用来查看网络在连接站点时经过的步骤或采取哪种路线，如果是网络出现故障，就可以通过这条命令查看出现问题的位置。15 个 Linux 神器，推荐给你。</p>
+<p>思考【测试大型网络的路由】：</p>
+<p>（1）多尝试几次 “ping <a href="http://www.sina.com.cn”" target="_blank" rel="noopener">www.sina.com.cn”</a> 操作，比较得到的新浪网的 IP 地址。如果两次 ping 得到的 IP 地址不同，试考虑其中的原因（如考虑到负载均衡）。然后，针对这些不同的 IP 地址，执行 “tracert ip_address” 命令，观察分析输出的结果是否有差异。</p>
+<p>（2）对于大型网络中的某站点进行 traceroute 测试，记录测试结果。观察其中是否出现第 n 跳的时延小于第 n-1 跳的时延情况。试分析其中原因（提示：可分别考虑时延的各个构成成分在总时延中所起的作用）。</p>
+<p>（3）在一天的不同时段内，用 traceroute 程序多次测试从固定主机到远程固定 IP 地址的主机的路由。试分析比较测量数据，观察该路由是否有变化？如果有变化，该变化频繁吗？</p>
+<ol start="5">
+<li>route 命令</li>
+</ol>
+<p>大多数主机一般都是驻留在只连接一台路由器的网段上。由于只有一台路由器，因此不存在选择使用哪一台路由器将数据包发送到远程计算机上去的问题，该路由器的 IP 地址可作为该网段上所有计算机的缺省网关。</p>
+<p>但是，当网络上拥有两个或多个路由器时，用户就不一定想只依赖缺省网关了。实际上可能想让某些远程 IP 地址通过某个特定的路由器来传递，而其他的远程 IP 则通过另一个路由器来传递。</p>
+<p>在这种情况下，用户需要相应的路由信息，这些信息储存在路由表中，每个主机和每个路由器都配有自己独一无二的路由表。大多数路由器使用专门的路由协议来交换和动态更新路由器之间的路由表。但在有些情况下，必须人工将项目添加到路由器和主机上的路由表中。route 命令就是用来显示、人工添加和修改路由表项目的。该命令可使用如下选项：</p>
+<p>（1）route print：本命令用于显示路由表中的当前项目，在单个路由器网段上的输出结果如图所示。</p>
+<p>（2）route add：使用本命令，可以将路由项目添加给路由表。</p>
+<p>例如，如果要设定一个到目的网络 209.99.32.33 的路由，其间要经过 5 个路由器网段，首先要经过本地网络上的一个路由器 IP 为 202.96.123.5，子网掩码为 255.255.255.224，那么用户应该输入以下命令：</p>
+<p>route add 209.99.32.33 mask 255.255.255.224 202.96.123.5 metric 5</p>
+<p>（3）route change：可以使用本命令来修改数据的传输路由，不过，用户不能使用本命令来改变数据的目的地。下面这个例子将上例路由改变采用一条包含 3 个网段的路径：</p>
+<p>route add 209.99.32.33 mask 255.255.255.224 202.96.123.250  metric 3</p>
+<p>（4）route delete  使用本命令可以从路由表中删除路由。例如：route delete 209.99.32.33</p>
+<ol start="6">
+<li>nslookup 命令</li>
+</ol>
+<p>命令 nslookup 的功能是查询任何一台机器的 IP 地址和其对应的域名。它通常需要一台域名服务器来提供域名。如果用户已经设置好域名服务器，就可以用这个命令查看不同主机的 IP 地址对应的域名。</p>
+<p>（1）在本地机上使用 nslookup 命令查看本机的 IP 及域名服务器地址。</p>
+<p>直接键入命令，系统返回本机的服务器名称（带域名的全称）和 IP 地址，并进入以 “&gt;” 为提示符的操作命令行状态；键入 “？” 可查询详细命令参数；若要退出，需键入 exit。</p>
+<p>（2）查看 <a href="http://www.haut.edu.cn" target="_blank" rel="noopener">www.haut.edu.cn</a> 的 IP。在提示符后输入要查询的 IP 地址或域名并回车即可。Java必备的Linux命令，分享给你，关注微信公众号：Java技术栈，在后台回复：java，可以获取我整理的 N 篇最新 Java 教程，都是干货。</p>
+<ol start="7">
+<li>nbtstat 命令</li>
+</ol>
+<p>使用 nbtstat 命令可以查看计算机上网络配置的一些信息。使用这条命令还可以查找出别人计算机上一些私人信息。</p>
+<p>如果想查看自己计算机上的网络信息，可以运行 nbtstat -n，可以得到你所在的工作组，计算机名以及网卡地址等等；想查看网络上其他的电脑情况，就，运行 nbtstat -a…，此处的…用 IP 地址代替就会返回得到那台主机上的一些信息。</p>
+<ol start="8">
+<li>netstat 命令</li>
+</ol>
+<p>学习使用 netstat 命令，以了解网络当前的状态。</p>
+<p>netstat 命令能够显示活动的 TCP 连接、计算机侦听的端口、以太网统计信息、IP 路由表、IPv4 统计信息（对于 IP、ICMP、TCP 和 UDP 协议）以及 IPv6 统计信息（对于 IPv6、ICMPv6、通过 IPv6 的 TCP 以及 UDP 协议）。使用时如果不带参数，netstat 显示活动的 TCP 连接。</p>
+<p>下面给出 netstat 的一些常用选项：</p>
+<p>① netstat –a：-a 选项显示所有的有效连接信息列表，包括已建立的连接（ESTABLISHED），也包括监听连接请求（LISTENING）的那些连接。</p>
+<p>② netstat –n：以点分十进制的形式列出 IP 地址，而不是象征性的主机名和网络名。</p>
+<p>③ netstat -e：-e 选项用于显示关于以太网的统计数据。它列出的项目包括传送的数据包的总字节数、错误数、删除数、数据包的数量和广播的数量。这些统计数据既有发送的数据包数量，也有接收的数据包数量。使用这个选项可以统计一些基本的网络流量。</p>
+<p>④ netstat -r：-r 选项可以显示关于路由表的信息，类似于 route print 命令时看到的信息。除了显示有效路由外，还显示当前有效的连接。</p>
+<p>上图显示的是一个路由表，其中：Network Destination 表示目的网络，0.0.0.0 表示不明网络，这是设置默认网关后系统自动产生的；127.0.0.0 表示本机网络地址，用于测试；224.0.0.0 表示组播地址；255.255.255.255 表示限制广播地址；Netmask 表示网络掩码，Gateway 表示网关，Interface 表示接口地址，Metric 表示路由跳数。</p>
+<p>⑤ netstat -s：-s 选项能够按照各个协议分别显示其统计数据。这样就可以看到当前计算机在网络上存在哪些连接，以及数据包发送和接收的详细情况等等。如果应用程序（如 Web 浏览器）运行速度比较慢，或者不能显示 Web 页之类的数据，那么可以用本选项来查看一下所显示的信息。仔细查看统计数据的各行，找到出错的关键字，进而确定问题所在。</p>
+<ol start="9">
+<li>net 命令</li>
+</ol>
+<p>了解 Net 服务的功能，学会使用 Net 服务命令解决有关网络问题。</p>
+<p>在命令行键入 net help command，可以在命令行获得 net 命令的语法帮助。例如，要得到关于 net accounts 命令的帮助信息，可键入 “net help accounts”。</p>
+<p>所有 net 命令都可以使用 /y 和 /n 命令行选项。例如，net stop server 命令用于提示用户确认停止所有依赖的服务器服务，net stop server/y 表示确认停止并关闭服务器服务。</p>
+<p>下表列出了基本的 NET 命令及它们的作用：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://mmc_jj.gitee.io/images/gtaph/liunx/cmd5.jpg" alt="](![Alt text" title="">
+                </div>
+                <div class="image-caption">](![Alt text</div>
+            </figure>
+
+<p>NET 命令可以在一个地方提供所有信息，并可以把结果重定向到打印机或一个标准的文本文件中。</p>
+<p>许多服务所使用的网络命令都以 net 开头，这些 net 命令有一些公用属性。要看到所有可用的 net 命令的列表，可以在命令提示符窗口键入 net/? 得到。可以都试一下 没有问题 我这里都不一一测试截图了 </p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-11-29T04:25:19.563Z" itemprop="dateUpdated">2020-11-29 12:25:19</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/cmd/" rel="tag">cmd</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/&title=《网络常见的 9 大命令》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/&title=《网络常见的 9 大命令》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《网络常见的 9 大命令》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/11/15/util/Java%E8%A7%A3%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Java解压缩文件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/11/02/services/liunx/liunx/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">liunx命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/&title=《网络常见的 9 大命令》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/&title=《网络常见的 9 大命令》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《网络常见的 9 大命令》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/11/02/services/liunx/cmd/cmd%E5%91%BD%E4%BB%A4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/11/15/services/java/lambad/Lambda/">
+    
+    
+    <title>Lambda语法糖 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="java,lambad">
+    <meta name="description" content="Lambda*Lambda 介绍 *Lambda 表达式 (lambda expression) 是一个匿名函数，Lambda 表达式基于数学中的λ演算得名，直接对应于其中的 lambda 抽象(lambda abstraction)，是一个匿名函数，即没有函数名的函数。 1 -  1 Lambda 表达式的结构一个 Lambda 表达式可以有零个或多个参数、参数的类型既可以明确声明，也可以根据上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lambda语法糖">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="Lambda*Lambda 介绍 *Lambda 表达式 (lambda expression) 是一个匿名函数，Lambda 表达式基于数学中的λ演算得名，直接对应于其中的 lambda 抽象(lambda abstraction)，是一个匿名函数，即没有函数名的函数。 1 -  1 Lambda 表达式的结构一个 Lambda 表达式可以有零个或多个参数、参数的类型既可以明确声明，也可以根据上">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-15T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-31T13:47:57.404Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="lambad">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Lambda语法糖</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Lambda语法糖</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-11-15T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-11-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/Lambda-java8/">Lambda java8</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Lambda"><span class="post-toc-number">1.</span> <span class="post-toc-text">Lambda</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Lambda-介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">*Lambda 介绍 *</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1-Lambda-表达式的结构"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1 -  1 Lambda 表达式的结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-Lambda-表达式的使用"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">1- 2 Lambda 表达式的使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-Lambda-表达式与匿名类的区别"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">1 -3 Lambda 表达式与匿名类的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Stream-介绍"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Stream   介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1-Stream-特性："><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">1 - 1 Stream 特性：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-Stream-流操作类型："><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">1- 2  Stream 流操作类型：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-1-Stream-使用"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">1-3-1  Stream 使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-1-1-首先通过普通的方式进行过滤"><span class="post-toc-number">1.2.3.1.</span> <span class="post-toc-text">1-3-1-1 首先通过普通的方式进行过滤:</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-1-2-使用-Steam-方式进行过滤："><span class="post-toc-number">1.2.3.2.</span> <span class="post-toc-text">1-3 -1-2 使用 Steam 方式进行过滤：</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-1-3-构造-Stream-流的方式"><span class="post-toc-number">1.2.3.3.</span> <span class="post-toc-text">1-3-1-3 构造 Stream 流的方式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-1-4-Stream-流的之间的转换"><span class="post-toc-number">1.2.3.4.</span> <span class="post-toc-text">1-3-1-4 Stream 流的之间的转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-2-Stream-流的-map-使用"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">1-3-2 Stream 流的 map 使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-2-1-map-方法用于映射每个元素到对应的结果，一对一。"><span class="post-toc-number">1.2.4.1.</span> <span class="post-toc-text">1-3-2-1 map 方法用于映射每个元素到对应的结果，一对一。</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-2-2-示例二：转换数据类型"><span class="post-toc-number">1.2.4.2.</span> <span class="post-toc-text">1-3-2-2 示例二：转换数据类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-2-3-示例三：获取平方"><span class="post-toc-number">1.2.4.3.</span> <span class="post-toc-text">1-3-2-3 示例三：获取平方</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-3-Stream-流的-filter-使用"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">1-3-3 Stream 流的 filter 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-4-Stream-流的-flatMap-使用"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">1-3-4 Stream 流的 flatMap 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-5-Stream-流的-limit-使用"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">1-3-5 Stream 流的 limit 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-6-Stream-流的-sort-使用"><span class="post-toc-number">1.2.8.</span> <span class="post-toc-text">1-3-6 Stream 流的 sort 使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-6-1-示例一：随机取值排序"><span class="post-toc-number">1.2.8.1.</span> <span class="post-toc-text">1-3-6-1 示例一：随机取值排序</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-3-6-2-示例二：优化排序"><span class="post-toc-number">1.2.8.2.</span> <span class="post-toc-text">1-3-6-2 示例二：优化排序</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-7-Stream-流的-peek-使用"><span class="post-toc-number">1.2.9.</span> <span class="post-toc-text">1-3-7 Stream 流的 peek 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-8-Stream-流的-parallel-使用"><span class="post-toc-number">1.2.10.</span> <span class="post-toc-text">1-3-8 Stream 流的 parallel 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-9-Stream-流的-max-min-distinct-使用"><span class="post-toc-number">1.2.11.</span> <span class="post-toc-text">1-3-9 Stream 流的 max&#x2F;min&#x2F;distinct 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-10-Stream-流的-Match-使用"><span class="post-toc-number">1.2.12.</span> <span class="post-toc-text">1-3-10  Stream 流的 Match 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-11-Stream-流的-reduce-使用"><span class="post-toc-number">1.2.13.</span> <span class="post-toc-text">1-3-11 .Stream 流的 reduce 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-12-Stream-流的-iterate-使用"><span class="post-toc-number">1.2.14.</span> <span class="post-toc-text">1-3-12 .Stream 流的 iterate 使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3-13-Stream-流的-summaryStatistics-使用"><span class="post-toc-number">1.2.15.</span> <span class="post-toc-text">1-3-13 .Stream 流的 summaryStatistics 使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LocalDateTime介绍"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">LocalDateTime介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-获取当前的日期时间"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">1 获取当前的日期时间</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-创建指定时间"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">2 创建指定时间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#通过指定年月日来创建。"><span class="post-toc-number">1.3.2.1.</span> <span class="post-toc-text">通过指定年月日来创建。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#示例一-具体相差的年月日"><span class="post-toc-number">1.3.2.1.1.</span> <span class="post-toc-text">示例一: 具体相差的年月日</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#示例二：相差总数的时间"><span class="post-toc-number">1.3.2.1.2.</span> <span class="post-toc-text">示例二：相差总数的时间</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#示例三：精度时间相差"><span class="post-toc-number">1.3.2.1.3.</span> <span class="post-toc-text">示例三：精度时间相差</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#示例四：时间大小比较"><span class="post-toc-number">1.3.2.1.4.</span> <span class="post-toc-text">示例四：时间大小比较</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-时区时间计算"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">3 时区时间计算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#示例一-通过-Clock-时钟类获取计算"><span class="post-toc-number">1.3.3.0.1.</span> <span class="post-toc-text">示例一: 通过 Clock 时钟类获取计算</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#示例二-通过-ZonedDateTime-类和-ZoneId"><span class="post-toc-number">1.3.3.0.2.</span> <span class="post-toc-text">示例二: 通过 ZonedDateTime 类和 ZoneId</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java-8-日期时间-API-总结"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Java 8 日期时间 API 总结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-services/java/lambad/Lambda"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Lambda语法糖</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-11-15 08:30:00" datetime="2020-11-15T00:30:00.000Z"  itemprop="datePublished">2020-11-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/Lambda-java8/">Lambda java8</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h2><h3 id="Lambda-介绍"><a href="#Lambda-介绍" class="headerlink" title="*Lambda 介绍 *"></a>*<em>Lambda 介绍 *</em></h3><p>Lambda 表达式 (lambda expression) 是一个匿名函数，Lambda 表达式基于数学中的λ演算得名，直接对应于其中的 lambda 抽象(lambda abstraction)，是一个匿名函数，即没有函数名的函数。</p>
+<h4 id="1-1-Lambda-表达式的结构"><a href="#1-1-Lambda-表达式的结构" class="headerlink" title="1 -  1 Lambda 表达式的结构"></a><strong>1 -  1 Lambda 表达式的结构</strong></h4><p>一个 Lambda 表达式可以有零个或多个参数、参数的类型既可以明确声明，也可以根据上下文来推断。例如：(int a)与 (a) 效果相同、所有参数需包含在圆括号内，参数之间用逗号相隔。<br>例如：(a, b) 或 (int a, int b) 或 (String a, int b, float c)、空圆括号代表参数集为空。</p>
+<p>例如：() -&gt; 42、当只有一个参数，且其类型可推导时，圆括号（）可省略。</p>
+<p>例如：a -&gt; return a*a、Lambda 表达式的主体可包含零条或多条语句、如果 Lambda 表达式的主体只有一条语句，花括号 {} 可省略。</p>
+<p>匿名函数的返回类型与该主体表达式一致、如果 Lambda 表达式的主体包含一条以上语句，则表达式必须包含在花括号 {} 中（形成代码块）。</p>
+<p>匿名函数的返回类型与代码块的返回类型一致，若没有返回则为空、</p>
+<h4 id="1-2-Lambda-表达式的使用"><a href="#1-2-Lambda-表达式的使用" class="headerlink" title="1- 2 Lambda 表达式的使用"></a>1- 2 Lambda 表达式的使用</h4><p>######下面我们先使用一个简单的例子来看看 Lambda 的效果吧。</p>
+<p>比如我们对 Map 的遍历<br>传统方式遍历如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">map.put(<span class="string">"a"</span>, <span class="string">"a"</span>);</span><br><span class="line">map.put(<span class="string">"b"</span>, <span class="string">"b"</span>);</span><br><span class="line">map.put(<span class="string">"c"</span>, <span class="string">"c"</span>);</span><br><span class="line">map.put(<span class="string">"d"</span>, <span class="string">"d"</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"map普通方式遍历:"</span>);</span><br><span class="line"><span class="keyword">for</span> (String key : map.keySet()) &#123;</span><br><span class="line">    System.out.println(<span class="string">"k="</span> + key + <span class="string">"，v="</span> + map.get(key));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 Lambda 进行遍历:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"map拉姆达表达式遍历:"</span>);</span><br><span class="line">map.forEach((k, v) -&gt; &#123;</span><br><span class="line">    System.out.println(<span class="string">"k="</span> + k + <span class="string">"，v="</span> + v);</span><br><span class="line">&#125;);</span><br><span class="line">List 也同理，不过 List 还可以通过双冒号运算符遍历:</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">list.add(<span class="string">"a"</span>);</span><br><span class="line">list.add(<span class="string">"bb"</span>);</span><br><span class="line">list.add(<span class="string">"ccc"</span>);</span><br><span class="line">list.add(<span class="string">"dddd"</span>);</span><br><span class="line">System.out.println(<span class="string">"list拉姆达表达式遍历:"</span>);</span><br><span class="line">list.forEach(v -&gt; &#123;</span><br><span class="line">    System.out.println(v);</span><br><span class="line">&#125;);</span><br><span class="line">System.out.println(<span class="string">"list双冒号运算符遍历:"</span>);</span><br><span class="line">list.forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">map普通方式遍历:</span><br><span class="line">k&#x3D;a，v&#x3D;a</span><br><span class="line">k&#x3D;b，v&#x3D;b</span><br><span class="line">k&#x3D;c，v&#x3D;c</span><br><span class="line">k&#x3D;d，v&#x3D;d</span><br><span class="line">map拉姆达表达式遍历:</span><br><span class="line">k&#x3D;a，v&#x3D;a</span><br><span class="line">k&#x3D;b，v&#x3D;b</span><br><span class="line">k&#x3D;c，v&#x3D;c</span><br><span class="line">k&#x3D;d，v&#x3D;d</span><br><span class="line">list拉姆达表达式遍历:</span><br><span class="line">a</span><br><span class="line">bb</span><br><span class="line">ccc</span><br><span class="line">dddd</span><br><span class="line">list双冒号运算符遍历:</span><br><span class="line">a</span><br><span class="line">bb</span><br><span class="line">ccc</span><br><span class="line">dddd</span><br></pre></td></tr></table></figure>
+
+<p>######Lambda 除了在 for 循环遍历中使用外，它还可以代替匿名的内部类。<br>比如下面这个例子的线程创建:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;使用普通的方式创建</span><br><span class="line">Runnable r1 &#x3D; new Runnable() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(&quot;普通方式创建!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>//使用拉姆达方式创建</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runnable r2 &#x3D; ()-&gt; System.out.println(&quot;拉姆达方式创建!&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>######注: 这个例子中使用 Lambda 表达式的时候，编译器会自动推断：根据线程类的构造函数签名 Runnable r { }，将该 Lambda 表达式赋 Runnable 接口。</p>
+<h4 id="1-3-Lambda-表达式与匿名类的区别"><a href="#1-3-Lambda-表达式与匿名类的区别" class="headerlink" title="1 -3 Lambda 表达式与匿名类的区别"></a>1 -3 Lambda 表达式与匿名类的区别</h4><p>######使用匿名类与 Lambda 表达式的一大区别在于关键词的使用。对于匿名类，关键词 this 解读为匿名类，而对于 Lambda 表达式，关键词 this 解读为写就 Lambda 的外部类。<br>######Lambda 虽然简化了代码的编写，但同时也减少了可读性。</p>
+<h3 id="Stream-介绍"><a href="#Stream-介绍" class="headerlink" title="Stream   介绍"></a>Stream   介绍</h3><p>Stream 使用一种类似用 SQL 语句从数据库查询数据的直观方式来提供一种对 Java 集合运算和表达的高阶抽象。Stream API 可以极大提高 Java 程序员的生产力，让程序员写出高效率、干净、简洁的代码。这种风格将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道的节点上进行处理， 比如筛选， 排序，聚合等。</p>
+<h4 id="1-1-Stream-特性："><a href="#1-1-Stream-特性：" class="headerlink" title="1 - 1 Stream 特性："></a>1 - 1 Stream 特性：</h4><p>不是数据结构：它没有内部存储，它只是用操作管道从 source（数据结构、数组、generator function、IO channel）抓取数据。它也绝不修改自己所封装的底层数据结构的数据。例如 Stream 的 filter 操作会产生一个不包含被过滤元素的新 Stream，而不是从 source 删除那些元素。</p>
+<p>######不支持索引访问：但是很容易生成数组或者 List 。</p>
+<p>######惰性化：很多 Stream 操作是向后延迟的，一直到它弄清楚了最后需要多少数据才会开始。Intermediate 操作永远是惰性化的。</p>
+<p>######并行能力。当一个 Stream 是并行化的，就不需要再写多线程代码，所有对它的操作会自动并行进行的。、</p>
+<p>######可以是无限的：集合有固定大小，Stream 则不必。limit(n) 和 findFirst() 这类的 short-circuiting 操作可以对无限的 Stream 进行运算并很快完成。、</p>
+<p>######注意事项：所有 Stream 的操作必须以 lambda 表达式为参数。、</p>
+<h4 id="1-2-Stream-流操作类型："><a href="#1-2-Stream-流操作类型：" class="headerlink" title="1- 2  Stream 流操作类型："></a>1- 2  Stream 流操作类型：</h4><p>######Intermediate：一个流可以后面跟随零个或多个 intermediate 操作。其目的主要是打开流，做出某种程度的数据映射 / 过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是惰性化的（lazy），就是说，仅仅调用到这类方法，并没有真正开始流的遍历。</p>
+<p>######Terminal：一个流只能有一个 terminal 操作，当这个操作执行后，流就被使用 “光” 了，无法再被操作。所以这必定是流的最后一个操作。Terminal 操作的执行，才会真正开始流的遍历，并且会生成一个结果，或者一个 side effect。</p>
+<h4 id="1-3-1-Stream-使用"><a href="#1-3-1-Stream-使用" class="headerlink" title="1-3-1  Stream 使用"></a>1-3-1  Stream 使用</h4><p>这里我们依旧使用一个简单示例来看看吧。<br>在开发中，我们有时需要对一些数据进行过滤，如果是传统的方式，我们需要对这批数据进行遍历过滤，会显得比较繁琐，如果使用 steam 流方式的话，那么可以很方便的进行处理。</p>
+<h5 id="1-3-1-1-首先通过普通的方式进行过滤"><a href="#1-3-1-1-首先通过普通的方式进行过滤" class="headerlink" title="1-3-1-1 首先通过普通的方式进行过滤:"></a>1-3-1-1 首先通过普通的方式进行过滤:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list &#x3D; Arrays.asList(&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;, &quot;xuwujing&quot;);</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;过滤之前:&quot; + list);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; result &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">for (String str : list) &#123;</span><br><span class="line">    if (!&quot;李四&quot;.equals(str)) &#123;</span><br><span class="line">        result.add(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(&quot;过滤之后:&quot; + result);</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-1-2-使用-Steam-方式进行过滤："><a href="#1-3-1-2-使用-Steam-方式进行过滤：" class="headerlink" title="1-3 -1-2 使用 Steam 方式进行过滤："></a>1-3 -1-2 使用 Steam 方式进行过滤：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; result2 &#x3D; list.stream().filter(str -&gt; !&quot;李四&quot;.equals(str)).collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;stream 过滤之后:&quot; + result2);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 去除符合条件的</span><br><span class="line">List&lt;String&gt;?list?&#x3D;?new?ArrayList&lt;&gt;(Arrays.asList(info,?info1,?info2,?info3,?info4,?&quot;Java信息&quot;));</span><br><span class="line">list.removeIf(StringUtils::isBlank);</span><br><span class="line">String?result?&#x3D;?list.get(0);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; &#x2F;&#x2F; 任何一个为&quot;&quot; 或者null 返回true</span><br><span class="line">      boolean anyBlank &#x3D; StringUtils.isAnyBlank(a, b, c);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">过滤之前:\[张三, 李四, 王五, xuwujing\]</span><br><span class="line">过滤之后:\[张三, 王五, xuwujing\]</span><br><span class="line">stream 过滤之后:\[张三, 王五, xuwujing\]</span><br></pre></td></tr></table></figure>
+
+<p>是不是很简洁和方便呢。<br>其实 Stream 流还有更多的使用方法，filter 只是其中的一角而已。那么在这里我们就来学习了解下这些用法吧。</p>
+<h5 id="1-3-1-3-构造-Stream-流的方式"><a href="#1-3-1-3-构造-Stream-流的方式" class="headerlink" title="1-3-1-3 构造 Stream 流的方式"></a>1-3-1-3 构造 Stream 流的方式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Stream stream &#x3D; Stream.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);</span><br><span class="line">String\[\] strArray &#x3D; new String\[\] &#123; &quot;a&quot;, &quot;b&quot;, &quot;c&quot; &#125;;</span><br><span class="line">stream &#x3D; Stream.of(strArray);</span><br><span class="line">stream &#x3D; Arrays.stream(strArray);</span><br><span class="line">List&lt;String&gt; list &#x3D; Arrays.asList(strArray);</span><br><span class="line">stream &#x3D; list.stream();</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-1-4-Stream-流的之间的转换"><a href="#1-3-1-4-Stream-流的之间的转换" class="headerlink" title="1-3-1-4 Stream 流的之间的转换"></a>1-3-1-4 Stream 流的之间的转换</h5><p>注意: 一个 Stream 流只可以使用一次，这段代码为了简洁而重复使用了数次，因此会抛出 stream has already been operated upon or closed 异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">    Stream&lt;String&gt; stream2 &#x3D; Stream.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);</span><br><span class="line">    &#x2F;&#x2F; 转换成 Array</span><br><span class="line">    String\[\] strArray1 &#x3D; stream2.toArray(String\[\]::new);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 转换成 Collection</span><br><span class="line">    List&lt;String&gt; list1 &#x3D; stream2.collect(Collectors.toList());</span><br><span class="line">    List&lt;String&gt; list2 &#x3D; stream2.collect(Collectors.toCollection(ArrayList::new));            </span><br><span class="line">    Set set1 &#x3D; stream2.collect(Collectors.toSet());</span><br><span class="line">    Stack stack1 &#x3D; stream2.collect(Collectors.toCollection(Stack::new));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 转换成 String</span><br><span class="line">    String str &#x3D; stream.collect(Collectors.joining()).toString();</span><br><span class="line">&#125; catch (Exception e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-2-Stream-流的-map-使用"><a href="#1-3-2-Stream-流的-map-使用" class="headerlink" title="1-3-2 Stream 流的 map 使用"></a>1-3-2 Stream 流的 map 使用</h4><h5 id="1-3-2-1-map-方法用于映射每个元素到对应的结果，一对一。"><a href="#1-3-2-1-map-方法用于映射每个元素到对应的结果，一对一。" class="headerlink" title="1-3-2-1 map 方法用于映射每个元素到对应的结果，一对一。"></a>1-3-2-1 map 方法用于映射每个元素到对应的结果，一对一。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例一：转换大写</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list3 &#x3D; Arrays.asList(&quot;zhangSan&quot;, &quot;liSi&quot;, &quot;wangWu&quot;);</span><br><span class="line">System.out.println(&quot;转换之前的数据:&quot; + list3);</span><br><span class="line">List&lt;String&gt; list4 &#x3D; list3.stream().map(String::toUpperCase).collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;转换之后的数据:&quot; + list4); </span><br><span class="line">&#x2F;&#x2F; 转换之后的数据:\[ZHANGSAN, LISI,WANGWU\]</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-2-2-示例二：转换数据类型"><a href="#1-3-2-2-示例二：转换数据类型" class="headerlink" title="1-3-2-2 示例二：转换数据类型"></a>1-3-2-2 示例二：转换数据类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list31 &#x3D; Arrays.asList(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;);</span><br><span class="line">System.out.println(&quot;转换之前的数据:&quot; + list31);</span><br><span class="line">List&lt;Integer&gt; list41 &#x3D; list31.stream().map(Integer::valueOf).collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;转换之后的数据:&quot; + list41); </span><br><span class="line">&#x2F;&#x2F; \[1, 2, 3\]</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-2-3-示例三：获取平方"><a href="#1-3-2-3-示例三：获取平方" class="headerlink" title="1-3-2-3 示例三：获取平方"></a>1-3-2-3 示例三：获取平方</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list5 &#x3D; Arrays.asList(new Integer\[\] &#123; 1, 2, 3, 4, 5 &#125;);</span><br><span class="line">List&lt;Integer&gt; list6 &#x3D; list5.stream().map(n -&gt; n \* n).collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;平方的数据:&quot; + list6);</span><br><span class="line">&#x2F;&#x2F; \[1, 4, 9, 16, 25\]</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-3-Stream-流的-filter-使用"><a href="#1-3-3-Stream-流的-filter-使用" class="headerlink" title="1-3-3 Stream 流的 filter 使用"></a>1-3-3 Stream 流的 filter 使用</h4><p>filter 方法用于通过设置的条件过滤出元素。</p>
+<p>示例二：通过与 findAny 得到 if/else 的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list &#x3D; Arrays.asList(&quot;张三&quot;, &quot;李四&quot;, &quot;王五&quot;, &quot;xuwujing&quot;);</span><br><span class="line">String result3 &#x3D; list.stream().filter(str -&gt; &quot;李四&quot;.equals(str)).findAny().orElse(&quot;找不到!&quot;);</span><br><span class="line">String result4 &#x3D; list.stream().filter(str -&gt; &quot;李二&quot;.equals(str)).findAny().orElse(&quot;找不到!&quot;);</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;stream 过滤之后 2:&quot; + result3);</span><br><span class="line">System.out.println(&quot;stream 过滤之后 3:&quot; + result4);</span><br><span class="line">&#x2F;&#x2F;stream 过滤之后 2:李四</span><br><span class="line">&#x2F;&#x2F;stream 过滤之后 3:找不到!</span><br></pre></td></tr></table></figure>
+
+<p>示例三：通过与 mapToInt 计算和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; lists &#x3D; new ArrayList&lt;User&gt;();</span><br><span class="line">lists.add(new User(6, &quot;张三&quot;));</span><br><span class="line">lists.add(new User(2, &quot;李四&quot;));</span><br><span class="line">lists.add(new User(3, &quot;王五&quot;));</span><br><span class="line">lists.add(new User(1, &quot;张三&quot;));</span><br><span class="line">&#x2F;&#x2F; 计算这个list中出现 &quot;张三&quot; id的值</span><br><span class="line">int sum &#x3D; lists.stream().filter(u -&gt; &quot;张三&quot;.equals(u.getName())).mapToInt(u -&gt; u.getId()).sum();</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;计算结果:&quot; + sum); </span><br><span class="line">&#x2F;&#x2F; 7</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-4-Stream-流的-flatMap-使用"><a href="#1-3-4-Stream-流的-flatMap-使用" class="headerlink" title="1-3-4 Stream 流的 flatMap 使用"></a>1-3-4 Stream 流的 flatMap 使用</h4><p>flatMap 方法用于映射每个元素到对应的结果，一对多。</p>
+<p>示例: 从句子中得到单词</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">String worlds &#x3D; &quot;The way of the future&quot;;</span><br><span class="line">List&lt;String&gt; list7 &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">list7.add(worlds);</span><br><span class="line">List&lt;String&gt; list8 &#x3D; list7.stream().flatMap(str -&gt; Stream.of(str.split(&quot; &quot;)))</span><br><span class="line">        .filter(world -&gt; world.length() &gt; 0).collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;单词:&quot;);</span><br><span class="line">list8.forEach(System.out::println);</span><br><span class="line">&#x2F;&#x2F; 单词:</span><br><span class="line">&#x2F;&#x2F; The </span><br><span class="line">&#x2F;&#x2F; way </span><br><span class="line">&#x2F;&#x2F; of </span><br><span class="line">&#x2F;&#x2F; the </span><br><span class="line">&#x2F;&#x2F; future</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-5-Stream-流的-limit-使用"><a href="#1-3-5-Stream-流的-limit-使用" class="headerlink" title="1-3-5 Stream 流的 limit 使用"></a>1-3-5 Stream 流的 limit 使用</h4><p>limit 方法用于获取指定数量的流。</p>
+<p>示例一：获取前 n 条数的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Random rd &#x3D; new Random();</span><br><span class="line">System.out.println(&quot;取到的前三条数据:&quot;);</span><br><span class="line">rd.ints().limit(3).forEach(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<p>//取到的前三条数据:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;1167267754</span><br><span class="line">&#x2F;&#x2F;-1164558977</span><br><span class="line">&#x2F;&#x2F;1977868798</span><br></pre></td></tr></table></figure>
+
+<p>示例二：结合 skip 使用得到需要的数据</p>
+<p>skip 表示的是扔掉前 n 个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; list9 &#x3D; new ArrayList&lt;User&gt;();</span><br><span class="line"></span><br><span class="line">for (int i &#x3D; 1; i &lt; 4; i++) &#123;</span><br><span class="line">    User user &#x3D; new User(i, &quot;pancm&quot; + i);</span><br><span class="line">    list9.add(user);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(&quot;截取之前的数据:&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>// 取前3条数据，但是扔掉了前面的2条，可以理解为拿到的数据为 2&lt;=i&lt;3 (i 是数值下标)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list10 &#x3D; list9.stream().map(User::getName).limit(3).skip(2).collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;截取之后的数据:&quot; + list10);</span><br><span class="line">&#x2F;&#x2F;截取之前的数据:</span><br><span class="line">&#x2F;&#x2F;姓名:pancm1</span><br><span class="line">&#x2F;&#x2F;姓名:pancm2</span><br><span class="line">&#x2F;&#x2F;姓名:pancm3</span><br><span class="line">&#x2F;&#x2F;截取之后的数据:\[pancm3\]</span><br></pre></td></tr></table></figure>
+
+<p>注: User 实体类中 getName 方法会打印姓名。</p>
+<h4 id="1-3-6-Stream-流的-sort-使用"><a href="#1-3-6-Stream-流的-sort-使用" class="headerlink" title="1-3-6 Stream 流的 sort 使用"></a>1-3-6 Stream 流的 sort 使用</h4><p>sorted 方法用于对流进行升序排序。</p>
+<h5 id="1-3-6-1-示例一：随机取值排序"><a href="#1-3-6-1-示例一：随机取值排序" class="headerlink" title="1-3-6-1 示例一：随机取值排序"></a>1-3-6-1 示例一：随机取值排序</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Random rd2 &#x3D; new Random();</span><br><span class="line">System.out.println(&quot;取到的前三条数据然后进行排序:&quot;);</span><br><span class="line">rd2.ints().limit(3).sorted().forEach(System.out::println);</span><br><span class="line">&#x2F;&#x2F;取到的前三条数据然后进行排序:</span><br><span class="line">&#x2F;&#x2F;-2043456377</span><br><span class="line">&#x2F;&#x2F;-1778595703</span><br><span class="line">&#x2F;&#x2F;1013369565</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-3-6-2-示例二：优化排序"><a href="#1-3-6-2-示例二：优化排序" class="headerlink" title="1-3-6-2 示例二：优化排序"></a>1-3-6-2 示例二：优化排序</h5><p>tips: 先获取在排序效率会更高!</p>
+<p>//普通的排序取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; list11 &#x3D; list9.stream().sorted((u1, u2) -&gt; u1.getName().compareTo(u2.getName())).limit(3)</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;排序之后的数据:&quot; + list11);</span><br></pre></td></tr></table></figure>
+
+<p>//优化排序取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;User&gt; list12 &#x3D; list9.stream().limit(3).sorted((u1, u2) -&gt; u1.getName().compareTo(u2.getName()))</span><br><span class="line">        .collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;优化排序之后的数据:&quot; + list12);</span><br><span class="line">&#x2F;&#x2F;排序之后的数据:\[&#123;&quot;id&quot;:1,&quot;name&quot;:&quot;pancm1&quot;&#125;, &#123;&quot;id&quot;:2,&quot;name&quot;:&quot;pancm2&quot;&#125;, &#123;&quot;id&quot;:3,&quot;name&quot;:&quot;pancm3&quot;&#125;\]</span><br><span class="line">&#x2F;&#x2F;优化排序之后的数据:\[&#123;&quot;id&quot;:1,&quot;name&quot;:&quot;pancm1&quot;&#125;, &#123;&quot;id&quot;:2,&quot;name&quot;:&quot;pancm2&quot;&#125;, &#123;&quot;id&quot;:3,&quot;name&quot;:&quot;pancm3&quot;&#125;\]</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-7-Stream-流的-peek-使用"><a href="#1-3-7-Stream-流的-peek-使用" class="headerlink" title="1-3-7 Stream 流的 peek 使用"></a>1-3-7 Stream 流的 peek 使用</h4><p>peek 对每个元素执行操作并返回一个新的 Stream</p>
+<p>示例: 双重操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;peek使用:&quot;);</span><br><span class="line">Stream.of(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;).filter(e -&gt; e.length() &gt; 3).peek(e -&gt; System.out.println(&quot;转换之前: &quot; + e))</span><br><span class="line">        .map(String::toUpperCase).peek(e -&gt; System.out.println(&quot;转换之后: &quot; + e)).collect(Collectors.toList());</span><br><span class="line">&#x2F;&#x2F;转换之前: three</span><br><span class="line">&#x2F;&#x2F;转换之后: THREE</span><br><span class="line">&#x2F;&#x2F;转换之前: four</span><br><span class="line">&#x2F;&#x2F;转换之后: FOUR</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-8-Stream-流的-parallel-使用"><a href="#1-3-8-Stream-流的-parallel-使用" class="headerlink" title="1-3-8 Stream 流的 parallel 使用"></a>1-3-8 Stream 流的 parallel 使用</h4><p>parallelStream 是流并行处理程序的代替方法。</p>
+<p>示例: 获取空字符串的数量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strings &#x3D; Arrays.asList(&quot;a&quot;, &quot;&quot;, &quot;c&quot;, &quot;&quot;, &quot;e&quot;,&quot;&quot;, &quot; &quot;);</span><br></pre></td></tr></table></figure>
+
+<p>// 获取空字符串的数量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">long count &#x3D;  strings.parallelStream().filter(string -&gt; string.isEmpty()).count();</span><br><span class="line">System.out.println(&quot;空字符串的个数:&quot;+count);</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-9-Stream-流的-max-min-distinct-使用"><a href="#1-3-9-Stream-流的-max-min-distinct-使用" class="headerlink" title="1-3-9 Stream 流的 max/min/distinct 使用"></a>1-3-9 Stream 流的 max/min/distinct 使用</h4><p>示例一：得到最大最小值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list13 &#x3D; Arrays.asList(&quot;zhangsan&quot;,&quot;lisi&quot;,&quot;wangwu&quot;,&quot;xuwujing&quot;);</span><br><span class="line">int maxLines &#x3D; list13.stream().mapToInt(String::length).max().getAsInt();</span><br><span class="line">int minLines &#x3D; list13.stream().mapToInt(String::length).min().getAsInt();</span><br><span class="line">System.out.println(&quot;最长字符的长度:&quot; + maxLines+&quot;,最短字符的长度:&quot;+minLines);</span><br></pre></td></tr></table></figure>
+
+<p>//最长字符的长度:8,最短字符的长度:4<br>示例二：得到去重之后的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String lines &#x3D; &quot;good good study day day up&quot;;</span><br><span class="line">List&lt;String&gt; list14 &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">list14.add(lines);</span><br><span class="line">List&lt;String&gt; words &#x3D; list14.stream().flatMap(line -&gt; Stream.of(line.split(&quot; &quot;))).filter(word -&gt; word.length() &gt; 0)</span><br><span class="line">        .map(String::toLowerCase).distinct().sorted().collect(Collectors.toList());</span><br><span class="line">System.out.println(&quot;去重复之后:&quot; + words);</span><br><span class="line">&#x2F;&#x2F;去重复之后:\[day, good, study, up\]</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-10-Stream-流的-Match-使用"><a href="#1-3-10-Stream-流的-Match-使用" class="headerlink" title="1-3-10  Stream 流的 Match 使用"></a>1-3-10  Stream 流的 Match 使用</h4><p>allMatch：Stream 中全部元素符合则返回 true ;</p>
+<p>anyMatch：Stream 中只要有一个元素符合则返回 true;</p>
+<p>noneMatch：Stream 中没有一个元素符合则返回 true。</p>
+<p>示例: 数据是否符合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">boolean all &#x3D; lists.stream().allMatch(u -&gt; u.getId() &gt; 3);</span><br><span class="line">System.out.println(&quot;是否都大于3:&quot; + all);</span><br><span class="line">boolean any &#x3D; lists.stream().anyMatch(u -&gt; u.getId() &gt; 3);</span><br><span class="line">System.out.println(&quot;是否有一个大于3:&quot; + any);</span><br><span class="line">boolean none &#x3D; lists.stream().noneMatch(u -&gt; u.getId() &gt; 3);</span><br><span class="line">System.out.println(&quot;是否没有一个大于3的:&quot; + none);        </span><br><span class="line">&#x2F;&#x2F;是否都大于3:false</span><br><span class="line">&#x2F;&#x2F;是否有一个大于3:true</span><br><span class="line">&#x2F;&#x2F;是否没有一个大于3的:false</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-11-Stream-流的-reduce-使用"><a href="#1-3-11-Stream-流的-reduce-使用" class="headerlink" title="1-3-11 .Stream 流的 reduce 使用"></a>1-3-11 .Stream 流的 reduce 使用</h4><p>reduce 主要作用是把 Stream 元素组合起来进行操作。</p>
+<p>示例一：字符串连接</p>
+<p>String concat = Stream.of(“A”, “B”, “C”, “D”).reduce(“”, String::concat);<br>System.out.println(“字符串拼接:” + concat);</p>
+<p>示例二：得到最小值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">double minValue &#x3D; Stream.of(-4.0, 1.0, 3.0, -2.0).reduce(Double.MAX\_VALUE, Double::min);</span><br><span class="line">System.out.println(&quot;最小值:&quot; + minValue);</span><br><span class="line">&#x2F;&#x2F;最小值:-4.0</span><br></pre></td></tr></table></figure>
+
+<p>示例三：求和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 求和, 无起始值</span><br><span class="line">int sumValue &#x3D; Stream.of(1, 2, 3, 4).reduce(Integer::sum).get();</span><br><span class="line">System.out.println(&quot;有无起始值求和:&quot; + sumValue);</span><br><span class="line">&#x2F;&#x2F; 求和, 有起始值</span><br><span class="line"> sumValue &#x3D; Stream.of(1, 2, 3, 4).reduce(1, Integer::sum);</span><br><span class="line"> System.out.println(&quot;有起始值求和:&quot; + sumValue);</span><br><span class="line">&#x2F;&#x2F;    有无起始值求和:10</span><br><span class="line">&#x2F;&#x2F;    有起始值求和:11</span><br></pre></td></tr></table></figure>
+
+<p>示例四：过滤拼接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">concat &#x3D; Stream.of(&quot;a&quot;, &quot;B&quot;, &quot;c&quot;, &quot;D&quot;, &quot;e&quot;, &quot;F&quot;).filter(x -&gt; x.compareTo(&quot;Z&quot;) &gt; 0).reduce(&quot;&quot;, String::concat);</span><br><span class="line">System.out.println(&quot;过滤和字符串连接:&quot; + concat);</span><br></pre></td></tr></table></figure>
+
+<p>//过滤和字符串连接:ace</p>
+<h4 id="1-3-12-Stream-流的-iterate-使用"><a href="#1-3-12-Stream-流的-iterate-使用" class="headerlink" title="1-3-12 .Stream 流的 iterate 使用"></a>1-3-12 .Stream 流的 iterate 使用</h4><p>iterate 跟 reduce 操作很像，接受一个种子值，和一个 UnaryOperator（例如 f）。然后种子值成为 Stream 的第一个元素，f(seed) 为第二个，f(f(seed)) 第三个，以此类推。在 iterate 时候管道必须有 limit 这样的操作来限制 Stream 大小。</p>
+<p>示例: 生成一个等差队列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;从2开始生成一个等差队列:&quot;);</span><br><span class="line">Stream.iterate(2, n -&gt; n + 2).limit(5).forEach(x -&gt; System.out.print(x + &quot; &quot;));</span><br><span class="line">&#x2F;&#x2F; 从2开始生成一个等差队列:</span><br><span class="line">&#x2F;&#x2F; 2 4 6 8 10</span><br></pre></td></tr></table></figure>
+
+<p>14.Stream 流的 Supplier 使用</p>
+<p>通过实现 Supplier 类的方法可以自定义流计算规则。</p>
+<p>示例：随机获取两条用户信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;自定义一个流进行计算输出:&quot;);</span><br><span class="line">Stream.generate(new UserSupplier()).limit(2).forEach(u -&gt; System.out.println(u.getId() + &quot;, &quot; + u.getName()));</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第一次:</span><br><span class="line">&#x2F;&#x2F;自定义一个流进行计算输出:</span><br><span class="line">&#x2F;&#x2F;10, pancm7</span><br><span class="line">&#x2F;&#x2F;11, pancm6</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第二次:</span><br><span class="line">&#x2F;&#x2F;自定义一个流进行计算输出:</span><br><span class="line">&#x2F;&#x2F;10, pancm4</span><br><span class="line">&#x2F;&#x2F;11, pancm2</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第三次:</span><br><span class="line">&#x2F;&#x2F;自定义一个流进行计算输出:</span><br><span class="line">&#x2F;&#x2F;10, pancm4</span><br><span class="line">&#x2F;&#x2F;11, pancm8</span><br><span class="line"></span><br><span class="line">class UserSupplier implements Supplier&lt;User&gt; &#123;</span><br><span class="line">    private int index &#x3D; 10;</span><br><span class="line">    private Random random &#x3D; new Random();</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public User get() &#123;</span><br><span class="line">        return new User(index++, &quot;pancm&quot; + random.nextInt(10));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">15.Stream 流的 groupingBy&#x2F;partitioningBy 使用</span><br><span class="line"></span><br><span class="line">groupingBy：分组排序；</span><br><span class="line"></span><br><span class="line">partitioningBy：分区排序。</span><br></pre></td></tr></table></figure>
+
+<p>示例一：分组排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;通过id进行分组排序:&quot;);</span><br><span class="line">Map&lt;Integer, List&lt;User&gt;&gt; personGroups &#x3D; Stream.generate(new UserSupplier2()).limit(5)</span><br><span class="line">        .collect(Collectors.groupingBy(User::getId));</span><br><span class="line">Iterator it &#x3D; personGroups.entrySet().iterator();</span><br><span class="line">while (it.hasNext()) &#123;</span><br><span class="line">    Map.Entry&lt;Integer, List&lt;User&gt;&gt; persons &#x3D; (Map.Entry) it.next();</span><br><span class="line">    System.out.println(&quot;id &quot; + persons.getKey() + &quot; &#x3D; &quot; + persons.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;通过id进行分组排序:</span><br><span class="line">&#x2F;&#x2F;id 10 &#x3D; \[&#123;&quot;id&quot;:10,&quot;name&quot;:&quot;pancm1&quot;&#125;\]    </span><br><span class="line">&#x2F;&#x2F;id 11 &#x3D; \[&#123;&quot;id&quot;:11,&quot;name&quot;:&quot;pancm3&quot;&#125;, &#123;&quot;id&quot;:11,&quot;name&quot;:&quot;pancm6&quot;&#125;, &#123;&quot;id&quot;:11,&quot;name&quot;:&quot;pancm4&quot;&#125;, &#123;&quot;id&quot;:11,&quot;name&quot;:&quot;pancm7&quot;&#125;\]</span><br><span class="line"></span><br><span class="line">class UserSupplier2 implements Supplier&lt;User&gt; &#123;</span><br><span class="line">    private int index &#x3D; 10;</span><br><span class="line">    private Random random &#x3D; new Random();</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public User get() &#123;</span><br><span class="line">        return new User(index % 2 &#x3D;&#x3D; 0 ? index++ : index, &quot;pancm&quot; + random.nextInt(10));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>示例二：分区排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;通过年龄进行分区排序:&quot;);</span><br><span class="line">Map&lt;Boolean, List&lt;User&gt;&gt; children &#x3D; Stream.generate(new UserSupplier3()).limit(5)</span><br><span class="line">        .collect(Collectors.partitioningBy(p -&gt; p.getId() &lt; 18));</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;小孩: &quot; + children.get(true));</span><br><span class="line">System.out.println(&quot;成年人: &quot; + children.get(false));</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 通过年龄进行分区排序:</span><br><span class="line">&#x2F;&#x2F; 小孩: \[&#123;&quot;id&quot;:16,&quot;name&quot;:&quot;pancm7&quot;&#125;, &#123;&quot;id&quot;:17,&quot;name&quot;:&quot;pancm2&quot;&#125;\]</span><br><span class="line">&#x2F;&#x2F; 成年人: \[&#123;&quot;id&quot;:18,&quot;name&quot;:&quot;pancm4&quot;&#125;, &#123;&quot;id&quot;:19,&quot;name&quot;:&quot;pancm9&quot;&#125;, &#123;&quot;id&quot;:20,&quot;name&quot;:&quot;pancm6&quot;&#125;\]</span><br><span class="line"></span><br><span class="line"> class UserSupplier3 implements Supplier&lt;User&gt; &#123;</span><br><span class="line">    private int index &#x3D; 16;</span><br><span class="line">    private Random random &#x3D; new Random();</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public User get() &#123;</span><br><span class="line">        return new User(index++, &quot;pancm&quot; + random.nextInt(10));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-13-Stream-流的-summaryStatistics-使用"><a href="#1-3-13-Stream-流的-summaryStatistics-使用" class="headerlink" title="1-3-13 .Stream 流的 summaryStatistics 使用"></a>1-3-13 .Stream 流的 summaryStatistics 使用</h4><p>IntSummaryStatistics 用于收集统计信息 (如 count、min、max、sum 和 average) 的状态对象。</p>
+<p>示例: 得到最大、最小、之和以及平均数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; numbers &#x3D; Arrays.asList(1, 5, 7, 3, 9);</span><br><span class="line">IntSummaryStatistics stats &#x3D; numbers.stream().mapToInt((x) -&gt; x).summaryStatistics();</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;列表中最大的数 : &quot; + stats.getMax());</span><br><span class="line">System.out.println(&quot;列表中最小的数 : &quot; + stats.getMin());</span><br><span class="line">System.out.println(&quot;所有数之和 : &quot; + stats.getSum());</span><br><span class="line">System.out.println(&quot;平均数 : &quot; + stats.getAverage());</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;列表中最大的数 : 9</span><br><span class="line">&#x2F;&#x2F;列表中最小的数 : 1</span><br><span class="line">&#x2F;&#x2F;所有数之和 : 25</span><br><span class="line">&#x2F;&#x2F;平均数 : 5.0</span><br></pre></td></tr></table></figure>
+
+<p>Stream 介绍就到这里了，JDK1.8 中的 Stream 流其实还有很多很多用法，更多的用法则需要大家去查看 JDK1.8 的 API 文档了。</p>
+<h3 id="LocalDateTime介绍"><a href="#LocalDateTime介绍" class="headerlink" title="LocalDateTime介绍"></a>LocalDateTime介绍</h3><p>######JDK1.8 除了新增了 lambda 表达式、stream 流之外，它还新增了全新的日期时间 API。在 JDK1.8 之前，Java 处理日期、日历和时间的方式一直为社区所诟病，将 java.util.Date 设定为可变类型，以及 SimpleDateFormat 的非线程安全使其应用非常受限。因此推出了 java.time 包，该包下的所有类都是不可变类型而且线程安全。</p>
+<p>关键类<br>Instant：瞬时时间。、</p>
+<p>LocalDate：本地日期，不包含具体时间, 格式 yyyy-MM-dd。、</p>
+<p>LocalTime：本地时间，不包含日期. 格式 yyyy-MM-dd HH:mm:ss.SSS 。、</p>
+<p>LocalDateTime：组合了日期和时间，但不包含时差和时区信息。、</p>
+<p>ZonedDateTime：最完整的日期时间，包含时区和相对 UTC 或格林威治的时差。、</p>
+<p>使用</p>
+<h4 id="1-获取当前的日期时间"><a href="#1-获取当前的日期时间" class="headerlink" title="1 获取当前的日期时间"></a>1 获取当前的日期时间</h4><p>通过静态工厂方法 now() 来获取当前时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;本地日期,不包括时分秒</span><br><span class="line">LocalDate nowDate &#x3D; LocalDate.now();</span><br><span class="line">&#x2F;&#x2F;本地日期,包括时分秒</span><br><span class="line">LocalDateTime nowDateTime &#x3D; LocalDateTime.now();</span><br><span class="line">System.out.println(&quot;当前时间:&quot;+nowDate);</span><br><span class="line">System.out.println(&quot;当前时间:&quot;+nowDateTime);</span><br><span class="line">&#x2F;&#x2F;  当前时间:2018-12-19</span><br><span class="line">&#x2F;&#x2F;  当前时间:2018-12-19T15:24:35.822</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>获取当前的年月日时分秒</li>
+</ol>
+<p>获取时间之后，直接 get 获取年月日时分秒。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;获取当前的时间，包括毫秒</span><br><span class="line">LocalDateTime ldt &#x3D; LocalDateTime.now();</span><br><span class="line">System.out.println(&quot;当前年:&quot;+ldt.getYear());   &#x2F;&#x2F;2018</span><br><span class="line">System.out.println(&quot;当前年份天数:&quot;+ldt.getDayOfYear());&#x2F;&#x2F;172 </span><br><span class="line">System.out.println(&quot;当前月:&quot;+ldt.getMonthValue());</span><br><span class="line">System.out.println(&quot;当前时:&quot;+ldt.getHour());</span><br><span class="line">System.out.println(&quot;当前分:&quot;+ldt.getMinute());</span><br><span class="line">System.out.println(&quot;当前时间:&quot;+ldt.toString());</span><br><span class="line">&#x2F;&#x2F;当前年:2018</span><br><span class="line">&#x2F;&#x2F;当前年份天数:353</span><br><span class="line">&#x2F;&#x2F;当前月:12</span><br><span class="line">&#x2F;&#x2F;当前时:15</span><br><span class="line">&#x2F;&#x2F;当前分:24</span><br><span class="line">&#x2F;&#x2F;当前时间:2018-12-19T15:24:35.833</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>格式化时间</li>
+</ol>
+<p>格式时间格式需要用到 DateTimeFormatter 类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime ldt &#x3D; LocalDateTime.now();</span><br><span class="line">System.out.println(&quot;格式化时间: &quot;+ ldt.format(DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)));</span><br><span class="line">&#x2F;&#x2F;格式化时间:2018-12-19 15:37:47.119</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>时间增减</li>
+</ol>
+<p>在指定的时间进行增加 / 减少年月日时分秒。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime ldt &#x3D; LocalDateTime.now();</span><br><span class="line">System.out.println(&quot;后5天时间:&quot;+ldt.plusDays(5));</span><br><span class="line">System.out.println(&quot;前5天时间并格式化:&quot;+ldt.minusDays(5).format(DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;))); &#x2F;&#x2F;2018-06-16</span><br><span class="line">System.out.println(&quot;前一个月的时间:&quot;+ldt2.minusMonths(1).format(DateTimeFormatter.ofPattern(&quot;yyyyMM&quot;))); &#x2F;&#x2F;2018-06-16</span><br><span class="line">System.out.println(&quot;后一个月的时间:&quot;+ldt2.plusMonths(1)); &#x2F;&#x2F;2018-06-16</span><br><span class="line">System.out.println(&quot;指定2099年的当前时间:&quot;+ldt.withYear(2099)); &#x2F;&#x2F;2099-06-21T15:07:39.506</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;后5天时间:2018-12-24T15:50:37.508</span><br><span class="line">&#x2F;&#x2F;前5天时间并格式化:2018-12-14</span><br><span class="line">&#x2F;&#x2F;前一个月的时间:201712</span><br><span class="line">&#x2F;&#x2F;后一个月的时间:2018-02-04T09:19:29.499</span><br><span class="line">&#x2F;&#x2F;指定2099年的当前时间:2099-12-19T15:50:37.508</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-创建指定时间"><a href="#2-创建指定时间" class="headerlink" title="2 创建指定时间"></a>2 创建指定时间</h4><h5 id="通过指定年月日来创建。"><a href="#通过指定年月日来创建。" class="headerlink" title="通过指定年月日来创建。"></a>通过指定年月日来创建。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LocalDate ld3&#x3D;LocalDate.of(2017, Month.NOVEMBER, 17);</span><br><span class="line">LocalDate ld4&#x3D;LocalDate.of(2018, 02, 11);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>时间相差比较</li>
+</ol>
+<p>比较相差的年月日时分秒。</p>
+<h6 id="示例一-具体相差的年月日"><a href="#示例一-具体相差的年月日" class="headerlink" title="示例一: 具体相差的年月日"></a>示例一: 具体相差的年月日</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LocalDate ld&#x3D;LocalDate.parse(&quot;2017-11-17&quot;);</span><br><span class="line">LocalDate ld2&#x3D;LocalDate.parse(&quot;2018-01-05&quot;);</span><br><span class="line">Period p&#x3D;Period.between(ld, ld2);</span><br><span class="line">System.out.println(&quot;相差年: &quot;+p.getYears()+&quot; 相差月 :&quot;+p.getMonths() +&quot; 相差天:&quot;+p.getDays());</span><br><span class="line">&#x2F;&#x2F; 相差年: 0 相差月 :1 相差天:19</span><br><span class="line">注: 这里的月份是不满足一年，天数是不满足一个月的。这里实际相差的是 1 月 19 天，也就是 49 天。</span><br></pre></td></tr></table></figure>
+
+<h6 id="示例二：相差总数的时间"><a href="#示例二：相差总数的时间" class="headerlink" title="示例二：相差总数的时间"></a>示例二：相差总数的时间</h6><p>ChronoUnit 日期周期单位的标准集合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LocalDate startDate &#x3D; LocalDate.of(2017, 11, 17);</span><br><span class="line">LocalDate endDate &#x3D; LocalDate.of(2018, 01, 05);</span><br><span class="line">System.out.println(&quot;相差月份:&quot;+ChronoUnit.MONTHS.between(startDate, endDate));</span><br><span class="line">System.out.println(&quot;两月之间的相差的天数   : &quot; + ChronoUnit.DAYS.between(startDate, endDate));</span><br><span class="line">&#x2F;&#x2F;相差月份:1</span><br><span class="line">&#x2F;&#x2F;两天之间的差在天数   : 49</span><br><span class="line">注: ChronoUnit 也可以计算相差时分秒。</span><br></pre></td></tr></table></figure>
+
+<h6 id="示例三：精度时间相差"><a href="#示例三：精度时间相差" class="headerlink" title="示例三：精度时间相差"></a>示例三：精度时间相差</h6><p>Duration 这个类以秒和纳秒为单位建模时间的数量或数量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Instant inst1 &#x3D; Instant.now();</span><br><span class="line">System.out.println(&quot;当前时间戳 : &quot; + inst1);</span><br><span class="line">Instant inst2 &#x3D; inst1.plus(Duration.ofSeconds(10));</span><br><span class="line">System.out.println(&quot;增加之后的时间 : &quot; + inst2);</span><br><span class="line">System.out.println(&quot;相差毫秒 : &quot; + Duration.between(inst1, inst2).toMillis());</span><br><span class="line">System.out.println(&quot;相毫秒 : &quot; + Duration.between(inst1, inst2).getSeconds());</span><br><span class="line">&#x2F;&#x2F;当前时间戳 : 2018-12-19T08:14:21.675Z</span><br><span class="line">&#x2F;&#x2F;增加之后的时间 : 2018-12-19T08:14:31.675Z</span><br><span class="line">&#x2F;&#x2F;相差毫秒 : 10000</span><br><span class="line">&#x2F;&#x2F;相毫秒 : 10</span><br></pre></td></tr></table></figure>
+
+<h6 id="示例四：时间大小比较"><a href="#示例四：时间大小比较" class="headerlink" title="示例四：时间大小比较"></a>示例四：时间大小比较</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime ldt4 &#x3D; LocalDateTime.now();</span><br><span class="line">LocalDateTime ldt5 &#x3D; ldt4.plusMinutes(10);</span><br><span class="line">System.out.println(&quot;当前时间是否大于:&quot;+ldt4.isAfter(ldt5));</span><br><span class="line">System.out.println(&quot;当前时间是否小于&quot;+ldt4.isBefore(ldt5));</span><br><span class="line">&#x2F;&#x2F; false</span><br><span class="line">&#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-时区时间计算"><a href="#3-时区时间计算" class="headerlink" title="3 时区时间计算"></a>3 时区时间计算</h4><p>得到其他时区的时间。</p>
+<h6 id="示例一-通过-Clock-时钟类获取计算"><a href="#示例一-通过-Clock-时钟类获取计算" class="headerlink" title="示例一: 通过 Clock 时钟类获取计算"></a>示例一: 通过 Clock 时钟类获取计算</h6><p>Clock 时钟类用于获取当时的时间戳，或当前时区下的日期时间信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Clock clock &#x3D; Clock.systemUTC();</span><br><span class="line">System.out.println(&quot;当前时间戳 : &quot; + clock.millis());</span><br><span class="line">Clock clock2 &#x3D; Clock.system(ZoneId.of(&quot;Asia&#x2F;Shanghai&quot;));</span><br><span class="line">System.out.println(&quot;亚洲上海此时的时间戳:&quot;+clock2.millis());</span><br><span class="line">Clock clock3 &#x3D; Clock.system(ZoneId.of(&quot;America&#x2F;New\_York&quot;));</span><br><span class="line">System.out.println(&quot;美国纽约此时的时间戳:&quot;+clock3.millis());</span><br><span class="line">&#x2F;&#x2F;当前时间戳 : 1545209277657</span><br><span class="line">&#x2F;&#x2F;亚洲上海此时的时间戳:1545209277657</span><br><span class="line">&#x2F;&#x2F;美国纽约此时的时间戳:1545209277658</span><br></pre></td></tr></table></figure>
+
+<h6 id="示例二-通过-ZonedDateTime-类和-ZoneId"><a href="#示例二-通过-ZonedDateTime-类和-ZoneId" class="headerlink" title="示例二: 通过 ZonedDateTime 类和 ZoneId"></a>示例二: 通过 ZonedDateTime 类和 ZoneId</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ZoneId zoneId&#x3D; ZoneId.of(&quot;America&#x2F;New\_York&quot;);</span><br><span class="line">ZonedDateTime dateTime&#x3D;ZonedDateTime.now(zoneId);</span><br><span class="line">System.out.println(&quot;美国纽约此时的时间 : &quot; + dateTime.format(DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;)));</span><br><span class="line">System.out.println(&quot;美国纽约此时的时间 和时区: &quot; + dateTime);</span><br><span class="line">&#x2F;&#x2F;美国纽约此时的时间 : 2018-12-19 03:52:22.494</span><br><span class="line">&#x2F;&#x2F;美国纽约此时的时间 和时区: 2018-12-19T03:52:22.494-05:00\[America&#x2F;New\_York\]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Java-8-日期时间-API-总结"><a href="#Java-8-日期时间-API-总结" class="headerlink" title="Java 8 日期时间 API 总结"></a>Java 8 日期时间 API 总结</h3><p>提供了 javax.time.ZoneId 获取时区。、</p>
+<p>提供了 LocalDate 和 LocalTime 类。、</p>
+<p>Java 8 的所有日期和时间 API 都是不可变类并且线程安全，而现有的 Date 和 Calendar API 中的 java.util.Date 和 SimpleDateFormat 是非线程安全的。、</p>
+<p>主包是 java.time, 包含了表示日期、时间、时间间隔的一些类。里面有两个子包 java.time.format 用于格式化， java.time.temporal 用于更底层的操作。、</p>
+<p>时区代表了地球上某个区域内普遍使用的标准时间。每个时区都有一个代号，格式通常由区域 / 城市构成（Asia/Tokyo），在加上与格林威治或 UTC 的时差。例如：东京的时差是 + 09:00。、</p>
+<p>OffsetDateTime 类实际上组合了 LocalDateTime 类和 ZoneOffset 类。用来表示包含和格林威治或 UTC 时差的完整日期（年、月、日）和时间（时、分、秒、纳秒）信息。、</p>
+<p>DateTimeFormatter 类用来格式化和解析时间。与 SimpleDateFormat 不同，这个类不可变并且线程安全，需要时可以给静态常量赋值。DateTimeFormatter 类提供了大量的内置格式化工具，同时也允许你自定义。在转换方面也提供了 parse() 将字符串解析成日期，如果解析出错会抛出 DateTimeParseException。DateTimeFormatter 类同时还有 format() 用来格式化日期，如果出错会抛出 DateTimeException 异常。、</p>
+<p>再补充一点，日期格式 “MMM d yyyy” 和“MMM dd yyyy”有一些微妙的不同，第一个格式可以解析 “Jan 2 2014” 和“Jan 14 2014”，而第二个在解析 “Jan 2 2014” 就会抛异常，因为第二个格式里要求日必须是两位的。如果想修正，你必须在日期只有个位数时在前面补零，就是说 “Jan 2 2014” 应该写成 “Jan 02 2014”。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-31T13:47:57.404Z" itemprop="dateUpdated">2020-12-31 21:47:57</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/11/15/services/java/lambad/Lambda/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/lambad/" rel="tag">lambad</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/&title=《Lambda语法糖》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/&title=《Lambda语法糖》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Lambda语法糖》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/11/15/services/java/jvm/jvm/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">jvm认知</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/11/15/util/Java%E8%A7%A3%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java解压缩文件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/&title=《Lambda语法糖》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/&title=《Lambda语法糖》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Lambda语法糖》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/11/15/services/java/lambad/Lambda/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

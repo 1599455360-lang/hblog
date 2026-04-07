@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <link rel="canonical" href="true/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+    
+    
+    <title>json工具类 | 嗯哼 | 解决问题的通用办法就是不断提高自我</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="util">
+    <meta name="description" content="1  json 工具类格式1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798">
+<meta property="og:type" content="article">
+<meta property="og:title" content="json工具类">
+<meta property="og:url" content="https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html">
+<meta property="og:site_name" content="嗯哼">
+<meta property="og:description" content="1  json 工具类格式1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-07T00:30:00.000Z">
+<meta property="article:modified_time" content="2020-12-31T13:47:59.291Z">
+<meta property="article:author" content="Mr. Zheng">
+<meta property="article:tag" content="util">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="嗯哼" href="/hblog/atom.xml">
+    
+    <link rel="shortcut icon" href="/hblog/favicon.png">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/hblog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/hblog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/hblog/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Mr. Zheng</h5>
+          <a href="mailto:JJ13523178139@163.com" title="JJ13523178139@163.com" class="mail">JJ13523178139@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                模块
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/books"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                书籍
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/playlist"  >
+                <i class="icon icon-lg icon-music"></i>
+                音乐
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/imgs"  >
+                <i class="icon icon-lg icon-image"></i>
+                图库
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/study"  >
+                <i class="icon icon-lg icon-paperclip"></i>
+                链接
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/hblog/videl"  >
+                <i class="icon icon-lg icon-video-camera"></i>
+                视频
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://gitee.com/mmc_jj/" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">json工具类</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">json工具类</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-10-07T00:30:00.000Z" itemprop="datePublished" class="page-time">
+  2020-10-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/json-%E5%B7%A5%E5%85%B7%E7%B1%BB/">json 工具类</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-json-工具类格式"><span class="post-toc-number">1.</span> <span class="post-toc-text">1  json 工具类格式</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#jsonUtils可以增加以下配置需要这个配置序列化时间"><span class="post-toc-number"></span> <span class="post-toc-text">jsonUtils可以增加以下配置需要这个配置序列化时间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#json2"><span class="post-toc-number">1.</span> <span class="post-toc-text">json2</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#json-3"><span class="post-toc-number">2.</span> <span class="post-toc-text">json 3</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-util/json 工具类"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">json工具类</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-10-07 08:30:00" datetime="2020-10-07T00:30:00.000Z"  itemprop="datePublished">2020-10-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/hblog/categories/json-%E5%B7%A5%E5%85%B7%E7%B1%BB/">json 工具类</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h5 id="1-json-工具类格式"><a href="#1-json-工具类格式" class="headerlink" title="1  json 工具类格式"></a>1  json 工具类格式</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONArray;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.JavaType;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonUtils</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="title">JsonUtils</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 将对象序列化成json字符串</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> object</span></span><br><span class="line"><span class="comment">    *            javaBean</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> jsonString json字符串</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">toJson</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (object == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> getInstance().writeValueAsString(object);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (JsonProcessingException e) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> object</span></span><br><span class="line"><span class="comment">    *            javaBean</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> jsonBytes</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] toJsonBytes(Object object) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> getInstance().writeValueAsBytes(object);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (JsonProcessingException e) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 将json反序列化成对象</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> jsonString</span></span><br><span class="line"><span class="comment">    *            jsonString</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> valueType</span></span><br><span class="line"><span class="comment">    *            class</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment">    *            T 泛型标记</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> Bean</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">parse</span><span class="params">(String jsonString, Class&lt;T&gt; valueType)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> getInstance().readValue(jsonString, valueType);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">parseList</span><span class="params">(String jsonString, Class&lt;T&gt; valueType)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> getInstance().readValue(jsonString,</span><br><span class="line">               getCollectionType(List<span class="class">.<span class="keyword">class</span>, <span class="title">valueType</span>))</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 获取泛型的Collection Type</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JavaType <span class="title">getCollectionType</span><span class="params">(Class&lt;?&gt; collectionClass,</span></span></span><br><span class="line"><span class="function"><span class="params">         Class&lt;?&gt;... elementClasses)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> getInstance().getTypeFactory()</span><br><span class="line">            .constructParametricType(collectionClass, elementClasses);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> ObjectMapper <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> JacksonHolder.INSTANCE;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">JacksonHolder</span> </span>&#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">static</span> ObjectMapper INSTANCE = <span class="keyword">new</span> JacksonObjectMapper();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@SuppressWarnings</span>(&#123;</span><br><span class="line">         <span class="string">"unchecked"</span>, <span class="string">"rawtypes"</span></span><br><span class="line">   &#125;)</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> JSONArray <span class="title">toJson</span><span class="params">(List list)</span> </span>&#123;</span><br><span class="line">      JSONArray children = <span class="keyword">new</span> JSONArray();</span><br><span class="line">      <span class="keyword">if</span> (ListHelper.isBlank(list)) &#123;</span><br><span class="line">         <span class="keyword">return</span> children;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         list.forEach(it -&gt; children</span><br><span class="line">               .add(JSONObject.parseObject(JsonUtils.toJson(it))));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> children;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2   json时间转化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line">import java.time.format.DateTimeFormatter;</span><br><span class="line">import java.time.format.DateTimeFormatterBuilder;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import com.fasterxml.jackson.databind.DeserializationFeature;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import com.fasterxml.jackson.databind.SerializationFeature;</span><br><span class="line">import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;</span><br><span class="line">import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;</span><br><span class="line">import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;</span><br><span class="line">import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;</span><br><span class="line">import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;</span><br><span class="line"></span><br><span class="line">import lombok.val;</span><br><span class="line"></span><br><span class="line">class JacksonObjectMapper extends ObjectMapper &#123;</span><br><span class="line">   private static final long serialVersionUID &#x3D; 1L;</span><br><span class="line"></span><br><span class="line">   JacksonObjectMapper() &#123;</span><br><span class="line">      this.setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">      this.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,</span><br><span class="line">            false);</span><br><span class="line">      setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">      disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);</span><br><span class="line">      configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);</span><br><span class="line">      setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">      val dateFormatter &#x3D; new DateTimeFormatterBuilder()</span><br><span class="line">            .parseCaseInsensitive().append(DateTimeFormatter.ISO_LOCAL_DATE)</span><br><span class="line">            .appendLiteral(&#39; &#39;).append(DateTimeFormatter.ISO_LOCAL_TIME)</span><br><span class="line">            .toFormatter();</span><br><span class="line">      val javaTimeModule &#x3D; new JavaTimeModule();</span><br><span class="line">      javaTimeModule.addDeserializer(LocalDateTime.class,</span><br><span class="line">            new LocalDateTimeDeserializer(dateFormatter));</span><br><span class="line">      javaTimeModule.addSerializer(LocalDateTime.class,</span><br><span class="line">            new LocalDateTimeSerializer(dateFormatter));</span><br><span class="line">      registerModule(javaTimeModule);</span><br><span class="line">      registerModule(new ParameterNamesModule())</span><br><span class="line">            .registerModule(new Jdk8Module());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="jsonUtils可以增加以下配置需要这个配置序列化时间"><a href="#jsonUtils可以增加以下配置需要这个配置序列化时间" class="headerlink" title="jsonUtils可以增加以下配置需要这个配置序列化时间"></a>jsonUtils可以增加以下配置需要这个配置序列化时间</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import com.fasterxml.jackson.annotation.JsonInclude;</span><br><span class="line">import com.fasterxml.jackson.databind.DeserializationFeature;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import com.fasterxml.jackson.databind.SerializationFeature;</span><br><span class="line">import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;</span><br><span class="line">import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;</span><br><span class="line">import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;</span><br><span class="line">import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;</span><br><span class="line">import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;</span><br><span class="line">import lombok.val;</span><br><span class="line"></span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.time.LocalDateTime;</span><br><span class="line">import java.time.format.DateTimeFormatter;</span><br><span class="line">import java.time.format.DateTimeFormatterBuilder;</span><br><span class="line"></span><br><span class="line">class JacksonObjectMapper extends ObjectMapper &#123;</span><br><span class="line">   private static final long serialVersionUID &#x3D; 1L;</span><br><span class="line"></span><br><span class="line">   JacksonObjectMapper() &#123;</span><br><span class="line">      this.setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">      this.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);</span><br><span class="line">      setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">      disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);</span><br><span class="line">      configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);</span><br><span class="line">      setSerializationInclusion(JsonInclude.Include.NON_NULL);</span><br><span class="line">      val dateFormatter &#x3D; new DateTimeFormatterBuilder()</span><br><span class="line">            .parseCaseInsensitive()</span><br><span class="line">            .append(DateTimeFormatter.ISO_LOCAL_DATE)</span><br><span class="line">            .appendLiteral(&#39; &#39;)</span><br><span class="line">            .append(DateTimeFormatter.ISO_LOCAL_TIME).toFormatter();</span><br><span class="line">      val javaTimeModule &#x3D; new JavaTimeModule();</span><br><span class="line">      javaTimeModule.addDeserializer(LocalDateTime.class,</span><br><span class="line">            new LocalDateTimeDeserializer(dateFormatter));</span><br><span class="line">      javaTimeModule.addSerializer(LocalDateTime.class,</span><br><span class="line">            new LocalDateTimeSerializer(dateFormatter));</span><br><span class="line">      registerModule(javaTimeModule);</span><br><span class="line">      registerModule(new ParameterNamesModule())</span><br><span class="line">            .registerModule(new Jdk8Module());</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h5 id="json2"><a href="#json2" class="headerlink" title="json2"></a>json2</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import com.google.gson.Gson;</span><br><span class="line">import com.google.gson.reflect.TypeToken;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * JSON 序列化工具类</span><br><span class="line"> *</span><br><span class="line"> * @author 郑俊杰</span><br><span class="line"> * @date 2020-04-16</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class JsonUtil &#123;</span><br><span class="line"></span><br><span class="line">    private static Gson gson &#x3D; new Gson();</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * JSON 转对象</span><br><span class="line">     *</span><br><span class="line">     * @param json</span><br><span class="line">     * @param tClass</span><br><span class="line">     * @param &lt;T&gt;</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static &lt;T&gt; T fromJson(String json, Class&lt;T&gt; tClass) &#123;</span><br><span class="line">        return gson.fromJson(json, tClass);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * JSON 数组转对象列表</span><br><span class="line">     *</span><br><span class="line">     * @param json</span><br><span class="line">     * @param tClass</span><br><span class="line">     * @param &lt;T&gt;</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static &lt;T&gt; List&lt;T&gt; fromJsonArray(String json, Class&lt;T&gt; tClass) &#123;</span><br><span class="line">        return gson.fromJson(json, new TypeToken&lt;List&lt;T&gt;&gt;() &#123;&#125;.getType());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 对象转 JSON</span><br><span class="line">     *</span><br><span class="line">     * @param object</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static String toJson(Object object) &#123;</span><br><span class="line">        return gson.toJson(object);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="json-3"><a href="#json-3" class="headerlink" title="json 3"></a>json 3</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">import java.io.File;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">import com.fasterxml.jackson.core.JsonParseException;</span><br><span class="line">import com.fasterxml.jackson.core.JsonProcessingException;</span><br><span class="line">import com.fasterxml.jackson.databind.JsonMappingException;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import net.sf.json.JSONArray;</span><br><span class="line">import net.sf.json.JSONObject;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @作者   郑俊杰 (William)</span><br><span class="line"> * @日期 2018年4月1日</span><br><span class="line"> * @描述 JSON工具类</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public final class JsonUtil&#123;</span><br><span class="line"></span><br><span class="line">	private static final ObjectMapper mapper &#x3D; new ObjectMapper();</span><br><span class="line"></span><br><span class="line">	&#x2F;**</span><br><span class="line">	 * bean 转 JSON 字符串</span><br><span class="line">	 * @param &lt;T&gt;        </span><br><span class="line">	 *        泛型声明</span><br><span class="line">	 * @param bean</span><br><span class="line">	 *        类的实例</span><br><span class="line">	 * @return JSON字符串</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	public static &lt;T&gt; String toJson(T bean)&#123;</span><br><span class="line">		StringBuffer json &#x3D; new StringBuffer();</span><br><span class="line">		if(null &#x3D;&#x3D; bean)&#123;</span><br><span class="line">			json.append(&quot;&#123;&#125;&quot;);</span><br><span class="line">			return json.toString();</span><br><span class="line">		&#125;</span><br><span class="line">		try&#123;</span><br><span class="line">			json.append(mapper.writeValueAsString(bean));</span><br><span class="line">		&#125;catch(JsonProcessingException e1)&#123;</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		return json.toString();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;**</span><br><span class="line">	 * JSON 转指定的bean对象</span><br><span class="line">	 * @param &lt;T&gt;</span><br><span class="line">	 *        泛型声明</span><br><span class="line">	 * @param json</span><br><span class="line">	 *        JSON字符串</span><br><span class="line">	 * @param c</span><br><span class="line">	 *        要转换对象的类型</span><br><span class="line">	 * @return</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	public static &lt;T&gt; T fromJson(String json, Class&lt;T&gt; c)&#123;</span><br><span class="line">		T t &#x3D; null;</span><br><span class="line">		try&#123;</span><br><span class="line">			t &#x3D; mapper.readValue(json, c);</span><br><span class="line">		&#125;catch(JsonParseException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(JsonMappingException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(IOException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		return t;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;**</span><br><span class="line">	 * JSON 转 Map</span><br><span class="line">	 * @param json</span><br><span class="line">	 *        JSON字符串,保持key是加了双引号的</span><br><span class="line">	 * @return Map对象,默认为HashMap</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	public static Map&lt;?, ?&gt; fromJson(String json)&#123;</span><br><span class="line">		Map&lt;?, ?&gt; map &#x3D; null;</span><br><span class="line">		try&#123;</span><br><span class="line">			map &#x3D; mapper.readValue(json, HashMap.class);</span><br><span class="line">		&#125;catch(JsonParseException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(JsonMappingException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(IOException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		return map;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;**</span><br><span class="line">	 * JSON 转指定的bean对象</span><br><span class="line">	 * @param &lt;T&gt;</span><br><span class="line">	 *        泛型声明</span><br><span class="line">	 * @param file</span><br><span class="line">	 *        JSON文件</span><br><span class="line">	 * @param c</span><br><span class="line">	 *        要转换对象的类型</span><br><span class="line">	 * @return</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	public static &lt;T&gt; T fromFile(File file, Class&lt;T&gt; c)&#123;</span><br><span class="line">		T t &#x3D; null;</span><br><span class="line">		try&#123;</span><br><span class="line">			t &#x3D; mapper.readValue(file, c);</span><br><span class="line">		&#125;catch(JsonParseException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(JsonMappingException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(IOException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		return t;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;**</span><br><span class="line">	 * JSON 转 Map</span><br><span class="line">	 * @param file</span><br><span class="line">	 *        JSON,请保持key是加了双引号的</span><br><span class="line">	 * @return Map对象,默认为HashMap</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	public static Map&lt;?, ?&gt; fromFile(File file)&#123;</span><br><span class="line">		Map&lt;?, ?&gt; map &#x3D; null;</span><br><span class="line">		try&#123;</span><br><span class="line">			map &#x3D; mapper.readValue(file, HashMap.class);</span><br><span class="line">		&#125;catch(JsonParseException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(JsonMappingException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;catch(IOException e)&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		return map;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;**</span><br><span class="line">	 * json字符串转list</span><br><span class="line">	 * @param jsonFile</span><br><span class="line">	 * @return</span><br><span class="line">	 * @throws Exception</span><br><span class="line">	 * @author fanchenxi</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	public static List&lt;Map&lt;String,Object&gt;&gt; GetJsonListByString(String jsonFile)&#123;</span><br><span class="line">		JSONArray arry &#x3D; JSONArray.fromObject(jsonFile);</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; rsList &#x3D; new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		for (int i &#x3D; 0; i &lt; arry.size(); i++)</span><br><span class="line">		&#123;</span><br><span class="line">			JSONObject jsonObject &#x3D; arry.getJSONObject(i);</span><br><span class="line">			Map&lt;String, Object&gt; map &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">			for (Iterator&lt;?&gt; iter &#x3D; jsonObject.keys(); iter.hasNext();) &#123;</span><br><span class="line">				String key &#x3D; (String) iter.next();</span><br><span class="line">				Object value &#x3D; jsonObject.get(key);</span><br><span class="line">				map.put(key, value);</span><br><span class="line">			&#125;</span><br><span class="line">			rsList.add(map);</span><br><span class="line">		&#125;</span><br><span class="line">		return rsList;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	public static void main(String[] args)&#123;</span><br><span class="line">		&#x2F;&#x2F;</span><br><span class="line">		String json &#x3D; &quot;&#123;\&quot;success\&quot;:false,\&quot;message\&quot;:\&quot;密码错误!\&quot;,\&quot;jsonData\&quot;:\&quot;&#123;&#125;\&quot;&#125;&quot;;</span><br><span class="line">		Map map &#x3D; JsonUtil.fromJson(json);</span><br><span class="line">		System.out.print(map);</span><br><span class="line">		System.out.print(&quot;---------------------------&quot;);</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; books &#x3D; new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		Map&lt;String, Object&gt; b &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">		b.put(&quot;id&quot;, &quot;阿杰卡&quot;);</span><br><span class="line">		b.put(&quot;name&quot;, &quot;jkakj&quot;);</span><br><span class="line">		b.put(&quot;bushi&quot;, 12);</span><br><span class="line">		b.put(&quot;wkw&quot;, &quot;kaoo.22.2&quot;);</span><br><span class="line">		books.add(b);</span><br><span class="line">		&#x2F;&#x2F;</span><br><span class="line">		b &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">		b.put(&quot;obj_aa&quot;, &quot;jkakj&quot;);</span><br><span class="line">		books.add(b);</span><br><span class="line">		&#x2F;&#x2F;</span><br><span class="line">		b &#x3D; new HashMap&lt;String, Object&gt;();</span><br><span class="line">		b.put(&quot;ceshi&quot;, &quot;阿哭了起来 &quot;);</span><br><span class="line">		b.put(&quot;haiha&quot;, 0.33);</span><br><span class="line">		b.put(&quot;cc3&quot;, 1234567);</span><br><span class="line">		b.put(&quot;vvvv&quot;, &quot;aja2&quot;);</span><br><span class="line">		books.add(b);</span><br><span class="line">		json &#x3D; JsonUtil.toJson(books);</span><br><span class="line">		System.out.println(json);</span><br><span class="line"></span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; x &#x3D; new ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3  生成唯一流水号 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import java.text.DecimalFormat;</span><br><span class="line">import java.time.LocalDate;</span><br><span class="line">import java.util.concurrent.atomic.AtomicLong;</span><br><span class="line"></span><br><span class="line">public class SnUtil &#123;</span><br><span class="line">   private static AtomicLong COUNT &#x3D; new AtomicLong(0);</span><br><span class="line">   private static LocalDate START &#x3D; LocalDate.now();</span><br><span class="line">   private final static DecimalFormat FORMAT &#x3D; new DecimalFormat(&quot;00000&quot;);</span><br><span class="line"></span><br><span class="line">   &#x2F;**</span><br><span class="line">    * 生成指定位数的流水号，每天重置，从0开始累加</span><br><span class="line">    * </span><br><span class="line">    * @param length</span><br><span class="line">    * @return</span><br><span class="line">    *&#x2F;</span><br><span class="line">   public static String getNumber(Integer length) &#123;</span><br><span class="line">      if (LocalDate.now().isAfter(START)) &#123;</span><br><span class="line">         COUNT &#x3D; new AtomicLong(0);</span><br><span class="line">      &#125;</span><br><span class="line">      final long l &#x3D; COUNT.incrementAndGet();</span><br><span class="line">      String formatNum &#x3D; FORMAT.format(l);</span><br><span class="line">      return formatNum.substring(formatNum.length() - length);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-12-31T13:47:59.291Z" itemprop="dateUpdated">2020-12-31 21:47:59</time>
+</span><br>
+
+
+        
+        文章有哪些不足之处请联系作者,希望大家共同学习多多交流，本文地址：<a href="/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/" target="_blank" rel="external">https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://gitee.com/mmc_jj/hblog">
+            <img src="/hblog/img/avatar.jpg" alt="Mr. Zheng">
+            Mr. Zheng
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hblog/tags/util/" rel="tag">util</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/&title=《json工具类》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/&title=《json工具类》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《json工具类》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/hblog/2020/10/07/util/redisUtil/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">redis获取键值</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/hblog/2020/10/07/util/TrimUtils/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">集合格式化数据</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷大赏 ~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/hblog/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/hblog/img/wechat.jpg" data-alipay="/hblog/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/hblog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Mr. Zheng &copy; 2020</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/&title=《json工具类》 — 嗯哼&pic=https://gitee.com/mmc_jj/hblog/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/&title=《json工具类》 — 嗯哼&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《json工具类》 — 嗯哼&url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/&via=https://gitee.com/mmc_jj/hblog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://gitee.com/mmc_jj/hblog/2020/10/07/util/json%20%E5%B7%A5%E5%85%B7%E7%B1%BB/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/hblog/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '风太大,信号不好,稍等一下下！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
